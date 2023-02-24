@@ -1,14 +1,12 @@
-<div align="center">
-  <img src="https://badgen.net/github/prs/Grupo-Beaver/siteInstitucional">
-  <img src="https://badgen.net/github/open-prs/kvlsndkf/project">
-  <img src="https://badgen.net/github/closed-prs/kvlsndkf/project">
-  <img src="https://badgen.net/github/merged-prs/kvlsndkf/project">
-  <img src="https://img.shields.io/github/languages/count/kvlsndkf/project">
-  <img src="https://img.shields.io/github/repo-size/kvlsndkf/project">
-  <img src="https://img.shields.io/tokei/lines/github/kvlsndkf/project">
-</div>
-
 ![Grupo 7](https://user-images.githubusercontent.com/110926410/219435146-da34104e-3e66-4c49-896f-f2dcead3203f.png)
+
+<br/>
+
+<div align="center">
+  
+  # Seja bem vindo repositório do Beaver!
+  
+</div>
 
 <br/>
 
