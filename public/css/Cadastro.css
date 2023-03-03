@@ -1,0 +1,25 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+main{
+    display: flex;
+}
+
+img{
+    height: 100vh;
+}
+
+.conteudoBanner{
+    background-image: url("../img/bannerCadastro.png ");
+    height: 100vh;
+    width: 35vw;
+    background-size: cover;
+}
+
+.voltarHome img{
+    height: 3.5vh;
+    cursor: pointer;
+}
