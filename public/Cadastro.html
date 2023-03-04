@@ -5,53 +5,55 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
-    <link rel="stylesheet" href="./css/Cadastro.css">
+    <link rel="stylesheet" href="./css/cadastro.css">
 </head>
 <body>
     <main>
         <div class="conteudoBanner">
-            <h1>Seja bem-vindo(a) ao BEAVER</h1>
-            <h2>Descubra como evitar a perda de desempenho das máquinas dos editores de vídeo da sua empresa</h2>
+            <div class="textBanner">
+                <h1>Seja bem-vindo(a) ao BEAVER</h1>
+                <h2>Descubra como evitar a perda de desempenho das máquinas dos editores de vídeo da sua empresa</h2>
+            </div>
         </div>
-        <div>
-            <form action="">
-                <div>
-                    <h2>Crie sua conta agora </h2>
-                    <div>
+        <div class="cadastroForm">
+            <form>
+                <h2>Crie sua conta agora </h2>
+                <div class="inputDados">
+                    <div class="inputDadosMin marginInput">
                         <label for="">Nome</label>
                         <input type="text">
                     </div>
-                    <div>
+                    <div class="inputDadosMin">
                         <label for="">Sobrenome</label>
                         <input type="text">
                     </div>
                 </div>
-                <div>
+                <div class="inputDadosMax">
                     <label for="">Email</label>
                     <input type="email">
                 </div>
-                <div>
-                    <div>
+                <div class="inputDados">
+                    <div class="inputDadosMin marginInput">
                         <label for="">Senha</label>
                         <input type="password">
                     </div>
-                    <div>
+                    <div class="inputDadosMin">
                         <label for="">Confirmação de Senha</label>
                         <input type="password">
                     </div>
                 </div>
-                <div>
+                <div class="containerButton">
                     <button>Criar Conta</button>
-                    <div>
-                        <h3>Já tem uma conta?</h3>
-                        <a href="">Conecte-se</a>
+                    <div class="containerJaTemConta">
+                        <p>Já tem uma conta? <a href="">Conecte-se</a></p>
+                        
                     </div>
                 </div>
-                <div class="voltarHome">
-                    <img onclick="window.location.href='./login.html'" src="./img/volta.png" alt="Logo">
-                    <a href="./login.html">Voltar</a>
-                </div>
             </form>
+            <div class="voltarHome">
+                <img onclick="window.location.href='./login.html'" src="./img/volta.png" alt="Logo">
+                <a href="./login.html">Voltar</a>
+            </div>
         </div>
     </main>
 </body>
