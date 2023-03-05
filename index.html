@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="./public/css/index.css">
     <link rel="shortcut icon" href="./public/img/logo 2.png" type="image/x-icon">
     <link rel="stylesheet" href="./public/css/reset.css">
+    <script src="./public/js/scrollBar.js"></script>
     <title>Beaver</title>
 </head>
 <body>
     <header>
         <div class="container">
             <div class="nav">
-                <img src="./public/img/logo-final2 1.svg" alt="">
+                <a href=""><img src="./public/img/logo-final2.svg" alt=""></a>
                 <section class="itemContainer">
                     <section class="item"><a href="">Início</a></section>
                     <section class="item"><a href="">Serviços</a> </section>
@@ -55,12 +56,12 @@
                     <section class="imagens-servicos">
                         <section class="icon-servicos">
                             <img src="./public/img/Group 1.png" alt="">
-                            <p class="text-servicos"><b class="bold">Monitoramento em tempo real</b>dos componentes do Sistema Operacional</p>
+                            <p class="text-servicos"><b class="bold">Monitoramento em tempo real</b> dos componentes do Sistema Operacional</p>
                         </section>
         
                         <section class="icon-servicos">
                             <img src="./public/img/Group 2.png" alt="">
-                            <p class="text-servicos"><b>Dashboards</b class="bold"> e <b>painéis de controle</b> para acompanhamento da situação das máquinas</p>
+                            <p class="text-servicos"><b class="bold">Dashboards</b> e <b class="bold">painéis de controle</b> para acompanhamento da situação das máquinas</p>
                         </section>
                         
                         <section class="icon-servicos">
@@ -70,8 +71,94 @@
                     </section>
                 </div>
             </div>
+            <section class="fim-servicos">
+                
+            </section>
+        </div>
+
+        <div class="quemSomos">
+            <div class="container">
+
+                <div class="somos-esquerda">
+                    <div class="text-esquerda">
+                        <p class="text-somos">Entregar <b class="bold">performance</b>  e <b class="bold">agilidade</b>  através do monitoramento de máquina, 
+                            contribuindo para o dia-a-dia dos profissionais de edição de vídeo</p>
+                    </div>
+
+                    <div class="text-esquerda-beaver">
+                        <b class="bold text-somos-beaver">Nós somos BEAVER!</b>
+                    </div>
+                </div>
+
+                <img class="imgCentro" src="./public/img/imgCentro.svg" alt="">
+
+                <div class="somos-direita">
+                    <div class="text-direita">
+                        <p class="text-somos">Resolver a vida das empresas de edição de vídeo, entregando o <b class="bold">melhor e mais completo </b> 
+                            software de monitoramento de computadores</p>
+                    </div>
+
+                    <div class="text-direita">
+                        <p class="text-somos">Acreditamos que agir com <b class="bold">Segurança</b> ,<b class="bold">Estratégia</b> e <b class="bold">Equilíbrio</b> faz toda a diferença!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="contato">
+            <div class="container">
+                <section class="esquerda-contato">
+                    <p class="titulo-contato">DÚVIDAS, SUGESTÕES OU ELOGIOS?</p>
+                    <p class="subTitulo-contato">Entre em contato agora!</p>
+                </section>
+
             
+                <div class="formulario-contato">
+                    <section class="nome-sobrenome-contato" >
+                        <section class="campos-forms">
+                            <label class="label-form" for="nomeUsuario">Nome: </label>
+                            <input class="inpt-form" type="text" name="nomeUsuario" id="nomeUsuario">
+                        </section>
+                        <section class="campos-forms">
+                            <label class="label-form" for="sobrenomeUsuario">Sobrenome: </label>
+                            <input class="inpt-form" type="text" name="sobrenomeUsuario" id="sobrenomeUsuario">
+                        </section>
+                    </section>
+                    <section class="campos-forms">
+                        <label class="label-form" for="emailUsuario">E-mail: </label>
+                        <input class="inpt-form" type="text" name="emailUsuario" id="emailUsuario">
+                    </section>
+                    <section class="campos-forms">
+                        <label class="label-form" for="assuntoUsuario">Assunto: </label>
+                        <input class="inpt-form" type="text" name="assuntoUsuario" id="assuntoUsuario">
+                    </section>
+                    <section class="campos-forms">
+                        <label class="label-form" for="mensagemUsuario">Mensagem: </label>
+                        <textarea class="text-area-form" name="mensagemUsuario" id="mensagemUsuario" cols="30" rows="10"></textarea>
+                    </section>
+                    <section class="btn-forms">
+                        <a href=""><button class="btn-contato pointer">Enviar</button></a>
+                    </section>
+                </div>
+            </div>
         </div>
     </main>
+
+    <footer>
+        <div class="container">
+            <section class="logo">
+                <img src="./public/img/logo-final2.svg" alt="">
+            </section>
+            <section class="texto-footer">
+                <p>BEAVER © 2023 Todos os Direitos Reservados</p>
+            </section>
+            <section class="icons-footer">
+                <a href=""><img class="icon-social" src="./public/img/iconFace.svg" alt=""></a>
+                <a href=""><img class="icon-social" src="./public/img/iconLink.svg" alt=""></a>
+                <a href=""><img class="icon-social" src="./public/img/iconInsta.svg" alt=""></a>
+                <a href=""><img class="icon-social" src="./public/img/iconTt.svg" alt=""></a>
+            </section>
+        </div>
+    </footer>
 </body>
 </html>

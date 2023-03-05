@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap');
 
 html{
@@ -23,6 +23,7 @@ header{
     display: flex;
     justify-content: center;
     background-color: #F5F5F5;
+    position:fixed;
 }
 
 .container{
@@ -148,9 +149,12 @@ header{
     display: flex;
     text-align: center;
     justify-content: center;
-    width: 90%;
     padding:2vh;
     font-family: 'Montserrat', sans-serif;
+}
+
+.bold{
+    font-weight: bold;
 }
 
 .texto-subtitulo{
@@ -174,8 +178,213 @@ header{
 
 .text-servicos{
     color: #F5F5F5;
+    width: 40%;
+    margin: 2vh auto 0 auto;
 }
 
 .conteudo-servicos{
     padding: 5vh 0;
+}
+
+.fim-servicos{
+    background-color: #F5F5F5;
+    padding: 3vh;
+    border-bottom: 0.7102272727272727vh solid #F5F5F5;
+    border-radius: 30px 30px 0 0;
+}
+
+
+
+/*Inicio quem somos*/
+
+.quemSomos{
+    background-color: #E4DFFC;
+    padding: 20vh 0;
+    width: 100%;
+}
+
+.imgCentro{
+    width: 50%;
+}
+
+.somos-esquerda{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.somos-direita{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.quemSomos .container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-esquerda{
+    text-align:end;
+    width: 60%;
+}
+
+.text-esquerda-beaver{
+    text-align:start;
+    width: 60%;
+}
+
+.text-direita{
+    text-align:start;
+    width: 50%;
+}
+
+.text-somos{
+    font-size: 21px;
+}
+
+.text-somos-beaver{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 69px;
+    font-weight:bold;
+}
+/*Inicio Contato*/
+
+.contato{
+    width: 100%;
+    background: rgb(27,31,153);
+    background: linear-gradient(180deg, rgba(27,31,153,1) 12%, rgba(79,77,167,1) 62%, rgba(112,94,220,1) 95%);
+    padding: 10vh 0;
+}
+
+.contato .container{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.esquerda-contato{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #F5F5F5;
+    width: 40%;
+    text-align: start;
+}
+
+.titulo-contato{
+    font-size: 30px;
+    font-weight: medium;
+}
+
+.subTitulo-contato{
+    font-size: 90px;
+    font-weight: bold;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.formulario-contato{
+    background-color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2vh;
+    border-radius: 3vh;
+}
+
+.nome-sobrenome-contato{
+    display: flex;
+}
+
+.campos-forms{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2vh;
+}
+
+.inpt-form{
+    background-color: #DAD5FC;
+    border-radius:7px;
+    padding: 1vh;
+}
+
+.label-form{
+    color: #141414;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-bottom: 1vh;
+}
+
+.btn-forms{
+    display: flex;
+    justify-content: flex-end;
+    padding: 2vh;
+}
+
+.text-area-form{
+    background-color: #DAD5FC;
+    border-radius:7px;
+    padding: 1vh;
+    resize: none;
+}
+
+.btn-contato{
+    color: #F5F5F5;
+    background-color: #141414;
+    padding: 1.5vh 8vh;
+    border-radius:4.201680672268908vh;
+}
+
+.btn-contato:hover{
+    background-color: #705EDC;
+}
+
+/*inicio footer*/
+
+footer{
+    background-color:#F5F5F5;
+    padding: 10vh;
+}
+
+footer .container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.texto-footer{
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+.icon-social{
+    padding: 0 5px;
+}
+
+/*Scroll Nav Bar*/
+
+.sticky {
+    -webkit-transition: 0.3s;
+    transition: 1s;
+    z-index: 2; 
+    width: 100%;
+    position: fixed;
+    box-shadow: 0 8px 32px 0 #705EDC;
+    backdrop-filter: blur( 1px );
+    -webkit-backdrop-filter: blur( 1px );
+}
+
+/*Scroll bar*/
+
+/* Scroll bar*/
+::-webkit-scrollbar{
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb{
+    background-color: #705EDC;
+    border-radius: 2vh;
 }
