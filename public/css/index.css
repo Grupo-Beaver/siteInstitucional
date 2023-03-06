@@ -319,7 +319,7 @@ header{
 
 .btn-forms{
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     padding: 2vh;
 }
 
@@ -345,7 +345,7 @@ header{
 
 footer{
     background-color:#F5F5F5;
-    padding: 10vh;
+    padding: 5vh;
 }
 
 footer .container{
@@ -360,7 +360,14 @@ footer .container{
     margin-bottom: 15px;
 }
 
+.icon-footer{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 .icon-social{
+    width: 15%;
     padding: 0 5px;
 }
 
@@ -380,11 +387,11 @@ footer .container{
 /*Scroll bar*/
 
 /* Scroll bar*/
-::-webkit-scrollbar{
+/* ::-webkit-scrollbar{
     background-color: #F5F5F5;
 }
 
 ::-webkit-scrollbar-thumb{
     background-color: #705EDC;
     border-radius: 2vh;
-}
+} */
