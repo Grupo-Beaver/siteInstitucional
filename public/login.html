@@ -12,21 +12,36 @@
 <main>
 
     <div class="esquerda">
+        <div class="container">
+        <h2>Bem-vindo(a) de volta!</h2>
+        <form action="">
 
-        <h1>Bem-vindo(a) de volta!</h1>
 
-        email<input type="email" name="email" id="emailUsuario" placeholder="email@email.com"> <br>
+                <div class="containerInput">
+                    <label for="">E-mail</label>
+                    <input type="email">
+                </div>
 
-        senha<input type="password" name="senha" id="senhaUsuario" placeholder="*******"> <br>
+                <div class="containerInput">
+                    <label for="">Senha</label>
+                    <input type="password">
+                </div> 
 
-        <button onclick="entrar()">Entrar</button> <br>
+        <button onclick="entrar()">Entrar</button> 
 
-        <div class="naoConta"> ainda nao tem uma conta?</div> <br>
+        <div class="containerCadastrar">
 
-        <button onclick="cadastrar()">Cadastre-se</button> <br>
+        <div class="naoConta"> Ainda nao tem uma conta?</div> 
 
-        <button onclick="voltar()">voltar</button> <br>
+        <a onclick="cadastrar()">Cadastre-se</a> 
+    </div>
+    </form>
 
+        <div class="voltarHome">
+                <img onclick="window.location.href='./login.html'" src="./img/volta.png" alt="Logo">
+                <a href="./login.html">Voltar</a>
+            </div>
+    </div>
     </div>
 
     <div class="direita">
@@ -35,7 +50,7 @@
             <h1 class="direitaBeaver">
                 direita beaver
             </h1>
-        </div> <br>
+        </div> 
 
         <div class="direitaTexto">
             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis distinctio similique voluptate amet laborum error commodi reiciendis illo magni delectus. Laboriosam rerum ab nostrum corporis, dolore adipisci totam placeat nihil.
