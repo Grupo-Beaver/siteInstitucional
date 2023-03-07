@@ -15,7 +15,11 @@ main {
     background-image: url("../img/Banner\ Login.png");
     background-size: cover;
     height: 100vh;
-    width: 45vw;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5vh 3vw;
 }
 
 .esquerda {
@@ -26,10 +30,17 @@ main {
     align-items: center;
 }
 
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+}
+
 h2 {
-font-family: 'Montserrat', sans-serif;
-font-size: 40px;
-font-weight: 800;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    width: 23vw;
 }
 
 label{
@@ -42,9 +53,12 @@ label{
 .containerInput {
     display: flex;
     flex-direction: column;
+    align-items: center;
     width: 38vw;
 }
 .containerInput input {
+    height: 4.5vh;
+    width: 35vw;
     margin-top: 1vh;
     margin-bottom: 4vh;
     border-style: none;
@@ -54,22 +68,31 @@ label{
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
+.containerInput label{
+    width: 35vw;
+    display: flex;
+    align-items: end;
+}
+
 .container {
-    height: 72vh;
-    width: 38vw;
-    background-color: red;
+    height: 75vh;
+    width: 35vw;
+    /* background-color: rgba(255, 0, 0, 0.422); */
     display: flex;
     flex-direction: column;
+    text-align: center;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-evenly;
+    margin-right: 8vw;
 }
 
 .voltarHome{
     font-family: 'Roboto', sans-serif;
     display: flex;
-    align-items: center;
-    width: 39vw;
-
+    flex-direction: row;
+    align-items: flex-end;
+    width: 10vw;
+    padding: 2vh 2vw;
 }
 
 .voltarHome img{
@@ -86,24 +109,50 @@ label{
 
 button {
     padding: 1vh 2vw;
-    border-radius: 10px;
+    border-radius: 30px;
     border-style: none;
     background-color: #0F1126;
     color: #fff;
     font-family: 'Montserrat', sans-serif;
     font-size: 20px;
     font-weight: 600;
-
+    height: 5vh;
+    width: 16vw;
+    margin-bottom: 2vh;
 }
 
 .containerCadastrar{
     font-family: 'Roboto', sans-serif;
+    padding: 1vh 2vw;
     font-size: 18px;
     font-weight: 500; 
+    line-height: 4vh;
     display: flex;
     flex-direction: column;
+    align-items: center;
 }
 
 .containerCadastrar a {
     color: #705EDC;
+}
+
+.titulo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: initial;
+}
+
+.direitaBeaver{
+    color: #fff;
+    width: 37vw;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 12vh;
+}
+
+.direitaTexto {
+    color: #fff;
+    font-size: 30px;
+    width: 25vw;
 }

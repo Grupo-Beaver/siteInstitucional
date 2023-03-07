@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,65 +8,66 @@
     <title>Beaver</title>
     <link rel="stylesheet" href="./css/login.css">
 </head>
+
 <body>
 
-<main>
+    <main>
+        
+        <div class="voltarHome">
+            <img onclick="window.location.href='./login.html'" src="./img/volta.png" alt="Logo">
+            <a href="./login.html">Voltar</a>
+        </div>
+        <div class="esquerda">
+            <div class="container">
+                <h2>Bem-vindo(a) de volta!</h2>
+                <form action="">
+                    
+                    <div class="containerInput">
+                        <label for="">E-mail</label>
+                        <input type="email">
+                    </div>
+                    
+                    <div class="containerInput">
+                        <label for="">Senha</label>
+                        <input type="password">
+                    </div>
+                    
+                    
+                    <div class="containerCadastrar">
+                        <button onclick="entrar()">Entrar</button>
+                        
+                        <div class="naoConta"> Ainda nao tem uma conta?</div>
+                        
+                        <a onclick="cadastrar()">Cadastre-se</a>
+                    </div>
+                </form>
+                
+            </div>
+        </div>
 
-    <div class="esquerda">
-        <div class="container">
-        <h2>Bem-vindo(a) de volta!</h2>
-        <form action="">
-
-                <div class="containerInput">
-                    <label for="">E-mail</label>
-                    <input type="email">
+        <div class="direita">
+            <div class="titulo">
+                <div>
+                    <h1 class="direitaBeaver">
+                        BEAVER
+                    </h1>
                 </div>
 
-                <div class="containerInput">
-                    <label for="">Senha</label>
-                    <input type="password">
-                </div> 
-
-        <button onclick="entrar()">Entrar</button> 
-
-        <div class="containerCadastrar">
-
-        <div class="naoConta"> Ainda nao tem uma conta?</div> 
-
-        <a onclick="cadastrar()">Cadastre-se</a> 
-    </div>
-    </form>
-
-        <div class="voltarHome">
-                <img onclick="window.location.href='./login.html'" src="./img/volta.png" alt="Logo">
-                <a href="./login.html">Voltar</a>
+                <div class="direitaTexto">
+                    Monitore os computadores de seus editores de vídeo com segurança, estratégia e equilíbrio!
+                </div>
             </div>
-    </div>
-    </div>
-
-    <div class="direita">
-
-        <div>
-            <h1 class="direitaBeaver">
-                direita beaver
-            </h1>
-        </div> 
-
-        <div class="direitaTexto">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perferendis distinctio similique voluptate amet laborum error commodi reiciendis illo magni delectus. Laboriosam rerum ab nostrum corporis, dolore adipisci totam placeat nihil.
         </div>
-        
 
-    </div>
+    </main>
 
-</main>
 
-    
 </body>
+
 </html>
 
 <script>
 
-    
+
 
 </script>
