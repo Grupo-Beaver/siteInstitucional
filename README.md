@@ -17,7 +17,7 @@
  1. `feat`: Uma nova Feature(recurso) que você está adicionando a aplicação específica.
  2. `fix`: A resolução de um bug. 
  3. `style`: recurso e atualizações relacionadas à estilização.
- 4. `refactor`: refatoração de umma seção específica da base de código.
+ 4. `refactor`: refatoração de uma seção específica da base de código.
  5. `test`: tudo o que for relacionado a testes.
  6. `docs`: Tudo o que for relaiconado a documentação.
  7. `chore`: manutenção regular do código.
