@@ -1,0 +1,159 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&family=Roboto:wght@100;300;400;500;700;900&display=swap');
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+main {
+    display: flex;
+}
+
+.direita {
+    background-image: url("../img/Banner\ Login.png");
+    background-size: cover;
+    height: 100vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5vh 3vw;
+}
+
+.esquerda {
+    height: 100vh;
+    width: 55vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 30px;
+    font-weight: 800;
+}
+
+h2 {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    font-weight: 800;
+    width: 23vw;
+}
+
+label{
+    font-family: 'Roboto', sans-serif;
+    font-size: 22px;
+    font-weight: 400; 
+    color: #141414;
+}
+
+.containerInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 38vw;
+}
+.containerInput input {
+    height: 4.5vh;
+    width: 35vw;
+    margin-top: 1vh;
+    margin-bottom: 4vh;
+    border-style: none;
+    border-radius: 10px;
+    padding: 1vh 1vw;
+    background-color: #E5E5E5;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.containerInput label{
+    width: 35vw;
+    display: flex;
+    align-items: end;
+}
+
+.container {
+    height: 75vh;
+    width: 35vw;
+    /* background-color: rgba(255, 0, 0, 0.422); */
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-right: 8vw;
+}
+
+.voltarHome{
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    width: 10vw;
+    padding: 2vh 2vw;
+}
+
+.voltarHome img{
+    height: 3.5vh;
+    cursor: pointer;
+}
+
+.voltarHome a{
+    text-decoration: none;
+    color: #161A86;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+button {
+    padding: 1vh 2vw;
+    border-radius: 30px;
+    border-style: none;
+    background-color: #0F1126;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+    height: 5vh;
+    width: 16vw;
+    margin-bottom: 2vh;
+}
+
+.containerCadastrar{
+    font-family: 'Roboto', sans-serif;
+    padding: 1vh 2vw;
+    font-size: 18px;
+    font-weight: 500; 
+    line-height: 4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.containerCadastrar a {
+    color: #705EDC;
+}
+
+.titulo{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+}
+
+.direitaBeaver{
+    color: #fff;
+    width: 37vw;
+    display: flex;
+    justify-content: flex-start;
+    margin-bottom: 12vh;
+}
+
+.direitaTexto {
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    font-size: 30px;
+    width: 27vw;
+}
