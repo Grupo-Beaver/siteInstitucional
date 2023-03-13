@@ -7,6 +7,10 @@
     box-sizing: border-box;
   }
 
+body{
+    overflow: hidden;
+}
+
 main{
     display: flex;
     
@@ -49,37 +53,18 @@ img{
     font-family: 'Roboto', sans-serif;
 }
 
-.voltarHome{
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    align-items: center;
-    width: 39vw;
-    margin-top: 8vh;
-    margin-left: -12vw;
-}
-
-.voltarHome img{
-    height: 3.5vh;
-    cursor: pointer;
-}
-
-.voltarHome a{
-    text-decoration: none;
-    color: #161A86;
-    font-weight: 500;
-    font-size: 20px;
-}
 
 .cadastroForm h2{
     font-size: 40px;
     font-family: 'Montserrat', sans-serif;
-    margin-bottom: 8vh;
+    margin-bottom: 6vh;
+    font-weight: 800;
     display: flex;
     
 }
 .cadastroForm{
     display: flex;
-    margin-top: 15vh;
+    margin-top: 10vh;
     align-items: center;
     flex-direction: column;
     width: 60vw;
@@ -92,14 +77,13 @@ form {
     width: 39vw;
     display: flex;
     flex-direction: column;
-     
     align-items: center;
-    
 }
+
 
 form input{
     margin-top: 1vh;
-    margin-bottom: 4vh;
+    margin-bottom: 3vh;
     border-style: none;
     border-radius: 10px;
     background-color: #E5E5E5;
@@ -113,7 +97,6 @@ input:focus{
 
 .inputDados{
     display: flex;
-    height: 8vh;
     margin: 2vh;
 }
 
@@ -127,7 +110,6 @@ input:focus{
     display: flex;
     flex-direction: column;
     width: 39vw;
-    height: 8vh;
 }
 
 .marginInput{
@@ -135,7 +117,7 @@ input:focus{
 }
 
 .containerButton{
-    margin-top: 8vh;
+    margin-top: 4vh;
     margin-bottom: 6vh;
     display: flex;
     justify-content: center;
@@ -149,16 +131,21 @@ input:focus{
     background-color: #705EDC;
     color: #fff;
     font-family: 'Montserrat', sans-serif;
-    font-size: 20px;
+    font-size: 2.8vh;
+    font-weight: 500;
     border-radius: 30px;
-    margin-bottom: 2vh;
+}
+
+.containerButton button:hover{
+    background-color: #0F1126;
 }
 
 .containerJaTemConta{
     display: flex;
     color: #141414;
     font-family: 'Roboto', sans-serif;
-    font-size: 18px;
+    font-size: 2.5vh;
+    margin-top: 2vh;
     font-weight: 400;
     justify-content: center;
 }
@@ -168,4 +155,26 @@ input:focus{
     color: #705EDC;
     font-weight: 500;
 
+}
+
+.voltarHome{
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    width: 39vw;
+    margin-top: 8vh;
+    margin-left: -12vw;
+    gap: 1vh;
+}
+
+.voltarHome img{
+    height: 3.5vh;
+    cursor: pointer;
+}
+
+.voltarHome a{
+    text-decoration: none;
+    color: #161A86;
+    font-weight: 500;
+    font-size: 20px;
 }

@@ -375,6 +375,10 @@ header{
     padding: 1vh;
 }
 
+input:focus{
+    outline: 0;
+}
+
 .label-form{
     color: #141414;
     font-family: 'Montserrat', sans-serif;
