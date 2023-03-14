@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,9 +8,12 @@
     <link rel="stylesheet" href="./public/css/index.css">
     <link rel="shortcut icon" href="./public/img/logo 2.png" type="image/x-icon">
     <link rel="stylesheet" href="./public/css/reset.css">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <script src="./public/js/scrollBar.js"></script>
     <title>Beaver</title>
 </head>
+
 <body>
     <header>
         <div class="container">
@@ -18,16 +22,60 @@
                 <section class="itemContainer">
                     <section class="item"><a href="index.html">Início</a></section>
                     <section class="item"><a href="index.html#servicos">Serviços</a> </section>
-                    <section class="item"><a href="index.html#quem_somos">Sobre Nós</a>  </section>               
+                    <section class="item"><a href="index.html#quem_somos">Sobre Nós</a> </section>
                     <section class="item"><a href="index.html#formulario_contato">Contato</a></section>
                 </section>
                 <section class="btn-container">
-                    <section class="btn-item"> <a href="./public/login.html"><button class="btn-nav-entrar pointer">Entrar</button> </a></section>
-                    <section class="btn-item"> <a href="./public/cadastro.html"><button class=" btn-nav-criar-conta pointer">Criar Conta</button> </a></section>
+                    <section class="btn-item"> <a href="./public/login.html"><button
+                                class="btn-nav-entrar pointer">Entrar</button> </a></section>
+                    <section class="btn-item"> <a href="./public/cadastro.html"><button
+                                class=" btn-nav-criar-conta pointer">Criar Conta</button> </a></section>
                 </section>
             </div>
         </div>
     </header>
+
+    <!-- Nav responsiva -->
+    <nav>
+        <div class="logo">
+            <a href=""><img src="./public/img/logo-final2.svg" alt=""></a>
+        </div>
+        <div class="menu">
+            <span class="material-symbols-outlined" onclick="abrirMenu()">
+                menu
+            </span>
+        </div>
+        <div class="navEscondida" id="navE">
+            <div class="fechar">
+                <span class="material-symbols-outlined" onclick="fecharMenu()">
+                    close
+                </span>
+            </div>
+            <div class="links">
+                <section class="item"><a href="index.html">Início</a></section>
+                <section class="item"><a href="index.html#servicos">Serviços</a> </section>
+                <section class="item"><a href="index.html#quem_somos">Sobre Nós</a> </section>
+                <section class="item"><a href="index.html#formulario_contato">Contato</a></section>
+            </div>
+            <div class="fim">
+                <section class="btn-item"> <a href="./public/login.html"><button
+                            class="btn-nav-entrar pointer">Entrar</button> </a>
+                </section>
+                <section class="btn-item"> <a href="./public/cadastro.html"><button
+                            class=" btn-nav-criar-conta pointer">Criar Conta</button> </a>
+                </section>
+            </div>
+        </div>
+    </nav>
+    <script>
+        function abrirMenu() {
+            document.getElementById('navE').style.top = "0"
+        }
+
+        function fecharMenu() {
+            document.getElementById('navE').style.top = "-120vh"
+        }
+    </script>
 
     <main>
         <div class="hero">
@@ -36,51 +84,56 @@
                     <div class="hero-esquerda">
                         <span class="text-hero">SEGURANÇA, ESTRATÉGIA & EQUILÍBRIO</span>
                         <b class="titulo-hero">BEAVER</b>
-                        <p class="text-hero2">Monitore já o computador dos editores 
-                        de vídeo da sua empresa.</p>
-                        <section class="btn-item"> <a href="index.html#servicos"><button class=" btn-hero pointer">Confira</button> </a></section>
+                        <p class="text-hero2">Monitore já o computador dos editores
+                            de vídeo da sua empresa.</p>
+                        <section class="btn-item"> <a href="index.html#servicos"><button
+                                    class=" btn-hero pointer">Confira</button> </a></section>
                     </div>
                     <div class="hero-img-chamativo">
-                        <img src="../siteInstitucional/public/img/imgInicioChamativo.png" class="img-chamativo" width="600px" alt="">
+                        <img src="../siteInstitucional/public/img/imgInicioChamativo.png" class="img-chamativo" alt="">
+                        <div class="img-engrenagem">
+                            <img src="../siteInstitucional/public/img/engrenagem.svg" alt="" width="110px">
+                        </div>
                     </div>
-                </div> 
-                <div class="img-engrenagem">
-                    <img src="../siteInstitucional/public/img/engrenagem.svg" alt="" width="110px">
                 </div>
             </div>
         </div>
 
         <div class="servicos" id="servicos">
             <section class="titulo-servicos">
-                <p class="text-titulo-servico">Editar vídeos exige grande poder computacional que pode sobrecarregar as máquinas de seus profissionais. </p>
+                <p class="text-titulo-servico">Editar vídeos exige grande poder computacional que pode sobrecarregar as
+                    máquinas de seus profissionais. </p>
             </section>
             <div class="container">
                 <div class="conteudo-servicos">
                     <section class="subTitulo-servicos">
-                        <p class="texto-subtitulo">Por isso, o Beaver oferece o monitoramento de notebooks e desktops, 
+                        <p class="texto-subtitulo">Por isso, o Beaver oferece o monitoramento de notebooks e desktops,
                             pelo suporte de TI da empresa, como solução!</p>
                     </section>
-        
+
                     <section class="imagens-servicos">
                         <section class="icon-servicos">
                             <img src="./public/img/Group 1.png" alt="">
-                            <p class="text-servicos"><b class="bold">Monitoramento em tempo real</b> dos componentes do Sistema Operacional</p>
+                            <p class="text-servicos"><b class="bold">Monitoramento em tempo real</b> dos componentes do
+                                Sistema Operacional</p>
                         </section>
-        
+
                         <section class="icon-servicos">
                             <img src="./public/img/Group 2.png" alt="">
-                            <p class="text-servicos"><b class="bold">Dashboards</b> e <b class="bold">painéis de controle</b> para acompanhamento da situação das máquinas</p>
+                            <p class="text-servicos"><b class="bold">Dashboards</b> e <b class="bold">painéis de
+                                    controle</b> para acompanhamento da situação das máquinas</p>
                         </section>
-                        
-                        <section class="icon-servicos">
+
+                        <section style="margin-bottom: 0;" class="icon-servicos containerImgRes">
                             <img src="./public/img/Group 3.png" alt="">
-                            <p class="text-servicos"><b class="bold">Alertas</b>, <b class="bold">notificações</b> e lista de histórico com <b class="bold">relatórios diários</b> para o editor de vídeo</p>
+                            <p class="text-servicos"><b class="bold">Alertas</b>, <b class="bold">notificações</b> e
+                                lista de histórico com <b class="bold">relatórios diários</b> para o editor de vídeo</p>
                         </section>
                     </section>
                 </div>
             </div>
             <section class="fim-servicos">
-                
+
             </section>
         </div>
 
@@ -89,7 +142,8 @@
 
                 <div class="somos-esquerda">
                     <div class="text-esquerda">
-                        <p class="text-somos">Entregar <b class="bold">performance</b>  e <b class="bold">agilidade</b>  através do monitoramento de máquina, 
+                        <p class="text-somos">Entregar <b class="bold">performance</b> e <b class="bold">agilidade</b>
+                            através do monitoramento de máquina,
                             contribuindo para o dia-a-dia dos profissionais de edição de vídeo</p>
                     </div>
 
@@ -102,12 +156,14 @@
 
                 <div class="somos-direita">
                     <div class="text-direita">
-                        <p class="text-somos">Resolver a vida das empresas de edição de vídeo, entregando o <b class="bold">melhor e mais completo </b> 
+                        <p class="text-somos">Resolver a vida das empresas de edição de vídeo, entregando o <b
+                                class="bold">melhor e mais completo </b>
                             software de monitoramento de computadores</p>
                     </div>
 
                     <div class="text-direita">
-                        <p class="text-somos valores">Acreditamos que agir com <b class="bold">Segurança</b>,<b class="bold">Estratégia</b> e <b class="bold">Equilíbrio</b> faz toda a diferença!</p>
+                        <p class="text-somos valores">Acreditamos que agir com <b class="bold">Segurança</b>,<b
+                                class="bold">Estratégia</b> e <b class="bold">Equilíbrio</b> faz toda a diferença!</p>
                     </div>
                 </div>
             </div>
@@ -120,9 +176,9 @@
                     <p class="subTitulo-contato">Entre em contato agora!</p>
                 </section>
 
-            
+
                 <div class="formulario-contato" id="formulario_contato">
-                    <section class="nome-sobrenome-contato" >
+                    <section class="nome-sobrenome-contato">
                         <section class="campos-forms">
                             <label class="label-form" for="nomeUsuario">Nome: </label>
                             <input class="inpt-form" type="text" name="nomeUsuario" id="nomeUsuario">
@@ -142,7 +198,8 @@
                     </section>
                     <section class="campos-forms">
                         <label class="label-form" for="mensagemUsuario">Mensagem: </label>
-                        <textarea class="text-area-form" name="mensagemUsuario" id="mensagemUsuario" cols="30" rows="10"></textarea>
+                        <textarea class="text-area-form" name="mensagemUsuario" id="mensagemUsuario" cols="30"
+                            rows="10"></textarea>
                     </section>
                     <section class="btn-forms">
                         <a href=""><button class="btn-contato pointer">Enviar</button></a>
@@ -169,4 +226,5 @@
         </div>
     </footer>
 </body>
+
 </html>

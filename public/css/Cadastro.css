@@ -7,22 +7,22 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-  }
+}
 
-body{
+body {
     overflow: hidden;
 }
 
-main{
+main {
     display: flex;
-    
+
 }
 
-img{
+img {
     height: 100vh;
 }
 
-.conteudoBanner{
+.conteudoBanner {
     background-image: url("../img/bannerCadastro.png ");
     height: 100vh;
     width: 40vw;
@@ -33,7 +33,7 @@ img{
     color: #f5f5f5;
 }
 
-.textBanner{
+.textBanner {
     width: 24vw;
     height: 50vh;
     display: flex;
@@ -42,29 +42,30 @@ img{
     flex-direction: column;
 }
 
-.textBanner h1{
+.textBanner h1 {
     font-size: 48px;
     margin-bottom: 8vh;
     font-weight: 700;
     font-family: 'Montserrat', sans-serif;
 }
 
-.textBanner h2{
+.textBanner h2 {
     font-size: 22px;
     font-weight: 400;
     font-family: 'Roboto', sans-serif;
 }
 
 
-.cadastroForm h2{
+.cadastroForm h2 {
     font-size: 40px;
     font-family: 'Montserrat', sans-serif;
     margin-bottom: 6vh;
     font-weight: 800;
     display: flex;
-    
+
 }
-.cadastroForm{
+
+.cadastroForm {
     display: flex;
     margin-top: 10vh;
     align-items: center;
@@ -83,7 +84,7 @@ form {
 }
 
 
-form input{
+form input {
     margin-top: 1vh;
     margin-bottom: 3vh;
     border-style: none;
@@ -93,32 +94,32 @@ form input{
     padding: 1vh 1vw;
 }
 
-input:focus{
+input:focus {
     outline: 0;
 }
 
-.inputDados{
+.inputDados {
     display: flex;
     margin: 2vh;
 }
 
-.inputDadosMin{
+.inputDadosMin {
     display: flex;
     flex-direction: column;
     width: 18vw;
 }
 
-.inputDadosMax{
+.inputDadosMax {
     display: flex;
     flex-direction: column;
     width: 39vw;
 }
 
-.marginInput{
+.marginInput {
     margin-right: 3vw;
 }
 
-.containerButton{
+.containerButton {
     margin-top: 4vh;
     margin-bottom: 6vh;
     display: flex;
@@ -127,7 +128,7 @@ input:focus{
     flex-direction: column;
 }
 
-.containerButton button{
+.containerButton button {
     padding: 1vh 4vw;
     border-style: none;
     background-color: #705EDC;
@@ -138,11 +139,11 @@ input:focus{
     border-radius: 30px;
 }
 
-.containerButton button:hover{
+.containerButton button:hover {
     background-color: #0F1126;
 }
 
-.containerJaTemConta{
+.containerJaTemConta {
     display: flex;
     color: #141414;
     font-family: 'Roboto', sans-serif;
@@ -152,14 +153,14 @@ input:focus{
     justify-content: center;
 }
 
-.containerJaTemConta a{
+.containerJaTemConta a {
     text-decoration: none;
     color: #705EDC;
     font-weight: 500;
 
 }
 
-.voltarHome{
+.voltarHome {
     font-family: 'Roboto', sans-serif;
     display: flex;
     align-items: center;
@@ -169,14 +170,87 @@ input:focus{
     gap: 1vh;
 }
 
-.voltarHome img{
+.voltarHome img {
     height: 3.5vh;
     cursor: pointer;
 }
 
-.voltarHome a{
+.voltarHome a {
     text-decoration: none;
     color: #161A86;
     font-weight: 500;
     font-size: 20px;
+}
+
+@media only screen and (max-width: 900px) {
+    .conteudoBanner {
+        display: none;
+    }
+
+    .cadastroForm {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10vh auto;
+    }
+
+    .cadastroForm form {
+        width: 90%;
+        height: 65vh;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+
+    .cadastroForm form * {
+        width: 100%;
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .cadastroForm form .inputDados {
+        display: flex;
+        justify-content: space-between;
+        height: 17vh;
+    }
+
+    .cadastroForm form input {
+        height: 5vh;
+    }
+
+    .cadastroForm form button {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cadastroForm form .containerButton {
+        height: 15vh;
+    }
+
+    .cadastroForm form .containerButton * {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cadastroForm form .containerButton .containerJaTemConta {
+        width: 100%;
+        height: 5vh;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .cadastroForm form .containerButton .containerJaTemConta a {
+        justify-content: flex-start;
+    }
+
+    .cadastroForm .voltarHome {
+        width: 90%;
+    }
+
+
 }
