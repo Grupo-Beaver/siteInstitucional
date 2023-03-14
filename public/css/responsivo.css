@@ -1,0 +1,323 @@
+@media only screen and (max-width: 600px) {  
+
+    header{
+        position: none;    
+    }
+
+    /*Nav-bar*/
+    .nav {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .img-logo {
+        margin-bottom: 1vh;
+    }
+
+    .itemContainer {
+        margin-bottom: 3vh;
+    }
+
+    .btn-container {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        font-size: 2.5vh;
+        gap: 3vh;
+        margin-bottom: 1vh;
+    }
+
+    .btn-nav-entrar {
+        padding: 1.1204481792717087vh 5vh;
+    }
+
+    /*inicio*/
+    .container-conteudo-hero {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        align-items: center;
+        padding-left: 2vh;
+        padding-bottom: 6vh;
+        padding-top: 8vh;
+    }
+
+    .container-conteudo-hero .btn-item {
+        display: none;
+    }
+
+    .hero-esquerda {
+        width: 100%;
+        margin-right: 0vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .text-hero {
+        margin-top: 2vh;
+        font-size: 2.5vh;
+        font-weight: 400;
+        letter-spacing: 0.15em;
+    }
+
+    .titulo-hero {
+        font-family: 'Montserrat', sans-serif;
+        font-size: 60px;
+        font-weight: bold;
+        padding: 2vh 0;
+    }
+
+    .text-hero2 {
+        font-size: 3vh;
+        margin-top: 1vh;
+        width: 100%;
+        padding: 0 10vh 3vh 10vh;
+    }
+
+    .img-chamativo {
+        border: 1.3vh solid #F5F5F5;
+        border-radius: 20px;
+        max-width: 100%;
+    }
+
+    .hero-img-chamativo {
+        width: 100%;
+        margin-top: 3vh;
+    }
+
+
+    /*serviços*/
+    .titulo-servicos {
+        text-align: center;
+    }
+
+    .text-titulo-servico{
+        font-size: 2.3vh;
+        margin: 0 8vh;
+    }
+
+    .subTitulo-servicos {
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        padding: 2vh;
+        font-family: 'Montserrat', sans-serif;
+    }
+
+    .texto-subtitulo{
+        color: #F5F5F5;
+        font-size: 3.2vh;
+        font-weight: 500;
+        padding: 0 3vh;
+    }
+
+    .imagens-servicos{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        padding: 0vh;
+        margin-left: 5vh;
+
+
+    }
+    
+    .icon-servicos{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 2vh;
+        margin-right: 10vh;
+    }
+
+    .icon3{
+        margin: 2vh ;
+    }
+    
+    .icon-servicos img{
+        max-width: 50%;
+        margin-top: 5vh;
+    }
+    
+    .text-servicos{
+        color: #F5F5F5;
+        width: 60%;
+        margin: 0 20%;
+        text-align: center;
+        font-size: 3vh;
+        margin-top: 2vh;
+    }
+
+    .conteudo-servicos{
+        padding: 5vh 0;
+    }
+
+
+    /*quem somos*/
+    .quemSomos{
+        padding: 20vh 0;
+        width: 100%;
+    }
+
+    .quemSomos .container{
+        display: flex;
+        flex-direction: column;
+
+    }
+    
+    .imgCentro{
+        width: 100%;
+    }
+    
+    .somos-esquerda{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+    }
+    
+    .somos-direita{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        width: 30%;
+    }
+    
+    .quemSomos .container{
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .text-esquerda{
+        text-align:end;
+        width: 60%;
+    }
+    
+    .text-esquerda-beaver{
+        text-align:start;
+        width: 60%;
+    }
+    
+    .text-direita{
+        text-align:start;
+        width: 50%;
+    }
+    
+    .text-somos{
+        font-size: 3vh;
+    }
+    
+    .valores{
+        padding-bottom: 3vh;
+    }
+    
+    .text-somos-beaver{
+        font-family: 'Montserrat', sans-serif;
+        font-size: 69px;
+        font-weight:bold;
+    }
+
+
+
+
+    /*contato*/
+    .contato .container{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .esquerda-contato{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        width: 100%;
+        text-align: start;
+    }
+
+    .titulo-contato{
+        text-align: center;
+        font-size: 2.5vh;
+        font-weight: 400;
+        letter-spacing: 0.15em;
+    }
+    
+    .subTitulo-contato{
+        font-size: 5vh;
+        text-align: center;
+        margin-top: 2vh;
+        margin-bottom: 5vh;
+    }
+
+    .formulario-contato{
+        width: 100%;
+        padding: 10% 0;
+        background-size: cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 2vh;
+        border-radius: 3vh;
+    }
+    
+    .nome-sobrenome-contato{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+    
+
+    .label-form{
+        font-weight: 600;
+        font-size: 3vh;
+        margin-bottom: 1vh;
+    }
+    
+    .btn-forms{
+        display: flex;
+        justify-content: center;
+        padding: 2vh;
+    }
+    
+    .btn-contato:hover{
+        background-color: #705EDC;
+    }
+
+
+    /*footer*/
+    footer{
+        padding: 5vh;
+    }
+    
+    footer .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .texto-footer{
+        font-weight: 400;
+        text-align: center;
+        font-size: 2.5vh;
+        margin-bottom: 15px;
+        padding-top: 3vh;
+    }
+    
+    .icons-footer{
+        padding-left: 5vh;
+    }
+    
+    .icon-social{
+        width: 18%;
+        padding-top: 1vh;
+    }
+    
+}
