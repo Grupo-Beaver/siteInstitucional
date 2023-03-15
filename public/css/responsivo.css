@@ -1736,14 +1736,17 @@ nav .navEscondida .fim section {
     
     .titulo-contato{
         color: #F5F5F5 ;
+        text-align: start;
         font-size: 3vh ;
         font-weight: 400;
         letter-spacing: 0.15em;
     }
     
     .subTitulo-contato{
-        font-size: 85px;
+        font-size: 70px;
         margin-top: 2vh;
+        text-align: start;
+        width: 80%;
         font-weight: bold;
         font-family: 'Montserrat', sans-serif;
     }
