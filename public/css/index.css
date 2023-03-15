@@ -1,8 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap');
 
+/*Index*/
 html{
     scroll-behavior: smooth;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body{
@@ -16,7 +23,6 @@ main{
 }
 
 /*Inicio do Header*/
-
 header{
     width: 100%;
     padding: 0.8522727272727273vh 0;
@@ -24,6 +30,7 @@ header{
     justify-content: center;
     background-color: #F5F5F5;
     position:fixed;
+    padding-top: 1vh;
 }
 
 .container{
@@ -39,7 +46,7 @@ header{
 
 .itemContainer{
     display: flex;
-    width: 50%;
+    width: 70%;
     justify-content: space-evenly;
 }
 
@@ -47,6 +54,7 @@ header{
     display: flex;
     align-items: center;
     color: #181818;
+    font-weight: 400;
 }
 
 .btn-item{
@@ -63,19 +71,33 @@ header{
 .btn-container{
     display: flex;
     width: 20%;
-    justify-content: space-evenly;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 2.5vh;
+    gap: 2vh;
 }
 
-.btn-nav{
+.btn-nav-entrar{
     color: #F5F5F5;
-    background-color: #0F1126;
+    background-color: #0F1126;;
     border-radius:4.201680672268908vh;
     padding: 1.1204481792717087vh 2.5210084033613445vh;
 }
 
-.btn-nav:hover{
+.btn-nav-criar-conta{
+    color: #F5F5F5;
+    background-color: #705EDC;;
+    border-radius:4.201680672268908vh;
+    padding: 1.1204481792717087vh 2.5210084033613445vh;
+}
+
+.btn-nav-entrar:hover{
    background-color: #705EDC;
 }
+
+.btn-nav-criar-conta:hover{
+    background-color: #0F1126;
+ }
 
 /*Fim do Header*/
 
@@ -83,22 +105,42 @@ header{
 
 .hero{
     /* position: relative; */
-    background-image: url(../img/grupão.png);
-    padding: 40vh 0;
+    background-image: url(../img/backgroundInicioSimples.png);
+    padding: 20vh 0 1vh 0;
     width: 100%;
     background-size: cover;
 }
 
+.img-chamativo{
+    border: 1.8vh solid #F5F5F5;
+    border-radius: 20px;
+    max-width: 100%;
+}
+
+.container-conteudo-hero{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    padding-left: 2vh;
+    padding-bottom: 5vh;
+}
+
 .hero-esquerda{
-    width: 40%;
+    width: 50%;
+    margin-right: 3vh;
     display: flex;
     flex-direction: column;
 }
 
+.hero-img-chamativo{
+    width: 50%;
+}
+
 .text-hero{
-    width: 70%;
     color: #F5F5F5 ;
-    font-size: 20px ;
+    font-size: 3vh ;
+    font-weight: 400;
+    letter-spacing: 0.15em;
 }
 
 .titulo-hero{
@@ -106,6 +148,14 @@ header{
     color: #F5F5F5;
     font-size: 90px;
     font-weight: bold;
+    padding: 2vh 0;
+}
+
+.text-hero2{
+    color: #F5F5F5 ;
+    font-size: 4vh;
+    margin-top: 3vh;
+    width: 70%;
 }
 
 .p-hero{
@@ -116,15 +166,22 @@ header{
 .btn-hero{
     color: #F5F5F5;
     background-color: #705EDC;
-    border-radius:4.201680672268908vh;
-    padding: 1.1204481792717087vh 2.5210084033613445vh;
-    margin-top: 15px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    font-size: 3vh;
+    border-radius:4.2vh;
+    padding: 1.5vh 6vh;
+    margin-top: 8vh;
 }
 
 .btn-hero:hover{
-   background-color: #F5F5F5;
-   color: #705EDC;
+    background-color: #0F1126;
 }
+
+/* .img-engrenagem{
+    display: flex;
+    justify-content: right;
+} */
 
 /*Inicio dos Serviços*/
 
@@ -138,7 +195,7 @@ header{
     display: flex;
     justify-content: center;
     background-color: #F5F5F5;
-    padding: 3vh;
+    padding: 4vh 3vh;
     border-bottom: 0.7102272727272727vh solid #F5F5F5;
     border-radius: 0 0 30px 30px;
     font-family: 'Montserrat', sans-serif;
@@ -159,38 +216,40 @@ header{
 
 .texto-subtitulo{
     color: #F5F5F5;
-    font-size: 30px;
-    font-weight: 600;
+    font-size: 4vh;
+    font-weight: 500;
+    padding: 0 15vh;
 }
 
 .imagens-servicos{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+    flex-direction: row;
+    align-items: flex-end;
     padding: 10vh 0;
+    width: 100%;
 }
 
 .icon-servicos{
     width: 40%;
-    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.icon-servicos img{
+    max-width: 100%;
 }
 
 .text-servicos{
     color: #F5F5F5;
-    width: 40%;
-    margin: 2vh auto 0 auto;
+    width: 60%;
+    margin: 3vh auto 0 auto;
+    text-align: center;
 }
 
 .conteudo-servicos{
     padding: 5vh 0;
-}
-
-.fim-servicos{
-    background-color: #F5F5F5;
-    padding: 3vh;
-    border-bottom: 0.7102272727272727vh solid #F5F5F5;
-    border-radius: 30px 30px 0 0;
 }
 
 
@@ -199,12 +258,13 @@ header{
 
 .quemSomos{
     background-color: #E4DFFC;
+    background-size: cover;
     padding: 20vh 0;
     width: 100%;
 }
 
 .imgCentro{
-    width: 50%;
+    width: 40%;
 }
 
 .somos-esquerda{
@@ -212,6 +272,7 @@ header{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    width: 30%;
 }
 
 .somos-direita{
@@ -219,6 +280,7 @@ header{
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    width: 30%;
 }
 
 .quemSomos .container{
@@ -242,7 +304,11 @@ header{
 }
 
 .text-somos{
-    font-size: 21px;
+    font-size: 3vh;
+}
+
+.valores{
+    padding-bottom: 3vh;
 }
 
 .text-somos-beaver{
@@ -274,18 +340,24 @@ header{
 }
 
 .titulo-contato{
-    font-size: 30px;
-    font-weight: medium;
+    color: #F5F5F5 ;
+    font-size: 3vh ;
+    font-weight: 400;
+    letter-spacing: 0.15em;
 }
 
 .subTitulo-contato{
-    font-size: 90px;
+    font-size: 85px;
+    margin-top: 2vh;
     font-weight: bold;
     font-family: 'Montserrat', sans-serif;
 }
 
 .formulario-contato{
+    width: 40%;
+    padding: 10% 0;
     background-color: #FFFFFF;
+    background-size: cover;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -295,12 +367,13 @@ header{
 
 .nome-sobrenome-contato{
     display: flex;
+    width: 100%;
 }
 
 .campos-forms{
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 2vh;
 }
 
@@ -308,6 +381,10 @@ header{
     background-color: #DAD5FC;
     border-radius:7px;
     padding: 1vh;
+}
+
+input:focus{
+    outline: 0;
 }
 
 .label-form{
@@ -333,6 +410,8 @@ header{
 .btn-contato{
     color: #F5F5F5;
     background-color: #141414;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
     padding: 1.5vh 8vh;
     border-radius:4.201680672268908vh;
 }
@@ -357,6 +436,7 @@ footer .container{
 .texto-footer{
     font-weight: 400;
     margin-bottom: 15px;
+    padding-top: 3vh;
 }
 
 .icon-footer{
@@ -394,3 +474,9 @@ footer .container{
     background-color: #705EDC;
     border-radius: 2vh;
 } */
+
+
+
+
+
+
