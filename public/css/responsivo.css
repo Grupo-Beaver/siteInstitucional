@@ -1,4 +1,4 @@
-@media only screen and (max-width: 600px) {  
+@media (max-width: 600px) {  
 
     header{
         position: none;    
@@ -320,4 +320,39 @@
         padding-top: 1vh;
     }
     
+}
+
+/* -------------------------------------------------------------------------------- */
+
+@media only screen and (min-width: 768px){
+    /*Nav-bar*/
+    .nav {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .img-logo {
+        width: 20%;
+        margin-bottom: 1vh;
+    }
+
+    .itemContainer {
+        width: 60%;
+        margin-bottom: 3vh;
+    }
+
+    .btn-container {
+        display: flex;
+        width: 20%;
+        justify-content: center;
+        font-size: 2.5vh;
+        gap: 3vh;
+        margin-bottom: 1vh;
+    }
+
+    .btn-nav-entrar {
+        padding: 1.1204481792717087vh 5vh;
+    }
 }
