@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="./public/css/index.css">
     <link rel="shortcut icon" href="./public/img/logo 2.png" type="image/x-icon">
     <link rel="stylesheet" href="./public/css/reset.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="./public/css/responsivo.css">
     <script src="./public/js/scrollBar.js"></script>
     <title>Beaver</title>
@@ -15,7 +16,7 @@
     <header>
         <div class="container">
             <div class="nav">
-                <a href="../siteInstitucional/index.html" class="img-logo"><img src="./public/img/logo-final2.svg" alt=""></a>
+                <a href="../siteInstitucional/index.html" class="img-logo"><img src="./public/img/logo-final2.svg" alt="" class="img-img-logo"></a>
                 <section class="itemContainer">
                     <section class="item"><a href="index.html">Início</a></section>
                     <section class="item"><a href="index.html#servicos">Serviços</a> </section>
@@ -29,6 +30,49 @@
             </div>
         </div>
     </header>
+
+    <!-- Nav responsiva -->
+    <nav>
+        <div class="logo">
+            <a href=""><img src="./public/img/logo-final2.svg" alt=""></a>
+        </div>
+        <div class="menu">
+            <span class="material-symbols-outlined" onclick="abrirMenu()">
+                menu
+            </span>
+        </div>
+        <div class="navEscondida" id="navE">
+            <div class="fechar">
+                <span class="material-symbols-outlined" onclick="fecharMenu()">
+                    close
+                </span>
+            </div>
+            <div class="links">
+                <section class="item"><a href="index.html">Início</a></section>
+                <section class="item"><a href="index.html#servicos">Serviços</a> </section>
+                <section class="item"><a href="index.html#quem_somos">Sobre Nós</a> </section>
+                <section class="item"><a href="index.html#formulario_contato">Contato</a></section>
+            </div>
+            <div class="fim">
+                <section class="btn-item"> <a href="./public/login.html"><button
+                            class="btn-nav-entrar pointer">Entrar</button> </a>
+                </section>
+                <section class="btn-item"> <a href="./public/cadastro.html"><button
+                            class=" btn-nav-criar-conta pointer">Criar Conta</button> </a>
+                </section>
+            </div>
+        </div>
+    </nav>
+
+    <script>
+        function abrirMenu() {
+            document.getElementById('navE').style.top = "0"
+        }
+
+        function fecharMenu() {
+            document.getElementById('navE').style.top = "-120vh"
+        }
+    </script>
 
     <main>
         <div class="hero">

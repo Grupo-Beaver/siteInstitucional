@@ -2,7 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap');
 
 /*Index*/
-
 html{
     scroll-behavior: smooth;
 }
@@ -24,7 +23,6 @@ main{
 }
 
 /*Inicio do Header*/
-
 header{
     width: 100%;
     padding: 0.8522727272727273vh 0;
@@ -254,13 +252,6 @@ header{
     padding: 5vh 0;
 }
 
-.fim-servicos{
-    /* background-color: #F5F5F5; */
-    padding: 3vh;
-    border-bottom: 0.7102272727272727vh solid #F5F5F5;
-    /* border-radius: 30px 30px 0 0; */
-}
-
 
 
 /*Inicio quem somos*/
@@ -483,3 +474,9 @@ footer .container{
     background-color: #705EDC;
     border-radius: 2vh;
 } */
+
+
+
+
+
+

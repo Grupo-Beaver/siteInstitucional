@@ -180,3 +180,75 @@ input:focus{
     font-weight: 500;
     font-size: 20px;
 }
+
+
+@media only screen and (max-width: 900px) {
+    .conteudoBanner {
+        display: none;
+    }
+
+    .cadastroForm {
+        width: 90%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 10vh auto;
+    }
+
+    .cadastroForm form {
+        width: 90%;
+        height: 65vh;
+        justify-content: space-around;
+        flex-direction: column;
+    }
+
+    .cadastroForm form * {
+        width: 100%;
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .cadastroForm form .inputDados {
+        display: flex;
+        justify-content: space-between;
+        height: 17vh;
+    }
+
+    .cadastroForm form input {
+        height: 5vh;
+    }
+
+    .cadastroForm form button {
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .cadastroForm form .containerButton {
+        height: 15vh;
+    }
+
+    .cadastroForm form .containerButton * {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cadastroForm form .containerButton .containerJaTemConta {
+        width: 100%;
+        height: 5vh;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .cadastroForm form .containerButton .containerJaTemConta a {
+        justify-content: flex-start;
+    }
+
+    .cadastroForm .voltarHome {
+        width: 90%;
+    }
+}
