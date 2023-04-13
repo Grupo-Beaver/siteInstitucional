@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
@@ -8,6 +8,8 @@
     <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
     <title>Beaver</title>
     <link rel="stylesheet" href="./css/login.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 </head>
 
 <body>
@@ -21,21 +23,21 @@
         <div class="esquerda">
             <div class="container">
                 <h2>Bem-vindo(a) de volta!</h2>
-                <form action="">
+                <form>
                     
                     <div class="containerInput">
                         <label for="">E-mail</label>
-                        <input type="email">
+                        <input id="email_input" type="email">
                     </div>
                     
                     <div class="containerInput">
                         <label for="">Senha</label>
-                        <input type="password">
+                        <input id="senha_input" type="password">
                     </div>
                     
                     
                     <div class="containerCadastrar">
-                        <button onclick="entrar()">Entrar</button>
+                        <button type="button" onclick="login()">Entrar</button>
                         
                         <div class="naoConta"> Ainda não tem uma conta?</div>
                         
@@ -69,6 +71,73 @@
 
 <script>
 
+    
 
+    function login() {
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+
+        if (emailVar == "" || senhaVar == "") {
+            alert("Erro preencha todos os campos em branco");
+            return false;
+        }
+        else {
+            // setInterval(alert("oi"), 5000)
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch("/usuarios/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO login()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    
+                    window.location ="./test.html";
+
+                });
+
+            } else {
+                Toastify({
+  text: "Erro login",
+  className: "info",
+
+  style: {
+    background: "linear-gradient(to right, #7D0505, #FF0000)",
+    "text-align": "center",
+    padding: "3vh 5vw",
+    "border-radius": "2vh"
+    
+  }
+}).showToast();
+
+                console.log("Houve um erro ao tentar realizar o login!");
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
+    }
 
 </script>
