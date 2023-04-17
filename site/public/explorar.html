@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <title>Beaver</title>
+    <link rel="stylesheet" href="./css/explorar.css">
+    <link rel="stylesheet" href="./css/componente.css">
+    <script src="./js/componente.js"></script>
+
+</head>
+<body>
+    <main-menu></main-menu>
+    <div>
+
+        <div class="header_explorar">
+            <div class="container_pesquisa_alert">
+                <div class="container_pesquisa">
+                    <img src="./img/lupa-barra-pesquisa.png" alt="">
+                    <input type="text">
+                </div>
+
+                <div class="container_alert">
+                    <p>1</p>
+                    <img src="./img/alert_expl.png" alt="">
+                </div>
+            </div>
+        </div>
+
+        <div class="container_main">
+
+            <div class="container_main_list">
+
+                <div class="container_select">
+                    <select name="" id="select_tipo">
+                        <option value="">Máquina</option>
+                        <option value="">Usuário</option>
+                    </select>
+                    <select name="" id="select_alert_status">
+                        <option value=""></option>
+                        <option value="">Saudável</option>
+                        <option value="">Atenção</option>
+                        <option value="">Crítico</option>
+                    </select>
+                </div>
+                <div class="container_list">
+                    <div class="container_titulo_maquina">
+                        <h2>Máquina</h2>
+                        <h2>Tipo</h2>
+                        <h2>Estado</h2>
+                        <h2>Usuários</h2>
+                        <div class="none"></div>
+                    </div>
+
+                    <div id="list" class="container_list_conteudo">
+                        
+
+                    </div>
+                
+                </div>
+
+            </div>           
+
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+
+imgExplorar.src="./img/lupaLocal.png";
+
+for(var i = 0; i < 10; i++){
+
+    list.innerHTML += `<div class="container_conteudo">
+                            <p>09578-G</p>
+                            <p>Notebook</p>
+                            <p>Crítico</p>
+                            <p>Enzzo</p>
+                            <div class="button_list">
+                                <button class="button_detalhe">+ Detalhes</button>
+                                <button id="margin_button">Editar</button>
+                                <button>Excluir</button>
+                            </div>
+                        </div>`
+
+}
+
+</script>
