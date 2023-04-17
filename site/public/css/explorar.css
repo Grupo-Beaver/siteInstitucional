@@ -264,6 +264,7 @@
 
 .modal-footer{
     border-top: none !important;
+    justify-content: space-evenly !important;
 }
 
 .modal-footer button{
@@ -273,9 +274,10 @@
     font-size: 1.2em !important;
     border-style: none;
     border-radius: 10px;
-    width: 5vw;
+    width: 6vw;
     height: 4vh;
     cursor: pointer;
+    
 }
 
 .container_conteudo p{
