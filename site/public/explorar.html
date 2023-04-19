@@ -17,7 +17,7 @@
 
 </head>
 
-<body>
+<body onload="verificarLista()">
     <main-menu></main-menu>
     <div>
 
@@ -41,7 +41,6 @@
 
                 <div class="container_select">
                     <select onchange="verificarLista()" name="" id="select_tipo">
-                        <option value=""></option>
                         <option value="maquina">Máquina</option>
                         <option value="usuario">Usuário</option>
                     </select>
