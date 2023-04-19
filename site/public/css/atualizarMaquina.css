@@ -51,7 +51,6 @@ h1 {
     justify-content: space-between;
 }
 
-.maquina,
 .modelo,
 .tipo,
 .fabricante,
@@ -71,11 +70,13 @@ h1 {
     font-size: 1.3vw;
 }
 
-.maquina input,
+.sistemas select,
+.usuario select,
+.maquina select,
 .modelo input,
 .tipo select,
 .fabricante input,
-.linha3 select,
+.linha3 input,
 .linha3 input,
 .processador input {
     width: 100%;
@@ -85,16 +86,22 @@ h1 {
     background-color: #D9D9D9;
     padding: 0 1vw;
     font-size: 1em;
+    display: flex;
+    align-items: center;
 }
 
 .tipo{
     width: 30%;
 }
 
+.modelo,
 .fabricante {
-    width: 65%;
+    width: 49%;
 }
 
+.maquina,
+.usuario,
+.tipo,
 .sistemas,
 .memoriaRam,
 .memoriaDisco {
@@ -131,5 +138,3 @@ h1 {
     width: 12vw;
     cursor: pointer;
 }
-
-
