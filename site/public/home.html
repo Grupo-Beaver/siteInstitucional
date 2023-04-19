@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/login.css">
+    <title>Home</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
 
     <!-- Preciso para aparecer menu -->
     <link rel="stylesheet" href="./css/componente.css">
@@ -15,11 +18,49 @@
 </head>
 <body>
   <main-menu></main-menu>
+
+  <main>
+    <div class="container">
+      <div class="sino-notificacao">
+        <img src="./img/notificacoes.svg" alt="">
+      </div>
+      <div class="topo">
+        <div class="titulo-dash">
+          <p>DashBoard Geral</p>
+        </div>
+      </div>
+      <div class="kpis">
+          <div class="kpi-box saudavel">
+            <p class="titulo-kpi">Saudável</p>
+            <b class="qtdMaquina">3</b>
+            <p>Qtd. Máquinas</p>
+          </div>
+          <div class="kpi-box atencao">
+            <p class="titulo-kpi">Atenção</p>
+            <b class="qtdMaquina">2</b>
+            <p>Qtd. Máquinas</p>
+          </div>
+          <div class="kpi-box critico">
+            <p class="titulo-kpi">Crítico</p>
+            <b class="qtdMaquina">1</b>
+            <p>Qtd. Máquinas</p>
+          </div>
+      </div>
+      <div class="containerGrafico">
+        <div class="fundoGrafico">
+          <p>Visão geral de todas as maquinas</p>
+          <div class="grafico">
+            <canvas id="myChart"></canvas>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </main>
+  
 </body>
 </html>
 
 <script>
-
 
 imgHome.src="./img/homeLocal.png";
 
@@ -36,4 +77,32 @@ Toastify({
     
   }
 }).showToast();
+</script>
+
+<script>
+  const ctx = document.getElementById('myChart');
+
+  new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: ['Saudável', 'Atenção' ,'Critico' ],
+      datasets: [{
+        // label: '# of Votes',
+        data: [12, 19, 3 ],
+        borderWidth: 1,
+        backgroundColor: [
+        'rgb(54, 162, 235)',
+        'rgb(255, 205, 86)',
+        'rgb(255, 99, 132)'
+        ]
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
 </script>
