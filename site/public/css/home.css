@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+main{
+    width: 100%;
+}
+
+.container{
+    width: 96%;
+}
+
+.topo{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 4vh;
+    padding-left: 20vh;
+    font-family: 'Montserrat', sans-serif;
+    font-weight:bold;
+    font-size:32px;
+}
+
+.container .sino-notificacao{
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 40px;
+}
+
+.container .kpis{
+    display: flex;
+    justify-content: space-between;
+    padding:2vh 20vh 0 20vh;
+    width: 100%;
+}
+
+.kpi-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5vh 12vh;
+    border-radius: 25px;
+}
+
+.saudavel{
+    background-color: #8FC7FA;
+}
+
+.atencao{
+    background-color: #F5F87A;
+}
+
+.critico{
+    background-color: #F38080;
+}
+
+.titulo-kpi{
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 3vh;
+}
+
+.qtdMaquina{
+    font-size: 65px;
+}
+
+.containerGrafico{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-top:2vh;
+}
+
+.fundoGrafico{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #D9D9D9;
+    padding: 2vh 7vh;
+    border-radius: 25px;
+}
+
+.fundoGrafico p{
+    font-size:24px;
+    padding-bottom: 1vh;
+}
+
+.grafico{
+    border-radius: 25px;
+    padding: 0 43vh;
+    background-color: #F5F5F5;
+}

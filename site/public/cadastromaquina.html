@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beaver</title>
+    <link rel="stylesheet" href="./css/cadastromaquina.css">
+    <link rel="stylesheet" href="./css/componente.css">
+    <script src="./js/componente.js"></script>
+</head>
+
+<body>
+    <main-menu></main-menu>
+    <div class="cabecalho">
+        <div class="titulo">
+            <h1>Cadastro de Máquina</h1>
+        </div>
+
+
+        <div class="container">
+            <div class="linha1">
+                <div class="maquina">
+                    <label>Máquina</label>
+                    <select onchange="mostrarCadastro()" name="" id="select_maquina">  
+                        <option value=""></option>
+                        <option value="maq">Maquina 1</option>
+                        <option value="maq">Maquina 2</option>
+                        <option value="maq">Maquina 3</option>
+                    </select>
+                    <p id="selecionar_maquina">Selecione a máquina que deseja cadastrar</p>
+                </div>
+
+                <div id="exibir" class="modelo">
+                    <label>Modelo<span>*</span></label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div id="exibir1" class="linha2">
+                <div class="tipo">
+                    <label>Tipo</label>
+                    <select name="" id="">
+                        <option value=""></option>
+                        <option value="">Tipo 1</option>
+                        <option value="">Tipo 2</option>
+                        <option value="">Tipo 3</option>
+                        <option value="">Tipo 4</option>
+                    </select>
+                </div>
+
+                <div class="fabricante">
+                    <label>Fabricante</label>
+                    <input type="text">
+                </div>
+            </div>
+
+            <div id="exibir2" class="linha3">
+                <div class="sistemas">
+                    <label>Sistema Operacional</label>
+                    <select name="" id="">
+                        <option value=""></option>
+                        <option value="">Windows</option>
+                        <option value="">Linux</option>
+                    </select>
+                </div>
+
+                <div class="memoriaRam">
+                    <label>Memoria Ram Total</label>
+                    <input type="text">
+                </div>
+
+                <div class="memoriaDisco">
+                    <label>Memoria Disco Total</label>
+                    <input type="text">
+                </div>
+
+            </div>
+
+            <div id="exibir3" class="linha4">
+                <div class="processador">
+                 <label>Processador</label>
+                 <input type="text">
+                </div>
+
+            </div>
+        
+            <div id="exibir4" class="botoes">
+                <button onclick="window.location.href='./explorar.html'" class="botao1">Cancelar</button>
+                <button class="botao2">Cadastrar</button>
+            </div>
+          
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script>
+    imgExplorar.src = "./img/lupaLocal.png";
+
+    function mostrarCadastro(){
+
+        var tipo = select_maquina.value;
+
+        if(tipo == "maq"){
+            exibir.style.display = "flex";
+            exibir1.style.display = "flex";
+            exibir2.style.display = "flex";
+            exibir3.style.display = "flex";
+            exibir4.style.display = "flex";
+            selecionar_maquina.style.display = "none";
+        } else{
+
+            exibir.style.display = "none";
+            exibir1.style.display = "none";
+            exibir2.style.display = "none";
+            exibir3.style.display = "none";
+            exibir4.style.display = "none";
+            selecionar_maquina.style.display = "block";
+
+        }
+
+    }
+</script>
