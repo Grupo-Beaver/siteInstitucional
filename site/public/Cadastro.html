@@ -22,29 +22,29 @@
                 <div class="inputDados">
                     <div class="inputDadosMin marginInput">
                         <label for="">Nome</label>
-                        <input type="text">
+                        <input id="nome_input" type="text">
                     </div>
                     <div class="inputDadosMin">
                         <label for="">Sobrenome</label>
-                        <input type="text">
+                        <input id="sobrenome_input" type="text">
                     </div>
                 </div>
                 <div class="inputDadosMax">
                     <label for="">Email</label>
-                    <input type="email">
+                    <input id="email_input" type="email">
                 </div>
                 <div class="inputDados">
                     <div class="inputDadosMin marginInput">
                         <label for="">Senha</label>
-                        <input type="password">
+                        <input id="senha_input" type="password">
                     </div>
                     <div class="inputDadosMin">
                         <label for="">Confirmação de Senha</label>
-                        <input type="password">
+                        <input id="verificar_senha_input" type="password">
                     </div>
                 </div>
                 <div class="containerButton">
-                    <button>Criar Conta</button>
+                    <button type="button" onclick="cadastrar()">Criar Conta</button>
                     <div class="containerJaTemConta">
                         <p>Já tem uma conta? <a href="./login.html">Conecte-se</a></p>
                         
@@ -59,3 +59,66 @@
     </main>
 </body>
 </html>
+
+<script>
+
+function cadastrar() {
+        
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = nome_input.value;
+        var sobrenomeVar = sobrenome_input.value;
+        var emailVar = email_input.value;
+        var senhaVar = senha_input.value;
+        var verificarSenhaVar = verificar_senha_input.value;
+        
+        if(senhaVar == verificarSenhaVar){
+        if (nomeVar == "" || emailVar == "" || senhaVar == "" || sobrenomeVar == "") {
+            alert("Erro preencha todos os campos em branco");
+            return false;
+
+        }
+        else {
+            //setInterval(sumirMensagem, 5000)
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomeServer: nomeVar,
+                sobrenomeServer: sobrenomeVar,
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        }).then(function (resposta) {
+
+            console.log("resposta: ", resposta);
+
+            if (resposta.ok) {
+
+
+                setTimeout(() => {
+                    window.location = "./login.html";
+                }, "1000")
+                
+            } else {
+                throw ("Houve um erro ao tentar realizar o cadastro!");
+            }
+        }).catch(function (resposta) {
+            console.log(`#ERRO: ${resposta}`);
+            finalizarAguardar();
+        });
+
+        return false;
+    }else{
+        alert("Senha diferentes");
+    }
+    }
+
+</script>

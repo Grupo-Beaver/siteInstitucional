@@ -175,6 +175,18 @@ button:hover{
     width: 27vw;
 }
 
+.button_support{
+    background-color: #705EDC;
+    border-radius: 20px 0 0 20px !important;
+    width: 13vw !important;
+}
+
+.button_editor{
+    background-color: aqua;
+    border-radius: 0 20px 20px 0;
+    width: 13vw !important;
+}
+
 /* -------------------------------------------------------------------------------- */
 @media only screen and (max-width: 900px) {
     .direita {
