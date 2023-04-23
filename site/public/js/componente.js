@@ -5,11 +5,11 @@ class Menu extends HTMLElement{
               <img class="imgLogoMenu" src="./img/logoMenu.png" alt="">
               <div class="container_icons">
                 <div class="container_icon_menu">
-                  <img onclick="window.location.href=''" id="imgHome" src="./img/home.png" alt="">
+                  <img onclick="window.location.href='./home.html'" id="imgHome" src="./img/home.png" alt="">
                   <p>Home</p>
                 </div>
                 <div class="container_icon_menu">
-                  <img onclick="window.location.href=''" id="imgExplorar" src="./img/lupa.png" alt="">
+                  <img onclick="window.location.href='./explorar.html'" id="imgExplorar" src="./img/lupa.png" alt="">
                   <p>Explorar</p>
                 </div>
                 <div class="container_icon_menu">
