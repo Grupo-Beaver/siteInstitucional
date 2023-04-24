@@ -137,6 +137,7 @@ button:hover{
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    height: 60vh;
 }
 
 .dash label{
@@ -147,13 +148,15 @@ button:hover{
     background-color: #fff;
     font-family: 'Montserrat', sans-serif;
     letter-spacing: 2px;
-    padding: 1vh 4vh;
+    padding: 1vh 11vw;
     margin-bottom: 3vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border-radius: 20px;
+    height: 52vh !important;
+    width: 50vw !important;
 }
 
 .container_ram{

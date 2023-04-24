@@ -142,6 +142,12 @@
 
 .button_detalhe{
     width: 5.5vw !important;
+    margin: 0 1vw;
+    
+}
+
+.button_dashbord{
+    width: 5.5vw !important;
     background-color: #705EDC !important;
     
 }
@@ -163,7 +169,7 @@
 }
 
 .none{
-    width: 15vw;
+    width: 17vw;
 }
 
 .container_list_conteudo{
