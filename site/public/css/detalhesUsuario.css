@@ -47,6 +47,10 @@ input:focus{
 }
 
 
+input::placeholder{
+    color: #000 ;
+}
+
 .form-cadastro{
     display: flex;
     flex-direction: column;
@@ -60,6 +64,7 @@ input:focus{
     gap: 1vw;
     margin-bottom: 5vh;
     width: 100%;
+    justify-content: center;
 }
 
 .nome, .sobrenome, .cpf, .telefone, .email, .empresa, .cnpj, .username, .senha, .confirm-senha{
