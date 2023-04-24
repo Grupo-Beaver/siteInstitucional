@@ -7,19 +7,24 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+
+}
+
+body{
+    overflow: hidden;
 }
 
 .cabecalho {
     width: 89vw;
     margin-left: 11vw;
-    height: 100vh;
+    height: 160vh;
     display: flex;
     flex-direction: column;
 }
 
 .titulo {
     width: 100%;
-    height: 16%;
+    height: 12%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -148,4 +153,8 @@ h1 {
     text-align: center;
     margin-top: 1vh;
     display: block;
+}
+
+main-iconitsm{
+    margin-top: 7vh;
 }

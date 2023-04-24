@@ -54,3 +54,24 @@ main{
   cursor: pointer;
   height: 4vh;
 }
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.icon-ITSM{
+  display: flex; 
+  justify-content: end;
+  
+}
+
+.img-icon-itsm{
+  cursor: pointer; 
+  position: absolute; 
+  z-index: 9999; 
+  margin-top: -65px; 
+  margin-right: 15px;
+}
