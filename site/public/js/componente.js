@@ -33,7 +33,7 @@ class IconITSM extends HTMLElement{
   connectedCallback() {
       this.innerHTML = `
       <div class="icon-ITSM">
-          <img class="img-icon-itsm" onclick="window.location.href='https://www.google.com.br/'" src="./img/auvo-icon.png" alt="" width="50px">
+          <img class="img-icon-itsm" onclick="window.location.href='https://beaver.auvo.com.br/'" src="./img/auvo-icon.png" alt="" width="50px">
       </div>
       ` 
   }
