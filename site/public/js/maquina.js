@@ -1,6 +1,7 @@
 var idSuporteTI = sessionStorage.ID_USUARIO;
 var listMaq = [];
-var idMaquina = 0;
+var idMaquina = sessionStorage.ID_MAQUINA;
+var maquina;
 
 function listarMaquinaByIdSuporte() {
 
@@ -35,6 +36,39 @@ function listarMaquinaByIdSuporte() {
 
 }
 
+function listarByIdMaquina() {
+    console.log("ta entrando");
+
+    fetch(`/maquinas/listarByIdMaquina/${idMaquina}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    maquina = json;
+                    adicionarCampos();
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+
+
+}
+
 
 function deletar() {
     fetch(`/maquinas/deletarMaquina/${idMaquina}`, {
@@ -57,8 +91,7 @@ function deletar() {
     });
 }
 
-function getByIdMaquina(idMaquina){
-
-    this.idMaquina = idMaquina;
+function getByIdMaquina(id){
+    sessionStorage.ID_MAQUINA = id;
 
 }

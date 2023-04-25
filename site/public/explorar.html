@@ -21,7 +21,7 @@
 <body onload="listarMaquinaByIdSuporte()">
     <main-menu></main-menu>
         
-        <div style="margin-left: 11vw;">
+        <div>
             
         <div class="header_explorar">
             <div class="container_pesquisa_alert">
@@ -138,7 +138,7 @@
                         <p>${listMaq[i].nomeEditor}</p>
                         <div class="button_list">
                             <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
-                            <button onclick="window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
+                            <button onclick="getByIdMaquina(${listMaq[i].idMaquina}), window.location.href='./detalhesMaquina.html'" class="button_detalhe" onclick="getByIdMaquina(${listMaq[i].idMaquina})">+ Detalhes</button>
                             <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`
@@ -167,7 +167,7 @@
                         <p>ATENÇÃO</p>
                         <div class="button_list">
                             <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
-                            <button onclick="window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
+                            <button onclick="getByIdMaquina(${listMaq[i].idMaquina}), window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
                             <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`
