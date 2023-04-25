@@ -87,25 +87,81 @@
         var senhaVar = senha_input.value;
 
         if (emailVar == "" || senhaVar == "") {
-            alert("Erro preencha todos os campos em branco");
+            cardErro.style.display = "flex";
+            mensagem_erro.innerHTML = "ERRO! Preencha os campos adequadamente.";
+        
             return false;
         }
         else {
-            // setInterval(alert("oi"), 5000)
-        }
+            cardErro.style.display = "none"
+            mensagem_erro.innerHTML = "";
 
-        console.log("FORM LOGIN: ", emailVar);
-        console.log("FORM SENHA: ", senhaVar);
+            console.log("FORM LOGIN: ", emailVar);
+            console.log("FORM SENHA: ", senhaVar);
 
-        fetch("/usuarios/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
+            fetch("/usuarios/login", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+                console.log("ESTOU NO THEN DO login()!")
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    cardErro.style.display = "none"
+                    mensagem_erro.innerHTML = "";
+
+                    cardSucesso.style.display = "flex";
+                    mensagem_sucesso.innerHTML = "Login realizado com sucesso!";
+
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        sessionStorage.ID_USUARIO = json.idUsuario;
+                        sessionStorage.NOME_USUARIO = json.nome;
+
+                        setTimeout(() => {
+                            window.location = "./home.html";
+                        }, "2000")
+
+                    });
+
+                } else {
+                    // Toastify({
+                    //     text: "Erro login",
+                    //     className: "info",
+
+                    //     style: {
+                    //         background: "linear-gradient(to right, #7D0505, #FF0000)",
+                    //         "text-align": "center",
+                    //         padding: "3vh 5vw",
+                    //         "border-radius": "2vh"
+
+                    //     }
+                    // }).showToast();
+
+                    cardErro.style.display = "flex";
+                    mensagem_erro.innerHTML = "Usuário ou senha incorretos! Por favor, tente novamente.";
+
+                    console.log("Houve um erro ao tentar realizar o login!");
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                    });
+
+                }
+
+            }).catch(function (erro) {
+                console.log(erro);
             })
+            
         }).then(function (resposta) {
             console.log("ESTOU NO THEN DO login()!")
 
@@ -153,5 +209,7 @@
 
         return false;
     }
+
+
 
 </script>
