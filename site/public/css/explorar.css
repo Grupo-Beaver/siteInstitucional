@@ -203,18 +203,12 @@
     color: #fff;
     font-family: 'Montserrat', sans-serif;
     font-size: 1vw;
-    display: none;
     cursor: pointer;
 }
 
 .margin_left_button{
     margin-left: 3vw;
 }
-
-#select_alert_status{
-    display: none;
-}
-
 
 
 .modal {
