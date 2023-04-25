@@ -46,15 +46,18 @@
                 <div class="inputDadosMax">
                     <label for="">Email</label>
                     <input id="email_input" type="email">
+                    <span class="alerta-erro-validacao" id="spanEmailInvalido"></span>
                 </div>
                 <div class="inputDados">
                     <div class="inputDadosMin marginInput">
                         <label for="">Senha</label>
                         <input id="senha_input" type="password">
+                        <span class="alerta-erro-validacao" id="spanSenhaInvalida"></span>
                     </div>
                     <div class="inputDadosMin">
                         <label for="">Confirmação de Senha</label>
                         <input id="verificar_senha_input" type="password">
+                        <span class="alerta-erro-validacao" id="spanConfirmSenhaInvalido"></span>
                     </div>
                 </div>
                 <div class="containerButton">
@@ -86,15 +89,51 @@
         var senhaVar = senha_input.value;
         var verificarSenhaVar = verificar_senha_input.value;
 
-        if (senhaVar == verificarSenhaVar) {
-            if (nomeVar == "" || emailVar == "" || senhaVar == "" || sobrenomeVar == "") {
-                alert("Erro preencha todos os campos em branco");
-                return false;
+        if (nomeVar == "" || sobrenomeVar == "" || emailVar == "" || senhaVar == "" || verificarSenhaVar == "") {
+            cardErro.style.display = "flex"
+            mensagem_erro.innerHTML = "ERRO! Preencha todos os campos adequadamente.";
+        } else {
+            //VALIDAÇÃO DE EMAIL
+            var emailInvalido = false;
+            const emailValido = /^[A-Za-z0-9]{1}[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*/
 
+            if (!emailValido.test(emailVar)) {
+                emailInvalido = true;
+                spanEmailInvalido.innerHTML = `
+                Digite um endereço de e-mail válido.
+                `;
             }
-            else {
-                //setInterval(sumirMensagem, 5000)
+            else if (emailInvalido == false) {
+                spanEmailInvalido.innerHTML = "";
             }
+
+            //VALIDAÇÃO DE SENHA
+            var senhaInvalida = false;
+            var confirmSenhaInvalido = false;
+
+            if (senhaVar.length < 8) {
+                senhaInvalida = true;
+                spanSenhaInvalida.innerHTML = `
+                Senha inválida! Digite uma senha de pelo menos 8 caracteres.
+                `;
+            }
+            else if (verificarSenhaVar != senhaVar) {
+                confirmSenhaInvalido = true;
+                spanConfirmSenhaInvalido.innerHTML = `
+                Senha incorreta! Digite a mesma senha digitada anteriormente.
+                `;
+            }
+            else if (senhaInvalida == false) {
+                spanSenhaInvalida.innerHTML = "";
+            }
+            else if (confirmSenhaInvalido == false) {
+                spanConfirmSenhaInvalido.innerHTML = "";
+            }
+        }
+
+        //cadastrar
+
+        if (emailInvalido == false && senhaInvalida == false && confirmSenhaInvalido == false) {
 
             // Enviando o valor da nova input
             fetch("/usuarios/cadastrar", {
@@ -116,8 +155,8 @@
 
                 if (resposta.ok) {
 
-                    cardSucesso.style.display = "flex";
-                    mensagem_sucesso.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                    // cardSucesso.style.display = "flex";
+                    // mensagem_sucesso.innerHTML = "Cadastro realizado com sucesso!";
 
                     setTimeout(() => {
                         window.location = "login.html";
@@ -132,10 +171,6 @@
             });
 
             return false;
-        } else {
-
-            cardErro.style.display = "flex"
-            mensagem_erro.innerHTML = "ERRO! Preencha todos os campos adequadamente.";
 
             // Toastify({
             //     text: "Erro cadastro, senha invalida",

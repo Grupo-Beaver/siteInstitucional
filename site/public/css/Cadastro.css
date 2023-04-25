@@ -85,7 +85,7 @@ form {
 
 form input{
     margin-top: 1vh;
-    margin-bottom: 3vh;
+    margin-bottom: 1vh;
     border-style: none;
     border-radius: 10px;
     background-color: #E5E5E5;
@@ -120,7 +120,7 @@ input:focus{
 
 .containerButton{
     margin-top: 4vh;
-    margin-bottom: 6vh;
+    margin-bottom: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -164,7 +164,7 @@ input:focus{
     display: flex;
     align-items: center;
     width: 39vw;
-    margin-top: 8vh;
+    margin-top: 7vh;
     margin-left: -12vw;
     gap: 1vh;
 }
@@ -183,6 +183,22 @@ input:focus{
 
 /*--------------------------------------------------------------------------*/
 
+/* erro validação */
+.alerta-erro-validacao{
+    margin-top: 1vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2vh;
+    color: #141414;
+    font-weight: 600;
+    color: #705EDC;
+}
+
+.input-alerta{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
 /*Cadastro realizado com sucesso*/
 .card_sucesso {
     display: none;
@@ -200,6 +216,7 @@ input:focus{
     font-size: 2.3vh;
     font-family: 'Montserrat', sans-serif;
   }
+  
 
   /* erro */
 .alerta_erro{
