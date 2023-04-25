@@ -168,9 +168,6 @@
             if (resposta.ok) {
                 console.log(resposta);
 
-                cardSucesso.style.display = "flex";
-                mensagem_sucesso.innerHTML = "Login realizado com sucesso!";
-
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));

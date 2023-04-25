@@ -20,8 +20,9 @@
 
 <body onload="listarMaquinaByIdSuporte()">
     <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
         
-        <div style="margin-left: 11vw;">
+        <div>
             
         <div class="header_explorar">
             <div class="container_pesquisa_alert">
@@ -72,9 +73,7 @@
                     <button id="buttonUsu">Cadastrar Usuário</button>
                     <button onclick="window.location.href='./cadastromaquina.html'" class="margin_left_button" id="buttonMaq">Cadastrar Máquina</button>
                 </div>
-
             </div>
-
         </div>
     </div>
     <div class="modal fade" id="ExemploModalCentralizado" tabindex="-1" role="dialog" aria-labelledby="TituloModalCentralizado" aria-hidden="true">
@@ -138,7 +137,7 @@
                         <p>${listMaq[i].nomeEditor}</p>
                         <div class="button_list">
                             <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
-                            <button onclick="window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
+                            <button onclick="getByIdMaquina(${listMaq[i].idMaquina}), window.location.href='./detalhesMaquina.html'" class="button_detalhe" onclick="getByIdMaquina(${listMaq[i].idMaquina})">+ Detalhes</button>
                             <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`
@@ -167,7 +166,7 @@
                         <p>ATENÇÃO</p>
                         <div class="button_list">
                             <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
-                            <button onclick="window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
+                            <button onclick="getByIdMaquina(${listMaq[i].idMaquina}), window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
                             <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`

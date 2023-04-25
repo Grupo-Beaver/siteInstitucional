@@ -26,7 +26,18 @@ function deletar(idMaquina) {
     return database.executar(instrucao);
 }
 
+function listarByIdMaquina(idMaquina) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarByIdMaquina():", idMaquina);
+    var instrucao = `
+    select maquina.*, editor.nome as nomeEditor from editorVideo AS editor INNER JOIN maquina ON editor.idEditorVideo = maquina.fkEditorVideo WHERE maquina.idMaquina = ${idMaquina};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
 module.exports = {
     listarMaquina,
-    deletar
+    deletar,
+    listarByIdMaquina
 };

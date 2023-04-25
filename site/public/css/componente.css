@@ -51,3 +51,24 @@ body{
   cursor: pointer;
   height: 4vh;
 }
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.icon-ITSM{
+  display: flex; 
+  justify-content: end;
+  
+}
+
+.img-icon-itsm{
+  width: 55px;
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+}

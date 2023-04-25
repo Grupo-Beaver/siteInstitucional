@@ -9,57 +9,58 @@
     <link rel="stylesheet" href="./css/detalhesMaquina.css">
     <link rel="stylesheet" href="./css/componente.css">
     <script src="./js/componente.js"></script>
+    <script src="./js/maquina.js"></script>
 </head>
 
 <body>
     <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
     <div class="cabecalho">
 
         <p class="titulo">Detalhes da Máquina</p>
-
         <div class="container">
             <div class="linha1">
                 <div class="maquina">
                     <label>Máquina</label>
-                    <p>Maquina 1</p>
+                    <p id="maquinaUser"></p>
                 </div>
 
                 <div class="usuario">
                     <label>Usuário</label>
-                    <p>Indefinido</p>
+                    <p id="usuarioUser"></p>
                 </div>
                 <div class="tipo">
                     <label>Tipo</label>
-                    <p>Notebook</p>
+                    <p id="tipoUser"></p>
                 </div>
             </div>
 
             <div class="linha2">
                 <div class="modelo">
                     <label>Modelo</label>
-                    <p>Dell Latitude 5480</p>
+                    <p id="modeloUser"></p>
                 </div>
 
                 <div class="fabricante">
                     <label>Fabricante</label>
-                    <p>Dell Inc.</p>
+                    <p id="fabricanteUser"></p>
                 </div>
             </div>
 
             <div class="linha3">
                 <div class="sistemas">
                     <label>Sistema Operacional</label>
-                    <p>Windows</p>
+                    <p id="soUser"></p>
                 </div>
 
                 <div class="memoriaRam">
                     <label>Memoria Ram Total</label>
-                    <p>8 GB</p>
+                    <p id="ramUser"></p>
                 </div>
 
                 <div class="memoriaDisco">
                     <label>Memoria Disco Total</label>
-                    <p>460 GB</p>
+                    <p id="discoUser"></p>
                 </div>
 
             </div>
@@ -88,4 +89,19 @@
 
 <script>
     imgExplorar.src = "./img/lupaLocal.png";
+    listarByIdMaquina();
+    
+    function adicionarCampos(){
+
+        maquinaUser.innerHTML = maquina[0].nome;
+        usuarioUser.innerHTML = maquina[0].nomeEditor;
+        tipoUser.innerHTML = maquina[0].tipo;
+        modeloUser.innerHTML = maquina[0].modelo;
+        fabricanteUser.innerHTML = maquina[0].fabricante;
+        soUser.innerHTML = maquina[0].sistemaOperacional;
+        ramUser.innerHTML = maquina[0].memoriaRAMTotal;
+        discoUser.innerHTML = maquina[0].memoriaDiscoTotal;
+
+
+    }
 </script>

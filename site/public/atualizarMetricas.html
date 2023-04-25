@@ -6,21 +6,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beaver</title>
-    <link rel="stylesheet" href="./css/atualizarMaquina.css">
+    <link rel="stylesheet" href="./css/atualizarMetricas.css">
     <link rel="stylesheet" href="./css/componente.css">
     <script src="./js/componente.js"></script>
 </head>
 
 <body>
     <main-menu></main-menu>
-    <div class="info-"></div>
-    <div class="tipo">
-        <label>Tipo</label>
-        <select name="" id="">
-            <option value=""></option>
-            <option value="">Computador</option>
-            <option value="">Notebook</option>
-        </select>
-    </div>
+    <main>
+        <div class="maquina_usuario">
+            <p class="span_maq">Máquina: <span id="maquina">09578-G</span></p>
+            <p class="span_maq">Usuário: <span id="usuario">Fulano</span></p>
+        </div>
+        <div class="componente">
+            <label>Componente</label>
+            <select name="" id="">
+                <option value=""></option>
+                <option value="">CPU</option>
+                <option value="">RAM</option>
+                <option value="">Disco</option>
+                <option value="">Rede</option>
+            </select>
+        </div>
+        <div class="container-parametro">
+            <div class="metrica-critico">
+                <label class="label-critico">CRÍTICO</label>
+                <input class="input-metrica-critico" type="text">
+            </div>
+            <p><img src="./img/sinalMaior.png" alt=""></p>
+            <div class="parametro">
+                <label class="label-parametro">Parâmetro</label>
+                <select name="" id="">
+                    <option value=""></option>
+                    <option value="">Utilização</option>
+                    <option value="">Velocidade</option>
+                    <option value="">Processos</option>
+                    <option value="">Threads</option>
+                </select>
+            </div>
+            <div><img src="./img/sinalMenor.png" alt=""></div>
+            <div class="metrica-critico">
+                <label class="label-saudavel">SAUDÁVEL</label>
+                <input class="input-metrica-saudavel" type="text">
+            </div>
+        </div>
+        <div class="botoes">
+            <button onclick="window.location.href='./dashboardCPU.html'" class="botao1">Cancelar</button>
+            <button class="botao2">Salvar</button>
+        </div>
+    </main>
 </body>
 </html>
+
+<script>
+        imgExplorar.src = "./img/lupaLocal.png";
+</script>
+
