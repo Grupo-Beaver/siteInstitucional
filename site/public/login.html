@@ -161,9 +161,56 @@
             }).catch(function (erro) {
                 console.log(erro);
             })
+            
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO login()!")
 
-            return false;
-        }
+            if (resposta.ok) {
+                console.log(resposta);
+
+                cardSucesso.style.display = "flex";
+                mensagem_sucesso.innerHTML = "Login realizado com sucesso!";
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.ID_USUARIO = json. idSuporteTI;
+                    sessionStorage.NOME_USUARIO = json.nome;
+
+                    setTimeout(() => {
+                        window.location = "./home.html";
+                    }, "2000")
+                    
+                });
+
+            } else {
+                // Toastify({
+                //     text: "Erro login",
+                //     className: "info",
+
+                //     style: {
+                //         background: "linear-gradient(to right, #7D0505, #FF0000)",
+                //         "text-align": "center",
+                //         padding: "3vh 5vw",
+                //         "border-radius": "2vh"
+
+                //     }
+                // }).showToast();
+
+                console.log("Houve um erro ao tentar realizar o login!");
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+
+                cardErro.style.display = "flex";
+                mensagem_erro.innerHTML = "Usuário ou senha incorretos! Por favor, tente novamente.";
+            }
+
+        }).catch(function (erro) {
+            console.log(erro);
+        })
+
+        return false;
     }
 
 
