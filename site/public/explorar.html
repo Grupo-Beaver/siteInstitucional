@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="./css/explorar.css">
     <link rel="stylesheet" href="./css/componente.css">
     <script src="./js/componente.js"></script>
+    <script src="./js/maquina.js"></script>
     <link  rel="stylesheet"  href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"  integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"  crossorigin="anonymous">
     <script  src="https://code.jquery.com/jquery-3.3.1.slim.min.js"  integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"  crossorigin="anonymous"></script>
 <script  src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"  integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"  crossorigin="anonymous"></script>
@@ -17,7 +18,7 @@
 
 </head>
 
-<body onload="verificarLista()">
+<body onload="listarMaquinaByIdSuporte()">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
         
@@ -55,7 +56,11 @@
                 </div>
                 <div class="container_list">
                     <div id="titulo" class="container_titulo_maquina">
-
+                        <h2>Maquina</h2>
+                        <h2>Tipo</h2>
+                        <h2>Estado</h2>
+                        <h2>Usuários</h2>
+                        <div class="none"></div>
                     </div>
 
                     <div id="list" class="container_list_conteudo">
@@ -88,12 +93,13 @@
               </p>
             </div>
             <div class="modal-footer">
-                <button>Sim</button>
+                <button onclick="deletar()">Sim</button>
               <button id="margin_button" data-dismiss="modal">Não</button>
             </div>
           </div>
         </div>
       </div>
+
 
 </html>
 
@@ -102,6 +108,7 @@
     
 
     imgExplorar.src = "./img/lupaLocal.png";
+        
 
     function verificarLista() {
 
@@ -109,28 +116,29 @@
         titulo.innerHTML = ''
         list.innerHTML = ''
 
+
         if (tipo == "maquina") {
             
 
             titulo.innerHTML = `
-            <h2>Máquina</h2>
+            <h2>Maquina</h2>
             <h2>Tipo</h2>
             <h2>Estado</h2>
             <h2>Usuários</h2>
             <div class="none"></div>
         `
 
-            for (var i = 0; i < 14; i++) {
+            for (var i = 0; i < listMaq.length; i++) {
 
                 list.innerHTML += `<div class="container_conteudo">
-                        <p>${i}</p>
-                        <p>Notebook</p>
+                        <p>${listMaq[i].modelo}</p>
+                        <p>${listMaq[i].tipo}</p>
                         <p>Crítico</p>
-                        <p>Enzzo</p>
+                        <p>${listMaq[i].nomeEditor}</p>
                         <div class="button_list">
                             <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
                             <button onclick="window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
-                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado">Excluir</button>
+                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`
 
@@ -149,17 +157,17 @@
             <div class="none"></div>
         `
 
-            for (var i = 0; i < 4; i++) {
+            for (var i = 0; i < listMaq.length; i++) {
 
                 list.innerHTML += `<div class="container_conteudo">
-                        <p>Enzzo</p>
-                        <p>Edit VV</p>
-                        <p>${i}</p>
+                        <p>${listMaq[i].nomeEditor}</p>
+                        <p>${listMaq[i].nomeEmpresa}</p>
+                        <p>${listMaq[i].modelo}</p>
                         <p>ATENÇÃO</p>
                         <div class="button_list">
                             <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
                             <button onclick="window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
-                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado">Excluir</button>
+                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`
 

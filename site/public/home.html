@@ -23,7 +23,7 @@
   <main>
     <div class="container">
       <div class="sino-notificacao">
-        <img src="./img/notificacoes.svg" alt="">
+        <img style="position: fixed;" src="./img/notificacoes.svg" alt="">
       </div>
       <div class="topo">
         <div class="titulo-dash">
@@ -66,7 +66,7 @@
 imgHome.src="./img/homeLocal.png";
 
 nome = sessionStorage.NOME_USUARIO;
-
+console.log(sessionStorage.ID_USUARIO);
 Toastify({
   text: "Bem vindo " + nome,
   className: "info",
@@ -97,13 +97,6 @@ Toastify({
         'rgb(255, 99, 132)'
         ]
       }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
-        }
-      }
     }
   });
 </script>
