@@ -1,21 +1,21 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
-    <title>Beaver</title>
     <link rel="stylesheet" href="./css/login.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Beaver</title>
 </head>
 
 <body>
 
     <main>
-        
+
         <div class="voltarHome">
             <img onclick="window.location.href='./login.html'" src="./img/volta.png" alt="Logo">
             <a href="../index.html">Voltar</a>
@@ -24,27 +24,36 @@
             <div class="container">
                 <h2>Bem-vindo(a) de volta!</h2>
                 <form>
-                    
+                    <div class="alerta_erro">
+                        <div class="card_erro" id="cardErro">
+                            <span id="mensagem_erro"></span>
+                        </div>
+                    </div>
+                    <div class="alerta_sucesso">
+                        <div class="card_sucesso" id="cardSucesso">
+                            <span id="mensagem_sucesso"></span>
+                        </div>
+                    </div>
                     <div class="containerInput">
                         <label for="">E-mail</label>
                         <input id="email_input" type="email">
                     </div>
-                    
+
                     <div class="containerInput">
                         <label for="">Senha</label>
                         <input id="senha_input" type="password">
                     </div>
-                    
-                    
+
+
                     <div class="containerCadastrar">
                         <button type="button" onclick="login()">Entrar</button>
-                        
+
                         <div class="naoConta"> Ainda não tem uma conta?</div>
-                        
+
                         <a href="./cadastro.html" onclick="cadastrar()">Cadastre-se</a>
                     </div>
                 </form>
-                
+
             </div>
         </div>
 
@@ -71,7 +80,6 @@
 
 <script>
 
-    
 
     function login() {
         var emailVar = email_input.value;
@@ -106,31 +114,36 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    sessionStorage.ID_USUARIO = json.idUsuario;
+                    sessionStorage.ID_USUARIO = json. idSuporteTI;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    
-                    window.location ="./home.html";
 
+                    setTimeout(() => {
+                        window.location = "./home.html";
+                    }, "2000")
+                    
                 });
 
             } else {
-                Toastify({
-  text: "Erro login",
-  className: "info",
+                // Toastify({
+                //     text: "Erro login",
+                //     className: "info",
 
-  style: {
-    background: "linear-gradient(to right, #7D0505, #FF0000)",
-    "text-align": "center",
-    padding: "3vh 5vw",
-    "border-radius": "2vh"
-    
-  }
-}).showToast();
+                //     style: {
+                //         background: "linear-gradient(to right, #7D0505, #FF0000)",
+                //         "text-align": "center",
+                //         padding: "3vh 5vw",
+                //         "border-radius": "2vh"
+
+                //     }
+                // }).showToast();
 
                 console.log("Houve um erro ao tentar realizar o login!");
                 resposta.text().then(texto => {
                     console.error(texto);
                 });
+
+                cardErro.style.display = "flex";
+                mensagem_erro.innerHTML = "Usuário ou senha incorretos! Por favor, tente novamente.";
             }
 
         }).catch(function (erro) {

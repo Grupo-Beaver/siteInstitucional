@@ -28,3 +28,15 @@ class Menu extends HTMLElement{
 }
 
 customElements.define('main-menu', Menu);
+
+class IconITSM extends HTMLElement{
+  connectedCallback() {
+      this.innerHTML = `
+      <div class="icon-ITSM">
+          <img class="img-icon-itsm" onclick="window.location.href='https://beaver.auvo.com.br/'" src="./img/auvo-icon.png" alt="" width="50px">
+      </div>
+      ` 
+  }
+}
+
+customElements.define('main-iconitsm', IconITSM);

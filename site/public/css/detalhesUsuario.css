@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background-color: #f5f5f5;
+    font-family: 'Montserrat', sans-serif;
+    color: #0F1126;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.titulo{
+    margin: 7vh 0;
+    font-size: 4.5vh;
+    font-weight: 400;
+}
+
+label{
+    font-size: 2.8vh;
+    margin-bottom: 1.5vh;
+    font-weight: 400;
+}
+
+input{
+    font-size: 2.5vh;
+    font-family: 'Roboto', sans-serif;
+    border-style: none;
+    border-radius: 10px;
+    background-color: #D9D9D9;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    padding: 1vh 1vw;
+}
+
+input:focus{
+    outline: 0;
+}
+
+
+input::placeholder{
+    color: #000 ;
+}
+
+.form-cadastro{
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 2vh 0;
+}
+
+.nome-sobrenome-cpf, .telefone-email, .empresa-cnpj, .username-senha-confirm{
+    display: flex;
+    flex-direction: row;
+    gap: 1vw;
+    margin-bottom: 5vh;
+    width: 100%;
+    justify-content: center;
+}
+
+.nome, .sobrenome, .cpf, .telefone, .email, .empresa, .cnpj, .username, .senha, .confirm-senha{
+    display: flex;
+    flex-direction: column;
+}
+
+.nome, .sobrenome, .cpf, .telefone, .cnpj, .username, .senha, .confirm-senha{
+    width: 33.3%;
+}
+
+.email, .empresa{
+    width: 70%;
+}
+
+button{
+    padding: 1vh 4vw;
+    border-style: none;
+    background-color: #0F1126;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.8vh;
+    font-weight: 500;
+    border-radius: 30px;
+    margin-top: 1vh;
+}
+

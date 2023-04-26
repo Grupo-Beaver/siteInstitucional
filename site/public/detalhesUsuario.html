@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/detalhesUsuario.css">
+    <link rel="stylesheet" href="./css/componente.css">
+    <script src="./js/componente.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Beaver</title>
+</head>
+
+<body>
+    <main-menu></main-menu>
+    <main>
+        <p class="titulo">Detalhes do Usuário</p>
+        <section class="form-cadastro">
+            <div class="nome-sobrenome-cpf">
+                <div class="nome">
+                    <label for="inputNome">Nome</label>
+                    <input id="inputNome" type="text" disabled="true" placeholder="Augusto">
+                </div>
+                <div class="sobrenome">
+                    <label for="inputSobrenome">Sobrenome</label>
+                    <input id="inputSobrenome" type="text" disabled="true" placeholder="Cesar"> 
+                   
+                </div>
+                <div class="cpf">
+                    <label for="inputCPF">CPF</label>
+                    <input id="inputCPF" type="text" disabled="true" placeholder="470.296.428-40">
+                </div>
+            </div>
+            <div class="telefone-email">
+                <div class="telefone">
+                    <label for="inputTelefone">Telefone </label>
+                    <input id="inputTelefone" type="text" disabled="true" placeholder="(11)94940-8447">
+                </div>
+                <div class="email">
+                    <label for="inputEmail">E-mail <b>*</b></label>
+                    <input id="inputEmail" type="text" disabled="true" placeholder="augusto@augusto.com">
+                </div>
+            </div>
+            <div class="empresa-cnpj">
+                <div class="empresa">
+                    <label for="inputEmpresa">Empresa</label>
+                    <input id="inputEmpresa" type="text" disabled="true" placeholder="O Mundo das Edições">
+                </div>
+                <div class="cnpj">
+                    <label for="inputCNPJ">CNPJ</label>
+                    <input id="inputCNPJ" type="text"disabled="true" placeholder=" 80.434.730/0001-30">
+                </div>
+            </div>
+            <div class="username-senha-confirm">
+                <div class="username">
+                    <label for="inputUsername">Username</label>
+                    <input id="inputUsername" type="text" disabled="true" placeholder=" augusto.cesar">
+                   
+                </div>
+                <div class="senha">
+                    <label for="inputSenha">Senha</label>
+                    <input id="inputSenha" type="text" disabled="true" placeholder="12345">
+                </div>
+              
+            </div>
+        </section>
+        <button style="cursor: pointer;" onclick="window.location.href='./atualizarUsuario.html'">Atualizar Dados</button>
+    </main>
+</body>
+
+</html>
+
+<script>
+    imgExplorar.src="./img/lupaLocal.png";
+</script>

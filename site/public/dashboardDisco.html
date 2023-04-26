@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
-    <title>Disco</title>
     <link rel="stylesheet" href="./css/componente.css">
     <link rel="stylesheet" href="./css/dashboardDisco.css">
     <script src="./js/componente.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Disco</title>
 </head>
 <body>
     <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
 <main>  
 
     <div class="cabecalho">
         
         
             <div class="maquina_usuario">
-                <p class="span_maq">Máquina: <span id="maquina">09578-G</span></p>
-                <p class="span_maq">Usuário: <span id="usuario">Fulano</span></p>
+                <p class="span_maq">Máquina: <span id="maquina">INSV15</span></p>
+                <p class="span_maq">Usuário: <span id="usuario">Gustavo</span></p>
                 <div class="span_maq"></div>
                 <div class="span_maq"></div>
                 <div class="span_maq_test"></div>
@@ -30,7 +31,7 @@
                 <a href="./dashboardRAM.html"><button id="RAM">RAM</button></a>
                 <a href="./dashboardDisco.html"><button id="Disco">Disco</button></a>
                 <a href="./dashboardRede.html"><button id="Rede">Rede</button></a>
-                <div class="container_metricas">
+                <div class="container_metricas"  onclick="window.location.href='./atualizarMetricas.html'">
                     <img src="./img/metricas.png" alt="">
                     <div class="container_metricas_label">
                         <label for="">Atualizar</label>
@@ -55,11 +56,11 @@
                 <div class="disco">
                     <div class="leitura">
                         <label for="">VELOCIDADE<br>LEITURA</label>
-                        <span>4,1 KB/s</span>
+                        <span>30,2 KB/s</span>
                     </div>
                     <div class="gravacao">
                         <label for="">VELOCIDADE<br>GRAVAÇÃO</label>
-                        <span>20,5 KB/s</span>
+                        <span>100 KB/s</span>
                     </div>
                 </div>
             </div>
@@ -84,11 +85,15 @@
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+        color:'black',
+      scales: {
+        y: {
+          ticks: { color: 'black', beginAtZero: true }
+        },
+        x: {
+          ticks: { color: 'black', beginAtZero: true }
         }
+      }
       }
     });
   </script>

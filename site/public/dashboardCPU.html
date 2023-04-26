@@ -4,23 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
-    <title>CPU</title>
     <link rel="stylesheet" href="./css/componente.css">
     <link rel="stylesheet" href="./css/dashboardCPU.css">
     <script src="./js/componente.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>CPU</title>
 </head>
 <body>
     <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
 <main>  
 
     <div class="cabecalho">
         
         
             <div class="maquina_usuario">
-                <p class="span_maq">Máquina: <span id="maquina">09578-G</span></p>
-                <p class="span_maq">Usuário: <span id="usuario">Fulano</span></p>
+                <p class="span_maq">Máquina: <span id="maquina">INSV15</span></p>
+                <p class="span_maq">Usuário: <span id="usuario">Gustavo</span></p>
                 <div class="span_maq"></div>
                 <div class="span_maq"></div>
                 <div class="span_maq_test"></div>
@@ -30,7 +31,7 @@
                 <a href="./dashboardRAM.html"><button id="RAM">RAM</button></a>
                 <a href="./dashboardDisco.html"><button id="Disco">Disco</button></a>
                 <a href="./dashboardRede.html"><button id="Rede">Rede</button></a>
-                <div class="container_metricas">
+                <div class="container_metricas" onclick="window.location.href='./atualizarMetricas.html'">
                     <img src="./img/metricas.png" alt="">
                     <div class="container_metricas_label">
                         <label for="">Atualizar</label>
@@ -55,7 +56,7 @@
                 <div class="cpu">
                     <div class="utilizacao">
                         <label for="">UTILIZAÇÂO</label>
-                        <span>30%</span>
+                        <span>40%</span>
                     </div>
                     <div class="processos">
                         <label for="">PROCESSOS</label>
@@ -72,10 +73,8 @@
                 </div>
             </div>
         </div>
-        
     </div>
 </main>
-    
 </body>
 
 <script>
@@ -87,16 +86,20 @@
         labels: ['10:00', '10:15', '10:30', '10:45', '11:00', '11:15'],
         datasets: [{
           label: '% Utilização',
-          data: [50, 65, 45, 50, 69, 75],
+          data: [50, 65, 45, 50, 69, 40],
           borderWidth: 3
         }]
       },
       options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
+        color:'black',
+      scales: {
+        y: {
+          ticks: { color: 'black', beginAtZero: true }
+        },
+        x: {
+          ticks: { color: 'black', beginAtZero: true }
         }
+      }
       }
     });
   </script>

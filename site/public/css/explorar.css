@@ -9,6 +9,10 @@
     box-sizing: border-box;
 }
 
+.container_icon_menu{
+    height: 9vh !important;
+}
+
 .header_explorar{
     background-color: #06095B;
     width: 89vw;
@@ -203,18 +207,12 @@
     color: #fff;
     font-family: 'Montserrat', sans-serif;
     font-size: 1vw;
-    display: none;
     cursor: pointer;
 }
 
 .margin_left_button{
     margin-left: 3vw;
 }
-
-#select_alert_status{
-    display: none;
-}
-
 
 
 .modal {

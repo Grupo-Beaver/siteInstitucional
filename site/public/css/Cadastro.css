@@ -85,7 +85,7 @@ form {
 
 form input{
     margin-top: 1vh;
-    margin-bottom: 3vh;
+    margin-bottom: 1vh;
     border-style: none;
     border-radius: 10px;
     background-color: #E5E5E5;
@@ -120,7 +120,7 @@ input:focus{
 
 .containerButton{
     margin-top: 4vh;
-    margin-bottom: 6vh;
+    margin-bottom: 5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -164,7 +164,7 @@ input:focus{
     display: flex;
     align-items: center;
     width: 39vw;
-    margin-top: 8vh;
+    margin-top: 7vh;
     margin-left: -12vw;
     gap: 1vh;
 }
@@ -180,6 +180,66 @@ input:focus{
     font-weight: 500;
     font-size: 20px;
 }
+
+/*--------------------------------------------------------------------------*/
+
+/* erro validação */
+.alerta-erro-validacao{
+    margin-top: 1vh;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2vh;
+    color: #141414;
+    font-weight: 600;
+    color: #705EDC;
+}
+
+.input-alerta{
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+/*Cadastro realizado com sucesso*/
+.card_sucesso {
+    display: none;
+    background-color: #CAF4DB;
+    color: black;
+    width: 100%;
+    border-radius: 4px;
+    border-left: #57D45B 10px solid;
+    padding: 10px;
+    margin-bottom: 3vh;
+  }
+  
+  .card_sucesso #mensagem_sucesso{
+    font-weight: 500;
+    font-size: 2.3vh;
+    font-family: 'Montserrat', sans-serif;
+  }
+  
+
+  /* erro */
+.alerta_erro{
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .card_erro {
+    display: none;
+    background-color: #EA9492;
+    color: #141414;
+    width: 100%;
+    border-radius: 4px;
+    border-left: #FF3C38 10px solid;
+    padding: 10px;
+    margin-bottom: 3vh;
+  }
+  
+  .card_erro #mensagem_erro{
+    font-weight: 500;
+    font-size: 2.3vh;
+    font-family: 'Montserrat', sans-serif;
+  }
 
 
 /* -------------------------------------------------------------------------------- */
