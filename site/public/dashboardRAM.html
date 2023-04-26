@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
-    <title>RAM</title>
     <link rel="stylesheet" href="./css/componente.css">
     <link rel="stylesheet" href="./css/dashboardRAM.css">
     <script src="./js/componente.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>RAM</title>
 </head>
 <body>
     <main-menu></main-menu>
@@ -20,8 +20,8 @@
         
         
             <div class="maquina_usuario">
-                <p class="span_maq">Máquina: <span id="maquina">09578-G</span></p>
-                <p class="span_maq">Usuário: <span id="usuario">Fulano</span></p>
+                <p class="span_maq">Máquina: <span id="maquina">INSV15</span></p>
+                <p class="span_maq">Usuário: <span id="usuario">Gustavo</span></p>
                 <div class="span_maq"></div>
                 <div class="span_maq"></div>
                 <div class="span_maq_test"></div>
@@ -56,15 +56,15 @@
                 <div class="ram">
                     <div class="total">
                         <label for="">TOTAL</label>
-                        <span>7,7GB</span>
+                        <span>64GB</span>
                     </div>
                     <div class="uso">
                         <label for="">EM USO</label>
-                        <span>5,5GB</span>
+                        <span>51,2GB</span>
                     </div>
                     <div class="disponivel">
                         <label for="">DISPONÍVEL</label>
-                        <span>2,3GB</span>
+                        <span>12,8GB</span>
                     </div>
                 </div>
             </div>
@@ -81,12 +81,14 @@
     new Chart(ctx, {
         type: 'pie',
       data: {
-        labels: ['20%', '80%'],
+        labels: ['20% Livre', '80% Em uso'],
         datasets: [{
           label: '% Utilização',
           data: [20, 80],
           borderWidth: 3
         }]
+      },options: {
+        color: 'black'
       }
     });
   </script>

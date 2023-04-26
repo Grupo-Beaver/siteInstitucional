@@ -21,15 +21,15 @@ main{
     font-size:32px;
 }
 
-/* .container .sino-notificacao{
+.container .sino-notificacao{
     display: flex;
     justify-content: flex-end;
-    padding-top: 40px;
+    padding: 1vh 0;
 }
 
 .container .sino-imagem{
     position: fixed;
-} */
+}
 
 .container .kpis{
     display: flex;
