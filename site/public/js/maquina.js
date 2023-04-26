@@ -78,8 +78,7 @@ function deletar() {
         },
     }).then(function (resposta) {
 
-        if (resposta.ok) {
-            window.alert("Maquina deletada com sucesso");
+        if (resposta.ok) {  
             location.reload();
         } else if (resposta.status == 404) {
             window.alert("Deu 404!");

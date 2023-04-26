@@ -70,7 +70,7 @@
                     
                 </div>
                 <div class="button_cadastrar">
-                    <button id="buttonUsu">Cadastrar Usuário</button>
+                    <button  onclick="window.location.href='./cadastroUsuario.html'" id="buttonUsu">Cadastrar Usuário</button>
                     <button onclick="window.location.href='./cadastromaquina.html'" class="margin_left_button" id="buttonMaq">Cadastrar Máquina</button>
                 </div>
             </div>
@@ -166,7 +166,7 @@
                         <p>ATENÇÃO</p>
                         <div class="button_list">
                             <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
-                            <button onclick="getByIdMaquina(${listMaq[i].idMaquina}), window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
+                            <button onclick="window.location.href='./detalhesUsuario.html'" class="button_detalhe">+ Detalhes</button>
                             <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`

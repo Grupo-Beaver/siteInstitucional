@@ -17,7 +17,6 @@ body{
 
 .cabecalho {
     width: 89vw;
-    margin-left: 11vw;
     height: 100vh;
     display: flex;
     flex-direction: column;

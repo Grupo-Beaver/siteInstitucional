@@ -9,6 +9,10 @@
     box-sizing: border-box;
 }
 
+.container_icon_menu{
+    height: 9vh !important;
+}
+
 .header_explorar{
     background-color: #06095B;
     width: 89vw;
