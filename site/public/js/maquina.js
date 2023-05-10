@@ -90,7 +90,13 @@ function deletar() {
     });
 }
 
-function getByIdMaquina(id){
+function getByIdSession(id){
     sessionStorage.ID_MAQUINA = id;
+
+}
+
+function getByIdMaq(id){
+    idMaquina = id;
+    console.log(idMaquina);
 
 }
