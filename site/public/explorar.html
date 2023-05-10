@@ -138,8 +138,8 @@
                         <p>${listMaq[i].nomeEditor}</p>
                         <div class="button_list">
                             <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
-                            <button onclick="getByIdMaquina(${listMaq[i].idMaquina}), window.location.href='./detalhesMaquina.html'" class="button_detalhe" onclick="getByIdMaquina(${listMaq[i].idMaquina})">+ Detalhes</button>
-                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina(${listMaq[i].idMaquina})">Excluir</button>
+                            <button onclick="getByIdSession(${listMaq[i].idMaquina}), window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
+                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaq(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`
 
@@ -168,7 +168,7 @@
                         <div class="button_list">
                             <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
                             <button onclick="window.location.href='./detalhesUsuario.html'" class="button_detalhe">+ Detalhes</button>
-                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina(${listMaq[i].idMaquina})">Excluir</button>
+                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getById(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`
 
