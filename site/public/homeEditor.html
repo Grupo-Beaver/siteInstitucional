@@ -18,7 +18,7 @@
 
         <div class="titulos">
 
-            <p class="titulo-principal">Bem-vindo(a), Fulano!</p>
+            <p class="titulo-principal">Bem-vindo(a), <span id="nome"></span>!</p>
 
             <p class="titulo-secundario">Suas Máquinas:</p>
             <p class="subtitulo">Você tem 2 máquinas cadastradas no nosso sistema.</p>
@@ -50,4 +50,5 @@
 
 <script>
     imgHome.src = "./img/homeLocal.png";
+    nome.innerHTML = sessionStorage.NOME_USUARIO;
 </script>

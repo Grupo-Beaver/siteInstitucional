@@ -12,7 +12,7 @@
     <title>Beaver</title>
 </head>
 
-<body>
+<body onload="test()">
     <main-menu-editor></main-menu-editor>
     <section>
         <div class="titulo">
@@ -23,31 +23,29 @@
                 <div class="componente">
                     <h3>Data</h3>
                     <div class="amostragem">
-                        <p>15/01/2003</p>
+                        <p id="data"></p>
                     </div>
                 </div>
                 <div class="componente">
                     <h3>Máquina</h3>
-                    <select name="" id="" class="maq">
-                        <option value=""></option>
-                        <option value="">Dell - Latitude 5480</option>
-                        <option value="">Asus - Vivobook 16</option>
-                    </select>
+                    <div class="amostragem">
+                        <p id="maquina">Maquina</p>
+                    </div>
                 </div>
 
                 <div class="componente">
                     <h3>Frequência</h3>
                     <div class="input-dad">
                         <div class="inputes">
-                            <input type="radio" name="radius" id="">
+                            <input type="radio" name="r1" id="">
                             <p class="p">Alta</p>
                         </div>
                         <div class="inputes">
-                            <input type="radio" name="radius" id="">
+                            <input type="radio" name="r1" id="">
                             <p class="p">Média</p>
                         </div>
                         <div class="inputes">
-                            <input type="radio" name="radius" id="">
+                            <input type="radio" name="r1" id="">
                             <p class="p">Baixa</p>
                         </div>
                     </div>
@@ -57,7 +55,7 @@
                 <h3 class="ac">Problema ocorrido:</h3>
                 <div class="input-mom">
                     <div class="inputes">
-                        <input type="radio" name="radius" id="">
+                        <input type="radio" name="radius" value="">
                         <p class="p">Travamento</p>
                     </div>
                     <div class="inputes">
@@ -80,7 +78,7 @@
                 </div>
             </div>
         </div>
-        <button>Enviar</button>
+        <button onclick="a()">Enviar</button>
     </section>
 </body>
 
@@ -88,4 +86,36 @@
 
 <script>
     imgEnviarReporte.src = "img/enviarReporteLocal.png";
+    now = new Date();
+    data.innerHTML = now.toLocaleDateString();
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+    function test(){
+        fetch(`/maquinas/nameMaquinaById/${idUsuario}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    maquina.innerHTML = json.nome;
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+    }
+
+    
 </script>
