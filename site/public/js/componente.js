@@ -17,7 +17,7 @@ class Menu extends HTMLElement {
                 <p>Padronização</p>
                 </div>
                 <div class="container_icon_menu">
-                  <img onclick="window.location.href=''" id="imgInsights" src="./img/historico.png" alt="">
+                  <img onclick="window.location.href='./insights.html'" id="imgInsights" src="./img/historico.png" alt="">
                   <p>Insights</p>
                 </div>
                 <div class="container_icon_menu">
@@ -54,15 +54,15 @@ class MenuEditorVideo extends HTMLElement {
       <img class="imgLogoMenu" src="./img/logoMenu.png" alt="">
       <div class="container_icons">
         <div class="container_icon_menu">
-          <img onclick="window.location.href=''" id="imgHome" src="./img/home.png" alt="">
+          <img onclick="window.location.href='./homeEditor.html'" id="imgHome" src="./img/home.png" alt="">
           <p>Home</p>
         </div>
         <div class="container_icon_menu">
-          <img onclick="window.location.href=''" id="imgEnviarReporte" src="./img/enviarReporte.png" alt="">
+          <img onclick="window.location.href='./reportarEditor.html'" id="imgEnviarReporte" src="./img/enviarReporte.png" alt="">
           <p>Enviar Reporte</p>
         </div>
         <div class="container_icon_menu">
-          <img onclick="window.location.href=''" id="imgHistorico" src="./img/historico.png" alt="">
+          <img onclick="window.location.href='./historicoEditor.html'" id="imgHistorico" src="./img/historico.png" alt="">
           <p>Histórico</p>
         </div>
       </div>
