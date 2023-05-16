@@ -27,7 +27,6 @@ function listar(req, res) {
 function login(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-    //var idUsuario = req.body.idUsuarioServer;
 
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");

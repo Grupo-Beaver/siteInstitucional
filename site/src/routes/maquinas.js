@@ -15,4 +15,8 @@ router.delete("/deletarMaquina/:idMaquina", function (req, res) {
     maquinaController.deletar(req, res);
 });
 
+router.get("/nameMaquinaById/:idUsuario", function (req, res) {
+    maquinaController.nameMaquinaById(req, res);
+});
+
 module.exports = router;
