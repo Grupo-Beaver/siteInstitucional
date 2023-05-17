@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/padronizacaoMaquina.css">
+    <link rel="stylesheet" href="./css/componente.css">
+    <script src="./js/componente.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Beaver</title>
+</head>
+
+<body>
+    <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
+    <div class="cabecalho">
+        <p class="titulo">Padronização de Máquina</p>
+        <div class="container-dados">
+            <div class="empresa">
+                <label>Empresa</label>
+                <p class="display-dado" id="empresa"></p>
+            </div>
+            <div class="maquina-padrao">
+                <label>Máquina Padrão</label>
+                <p class="display-dado" id="maquinaPadrao"></p>
+            </div>
+        </div>
+        <div class="container-btn">
+            <button onclick="window.location.href='./detalhesMaquina.html'" class="botao">Visualizar Máquina</button>
+            <button onclick="window.location.href='./atualizarPadrao.html'" class="botao">Atualizar Dados</button>
+        </div>
+    </div>
+</body>
+
+</html>
