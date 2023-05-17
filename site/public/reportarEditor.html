@@ -15,70 +15,78 @@
 <body onload="test()">
     <main-menu-editor></main-menu-editor>
     <section>
-        <div class="titulo">
-            <h1>Reportar Problema</h1>
-        </div>
-        <div class="container">
-            <div class="esquerda">
-                <div class="componente">
-                    <h3>Data</h3>
-                    <div class="amostragem">
-                        <p id="data"></p>
+        <div class="container-macro">
+            <div class="titulo">
+                <h1>Reportar Problema</h1>
+            </div>
+            <div class="container">
+                <div class="esquerda">
+                    <div class="componente">
+                        <h3>Data</h3>
+                        <div class="amostragem">
+                            <p id="data"></p>
+                        </div>
                     </div>
-                </div>
-                <div class="componente">
-                    <h3>Máquina</h3>
-                    <div class="amostragem">
-                        <p id="maquina">Maquina</p>
+                    <div class="componente">
+                        <h3>Máquina</h3>
+                        <div class="amostragem">
+                            <p id="maquina">Maquina</p>
+                        </div>
+                    </div>
+
+                    <div class="componente">
+                        <h3>Frequência</h3>
+                        <div class="input-dad">
+                            <div class="inputes">
+                                <input type="radio" name="r1" id="">
+                                <p class="p">Alta</p>
+                            </div>
+                            <div class="inputes">
+                                <input type="radio" name="r1" id="">
+                                <p class="p">Média</p>
+                            </div>
+                            <div class="inputes">
+                                <input type="radio" name="r1" id="">
+                                <p class="p">Baixa</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="componente">
-                    <h3>Frequência</h3>
-                    <div class="input-dad">
-                        <div class="inputes">
-                            <input type="radio" name="r1" id="">
-                            <p class="p">Alta</p>
-                        </div>
-                        <div class="inputes">
-                            <input type="radio" name="r1" id="">
-                            <p class="p">Média</p>
-                        </div>
-                        <div class="inputes">
-                            <input type="radio" name="r1" id="">
-                            <p class="p">Baixa</p>
+                <div class="direita">
+                    <h3 class="problema-ocorrido">Problema ocorrido</h3>
+                    <div class="input-mom">
+                        <div class="container-input-mom">
+                            <div class="inputes">
+                                <input type="radio" name="radius" value="">
+                                <p class="p">Travamento</p>
+                            </div>
+                            <div class="inputes">
+                                <input type="radio" name="radius" id="">
+                                <p class="p">Lentidão</p>
+                            </div>
+                            <div class="inputes">
+                                <input type="radio" name="radius" id="">
+                                <p class="p">Desligamento</p>
+                            </div>
+                            <div class="inputes">
+                                <input type="radio" name="radius" id="">
+                                <p class="p">Superaquecimento</p>
+                            </div>
+                            <div class="input-outros">
+                                <div class="horizontal">
+                                    <input type="radio" name="radius" id="">
+                                    <p class="p">Outros</p>
+                                </div>
+                                    <input class="vertical" type="text">
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="direita">
-                <h3 class="ac">Problema ocorrido:</h3>
-                <div class="input-mom">
-                    <div class="inputes">
-                        <input type="radio" name="radius" value="">
-                        <p class="p">Travamento</p>
-                    </div>
-                    <div class="inputes">
-                        <input type="radio" name="radius" id="">
-                        <p class="p">Lentidão</p>
-                    </div>
-                    <div class="inputes">
-                        <input type="radio" name="radius" id="">
-                        <p class="p">Desligamento</p>
-                    </div>
-                    <div class="inputes">
-                        <input type="radio" name="radius" id="">
-                        <p class="p">Superaquecimento</p>
-                    </div>
-                    <div class="inputes">
-                        <input type="radio" name="radius" id="">
-                        <p class="p">Outros</p>
-                    </div>
-                    <input type="text">
-                </div>
-            </div>
+            <button onclick="a()">Enviar</button>
         </div>
-        <button onclick="a()">Enviar</button>
     </section>
 </body>
 
@@ -90,12 +98,12 @@
     data.innerHTML = now.toLocaleDateString();
     var idUsuario = sessionStorage.ID_USUARIO;
 
-    function test(){
+    function test() {
         fetch(`/maquinas/nameMaquinaById/${idUsuario}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
 
     })
         .then(resposta => {
@@ -112,10 +120,24 @@
                 console.error('Nenhum dado encontrado ou erro na API');
             }
         })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
-        });
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        maquina.innerHTML = json.nome;
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
     }
 
-    
+
 </script>
