@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/atualizarPadrao.css">
+    <link rel="stylesheet" href="./css/componente.css">
+    <script src="./js/componente.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Beaver</title>
+</head>
+
+<body>
+    <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
+    <div class="cabecalho">
+        <p class="titulo">Atualizar Padrão</p>
+        <p class="subtitulo">Selecione a máquina que deseja utilizar como parâmetro para definir o padrão de máquina da sua empresa.</p>
+        <div class="container-dados">
+            <div class="maquina">
+                <label>Máquina</label>
+                <select onchange="mostrarCadastro()" name="" id="select_maquina">
+                    <option value=""></option>
+                    <option value="maq">Maquina 1</option>
+                    <option value="maq">Maquina 2</option>
+                    <option value="maq">Maquina 3</option>
+                </select>
+            </div>
+        </div>
+        <div class="container-btn">
+            <button onclick="window.location.href='./padronizacaoMaquina.html'" class="botao">Cancelar</button>
+            <button onclick="window.location.href='./padronizacaoMaquina.html'" class="botao">Salvar</button>
+        </div>
+    </div>
+</body>
+
+</html>
