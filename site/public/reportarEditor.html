@@ -106,7 +106,7 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    maquina.innerHTML = json.nome;
+                    maquina.innerHTML = json[0].nome;
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

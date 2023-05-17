@@ -136,7 +136,7 @@
         if (emailInvalido == false && senhaInvalida == false && confirmSenhaInvalido == false) {
 
             // Enviando o valor da nova input
-            fetch("/usuarios/cadastrar", {
+            fetch("/usuarios/cadastrarSuport", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -154,11 +154,8 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-
-                    setTimeout(() => {
-                        window.location = "login.html";
-                    }, "2000")
-
+                    alert("oi");
+                    listIdByEmail(emailVar);
                 } else {
                     throw ("Houve um erro ao tentar realizar o cadastro!");
                 }
@@ -169,19 +166,41 @@
 
             return false;
 
-            // Toastify({
-            //     text: "Erro cadastro, senha invalida",
-            //     className: "info",
-
-            //     style: {
-            //         background: "linear-gradient(to right, #7D0505, #FF0000)",
-            //         "text-align": "center",
-            //         padding: "3vh 5vw",
-            //         "border-radius": "2vh"
-
-            //     }
-            // }).showToast();
         }
+
+        function listIdByEmail(email){
+            alert(email)
+            fetch(`/usuarios/listIdByEmail/${email}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    var id = json[0].idUsuario;
+                    
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+        }
+    }
+
+    function cadastrarSuporteTi(idSuport, idEmpresa){
+
     }
 
 </script>

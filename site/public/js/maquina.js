@@ -37,7 +37,6 @@ function listarMaquinaByIdSuporte() {
 }
 
 function listarByIdMaquina() {
-    console.log("ta entrando");
 
     fetch(`/maquinas/listarByIdMaquina/${idMaquina}`, {
         method: "GET",

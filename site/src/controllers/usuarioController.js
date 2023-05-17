@@ -9,6 +9,25 @@ function testar(req, res) {
 
 function listar(req, res) {
     usuarioModel.listar()
+    .then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(
+        function (erro) {
+            console.log(erro);
+            console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+            res.status(500).json(erro.sqlMessage);
+        }
+        );
+    }
+    
+    
+    function listIdByEmail(req, res) {
+    var email = req.params.email;
+    usuarioModel.listIdByEmail(email)
         .then(function (resultado) {
             if (resultado.length > 0) {
                 res.status(200).json(resultado);
@@ -60,7 +79,7 @@ function login(req, res) {
 
 }
 
-function cadastrar(req, res) {
+function cadastrarSuport(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
     var sobrenome = req.body.sobrenomeServer;
@@ -79,7 +98,7 @@ function cadastrar(req, res) {
     } else {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrar(nome, sobrenome, email, senha)
+        usuarioModel.cadastrarSuport(nome, sobrenome, email, senha)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -100,7 +119,8 @@ function cadastrar(req, res) {
 
 module.exports = {
     login,
-    cadastrar,
+    cadastrarSuport,
     listar,
-    testar
+    testar,
+    listIdByEmail
 }

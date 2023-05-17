@@ -19,4 +19,8 @@ router.get("/nameMaquinaById/:idUsuario", function (req, res) {
     maquinaController.nameMaquinaById(req, res);
 });
 
+router.get("/listReporte/:idUsuario", function (req, res) {
+    maquinaController.listReporte(req, res);
+});
+
 module.exports = router;
