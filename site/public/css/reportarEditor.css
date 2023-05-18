@@ -16,12 +16,12 @@ section{
 
 .container-macro{
     width: 70%;
-    height: 83%;
+    height: 75%;
     border-radius: 30px;
     background-color: #D9D9D9;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-evenly;
     flex-direction: column;
 }
 

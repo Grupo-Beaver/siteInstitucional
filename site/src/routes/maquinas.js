@@ -23,4 +23,9 @@ router.get("/listReporte/:idUsuario", function (req, res) {
     maquinaController.listReporte(req, res);
 });
 
+router.post("/reporteProblema", function (req, res) {
+    maquinaController.reporteProblema(req, res);
+});
+
+
 module.exports = router;

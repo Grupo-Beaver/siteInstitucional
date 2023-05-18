@@ -12,7 +12,7 @@
     <title>Beaver</title>
 </head>
 
-<body onload="test()">
+<body onload="buscarNameAndId()">
     <main-menu-editor></main-menu-editor>
     <section>
         <div class="container-macro">
@@ -30,7 +30,7 @@
                     <div class="componente">
                         <h3>Máquina</h3>
                         <div class="amostragem">
-                            <p id="maquina">Maquina</p>
+                            <p id="maquina">Nenhuma maquina cadastrada</p>
                         </div>
                     </div>
 
@@ -38,15 +38,15 @@
                         <h3>Frequência</h3>
                         <div class="input-dad">
                             <div class="inputes">
-                                <input type="radio" name="r1" id="">
-                                <p class="p">Alta</p>
+                                <input onclick="freq('Alta')" type="radio" name="r1" id="" value="Alta">
+                                <p  class="p">Alta</p>
                             </div>
                             <div class="inputes">
-                                <input type="radio" name="r1" id="">
+                                <input onclick="freq('Media')" type="radio" name="r1" id="c" value="Media">
                                 <p class="p">Média</p>
                             </div>
                             <div class="inputes">
-                                <input type="radio" name="r1" id="">
+                                <input onclick="freq('Baixa')" onclick="a()" type="radio" name="r1" id="t" value="Baixa">
                                 <p class="p">Baixa</p>
                             </div>
                         </div>
@@ -58,34 +58,34 @@
                     <div class="input-mom">
                         <div class="container-input-mom">
                             <div class="inputes">
-                                <input type="radio" name="radius" value="">
+                                <input onclick="prob('Travamento')" type="radio" name="radius" value="">
                                 <p class="p">Travamento</p>
                             </div>
                             <div class="inputes">
-                                <input type="radio" name="radius" id="">
+                                <input onclick="prob('Lentidão')" type="radio" name="radius" id="">
                                 <p class="p">Lentidão</p>
                             </div>
                             <div class="inputes">
-                                <input type="radio" name="radius" id="">
+                                <input onclick="prob('Desligamento')" type="radio" name="radius" id="">
                                 <p class="p">Desligamento</p>
                             </div>
                             <div class="inputes">
-                                <input type="radio" name="radius" id="">
+                                <input onclick="prob('Superaquecimento')" type="radio" name="radius" id="">
                                 <p class="p">Superaquecimento</p>
                             </div>
                             <div class="input-outros">
                                 <div class="horizontal">
-                                    <input type="radio" name="radius" id="">
+                                    <input onclick="prob('Outros')" type="radio" name="radius" id="">
                                     <p class="p">Outros</p>
                                 </div>
-                                    <input class="vertical" type="text">
+                                    <input id="otr" class="vertical" type="text">
                             </div>
 
                         </div>
                     </div>
                 </div>
             </div>
-            <button onclick="a()">Enviar</button>
+            <button onclick="relatarProblema()">Enviar</button>
         </div>
     </section>
 </body>
@@ -97,8 +97,20 @@
     now = new Date();
     data.innerHTML = now.toLocaleDateString();
     var idUsuario = sessionStorage.ID_USUARIO;
+    var frequencia;
+    var idMaquina;
+    var problema;
 
-    function test() {
+    function freq(fqc){
+        frequencia = fqc;
+    }
+
+    function prob(p){
+        problema = p;
+    }
+
+
+    function buscarNameAndId() {
         fetch(`/maquinas/nameMaquinaById/${idUsuario}`, {
             method: "GET",
             headers: {
@@ -115,16 +127,17 @@
                     console.log(json);
                     console.log(JSON.stringify(json));
                     maquina.innerHTML = json[0].nome;
+                    idMaquina = json[0].idMaquina;
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
             }
         })
             .then(resposta => {
-
+                
                 if (resposta.ok) {
                     console.log(resposta);
-
+                    
                     resposta.json().then(json => {
                         console.log(json);
                         console.log(JSON.stringify(json));
@@ -137,6 +150,51 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
             });
+        }
+        
+        function relatarProblema(){
+        var data = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`
+        if(!frequencia || !problema){
+            alert("Preencha todos os campos")
+        }else{
+            if(problema == "Outros"){
+                var outro = otr.value;
+                if(!outro){
+                    frequencia = "Sem especifições"
+                }
+
+            }
+                fetch("/maquinas/reporteProblema", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    dataServer: data,
+                    frequenciaServer: frequencia,
+                    problemaServer: problema,
+                    fkMaquinaServer: idMaquina
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    alert("Reportado com sucesso")
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+
+
+
+                
+        }
     }
 
 
