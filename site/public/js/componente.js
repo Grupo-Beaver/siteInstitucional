@@ -13,7 +13,7 @@ class Menu extends HTMLElement {
                   <p>Explorar</p>
                 </div>
                 <div class="container_icon_menu">
-                <img onclick="window.location.href=''" id="imgPadronizacao" src="./img/padronizacao.png" alt="">
+                <img onclick="window.location.href='./padronizacaoMaquina.html'" id="imgPadronizacao" src="./img/padronizacao.png" alt="">
                 <p>Padronização</p>
                 </div>
                 <div class="container_icon_menu">

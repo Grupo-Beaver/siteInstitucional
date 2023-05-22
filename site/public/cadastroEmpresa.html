@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <link rel="stylesheet" href="./css/cadastroEmpresa.css">
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Cadastro</title>
+</head>
+
+<body>
+    <main>
+        <div class="conteudoBanner">
+            <div class="textBanner">
+                <h1>Sua empresa muito mais segura</h1>
+                <h2>Garanta mais segurança e qualidade no dia a dia dos profissionais da sua empresa com a Beaver</h2>
+            </div>
+        </div>
+        <div class="cadastroForm">
+            <h2>Cadastre sua empresa</h2>
+            <form>
+                <div class="alerta_erro">
+                    <div class="card_erro" id="cardErro">
+                        <span id="mensagem_erro"></span>
+                    </div>
+                </div>
+                <div class="alerta_sucesso">
+                    <div class="card_sucesso" id="cardSucesso">
+                        <span id="mensagem_sucesso"></span>
+                    </div>
+                </div>
+                <div class="inputDadosMax">
+                    <div class="nome-empresa"> 
+                        <label for="nome_empresa_input">Nome</label>
+                        <input id="nome_empresa_input" type="text">
+                    </div>
+                    <div class="cnpj">
+                        <label for="cnpj_input">CNPJ</label>
+                        <input id="cnpj_input" type="text">
+                        <span class="alerta-erro-validacao" id="spanCNPJInvalido"></span>
+                    </div>
+                </div>
+                <div class="containerButton">
+                    <button type="button" onclick="cadastrar()">Cadastrar</button>
+                </div>
+            </form>
+            <div class="voltarHome">
+                <img class="img-volta" onclick="window.location.href='./cadastro.html'" src="./img/volta.png" alt="Logo">
+                <a href="./cadastro.html">Voltar</a>
+            </div>
+        </div>
+    </main>
+</body>
+
+</html>
+
+<script>
+    function cadastrar(){
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeEmpresaVar = nome_empresa_input.value;
+        var cnpjVar = cnpj_input.value;
+
+        if (nomeEmpresaVar == "" || cnpjVar == "") {
+            cardErro.style.display = "flex"
+            mensagem_erro.innerHTML = "ERRO! Preencha todos os campos adequadamente.";
+        } else {
+            //VALIDAÇÃO DE CNPJ
+            var cnpjInvalido = false;
+            const cnpjValido = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/
+
+            if (!cnpjValido.test(cnpjVar)) {
+                cnpjInvalido = true;
+                spanCNPJInvalido.innerHTML = `
+                Digite um CNPJ válido.
+                `;
+            }
+            else if (cnpjInvalido == false) {
+                spanCNPJInvalido.innerHTML = "";
+            }
+        }
+
+        //cadastrar
+
+        if (cnpjInvalido == false) {
+
+            // Enviando o valor da nova input
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeEmpresaServer: nomeEmpresaVar,
+                    cnpjServer: cnpjVar,
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+
+                    setTimeout(() => {
+                        window.location = "cadastro.html";
+                    }, "2000")
+
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+            return false;
+
+            // Toastify({
+            //     text: "Erro cadastro, senha invalida",
+            //     className: "info",
+
+            //     style: {
+            //         background: "linear-gradient(to right, #7D0505, #FF0000)",
+            //         "text-align": "center",
+            //         padding: "3vh 5vw",
+            //         "border-radius": "2vh"
+
+            //     }
+            // }).showToast();
+        }
+    }
+</script>

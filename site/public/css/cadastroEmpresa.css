@@ -23,7 +23,7 @@ main{
 }
 
 .conteudoBanner{
-    background-image: url("../img/bannerCadastro.png ");
+    background-image: url("../img/bannerCadastroEmpresa.png ");
     height: 100vh;
     width: 40vw;
     background-size: cover;
@@ -59,21 +59,21 @@ main{
 .cadastroForm h2{
     font-size: 40px;
     font-family: 'Montserrat', sans-serif;
-    margin-bottom: 4vh;
+    margin-bottom: 8vh;
     font-weight: 800;
     display: flex;
     
 }
-
 .cadastroForm{
     display: flex;
-    margin-top: 10vh;
+    margin-top: 15vh;
     align-items: center;
     flex-direction: column;
     width: 60vw;
 }
 
 form {
+    margin-top: 2vh;
     font-family: 'Roboto', sans-serif;
     color: #141414;
     font-weight: 400;
@@ -98,59 +98,31 @@ input:focus{
     outline: 0;
 }
 
-.inputDados{
-    display: flex;
-    margin: 2vh;
-}
-
-.inputDadosMin{
-    display: flex;
-    flex-direction: column;
-    width: 18vw;
-}
-
 .inputDadosMax{
     display: flex;
     flex-direction: column;
-    width: 39vw;
+    align-items: center;
+    width: 39hv;
+    gap: 8vh;
+}
+
+.nome-empresa, .cnpj{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#nome_empresa_input, #cnpj_input{
+    width: 30vw;
 }
 
 .marginInput{
     margin-right: 3vw;
 }
 
-.container-explicativo-cadastro-empresa{
-    margin-top: 1vh;
-    display: flex;
-}
-
-.img-atencao{
-    width: 10%;
-}
-
-.explicativo-cadastro-empresa{
-    width: 90%;
-}
-
-.frase-cadastro-empresa{
-    color: #0F1126;
-    font-size: 2.2vh;
-    text-align: justify;
-    font-weight: 400;
-}
-
-.frase-cadastro-empresa b{
-    color: #705EDC;
-}
-
-.frase-cadastro-empresa a{
-    text-decoration: none;
-}
-
-
 .containerButton{
-    margin-top: 4vh;
-    margin-bottom: 5vh;
+    margin-top: 10vh;
+    margin-bottom: 13vh;
     display: flex;
     justify-content: center;
     align-items: center;
