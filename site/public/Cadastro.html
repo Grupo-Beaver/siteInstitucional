@@ -80,7 +80,7 @@
                     </div>
                 </div>
                 <div class="containerButton">
-                    <button type="button" onclick="cadastrar()">Criar Conta</button>
+                    <button type="button" onclick="verificarCnpj()">Criar Conta</button>
                     <div class="containerJaTemConta">
                         <p>Já tem uma conta? <a href="./login.html">Conecte-se</a></p>
 
@@ -98,6 +98,43 @@
 </html>
 
 <script>
+
+function verificarCnpj(){
+
+var cnpj = cnpj_input.value;
+var empresa = 0;
+
+fetch(`/empresas/verificarCnpj/${cnpj}`, {
+method: "GET",
+headers: {
+    "Content-Type": "application/json"
+},
+
+})
+.then(resposta => {
+
+    if (resposta.ok) {
+        console.log(resposta);
+
+        if(resposta.status == 200){
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+                this.empresa = json[0].idEmpresa;
+                cadastrar()
+            });
+        }else{
+            alert("Empresa não existe, cadastre-a");
+        }
+
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+.catch(function (error) {
+    console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+});
+}
 
     function cadastrar() {
         //Recupere o valor da nova input pelo nome do id
@@ -128,18 +165,7 @@
             }
 
             //VALIDAÇÃO DE CNPJ
-            var cnpjInvalido = false;
-            const cnpjValido = /^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$/
 
-            if (!cnpjValido.test(cnpjVar)) {
-                cnpjInvalido = true;
-                spanCNPJInvalido.innerHTML = `
-                Digite um CNPJ válido.
-                `;
-            }
-            else if (cnpjInvalido == false) {
-                spanCNPJInvalido.innerHTML = "";
-            }
 
             //VALIDAÇÃO DE SENHA
             var senhaInvalida = false;
@@ -167,10 +193,10 @@
 
         //cadastrar
 
-        if (emailInvalido == false && cnpjInvalido == false && senhaInvalida == false && confirmSenhaInvalido == false) {
+        if (emailInvalido == false && senhaInvalida == false && confirmSenhaInvalido == false) {
 
             // Enviando o valor da nova input
-            fetch("/usuarios/cadastrar", {
+            fetch("/usuarios/cadastrarSuport", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -189,11 +215,7 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-
-                    setTimeout(() => {
-                        window.location = "login.html";
-                    }, "2000")
-
+                    listIdByEmail(emailVar);
                 } else {
                     throw ("Houve um erro ao tentar realizar o cadastro!");
                 }
@@ -204,19 +226,68 @@
 
             return false;
 
-            // Toastify({
-            //     text: "Erro cadastro, senha invalida",
-            //     className: "info",
-
-            //     style: {
-            //         background: "linear-gradient(to right, #7D0505, #FF0000)",
-            //         "text-align": "center",
-            //         padding: "3vh 5vw",
-            //         "border-radius": "2vh"
-
-            //     }
-            // }).showToast();
         }
+
+        function listIdByEmail(email){
+            fetch(`/usuarios/listIdByEmail/${email}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    var id = json[0].idUsuario;
+                    cadastrarSuporteTi(id);
+                    
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+        }
+    }
+
+    function cadastrarSuporteTi(idSuport){
+     
+        fetch("/usuarios/cadastrarSuportEnmpresa", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    fkUsuarioServer: idSuport,
+                    fkEmpresaServer: this.empresa
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    window.location.href="./login.html"
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+            return false;
+
     }
 
 </script>
