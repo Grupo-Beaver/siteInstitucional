@@ -16,6 +16,16 @@
     <main-menu></main-menu>
     <main>
         <p class="titulo">Cadastro de Usuário</p>
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+        </div>
+        <div class="alerta_sucesso">
+            <div class="card_sucesso" id="cardSucesso">
+                <span id="mensagem_sucesso"></span>
+            </div>
+        </div>
         <section class="form-cadastro">
             <div class="nome-sobrenome-cpf">
                 <div class="nome">
@@ -29,18 +39,33 @@
                 <div class="cpf">
                     <label for="inputCPF">CPF <b>*</b></label>
                     <input id="inputCPF" type="text">
+                    <span class="alerta-erro-validacao" id="spanCPFInvalido"></span>
                 </div>
             </div>
             <div class="telefone-email">
                 <div class="telefone">
                     <label for="inputTelefone">Telefone <b>*</b></label>
-                    <input id="inputTelefone" type="text">
+                    <input id="inputTelefone" type="tel">
+                    <span class="alerta-erro-validacao" id="spanTelInvalido"></span>
                 </div>
                 <div class="email">
                     <label for="inputEmail">E-mail <b>*</b></label>
-                    <input id="inputEmail" type="text">
+                    <input id="inputEmail" type="email">
+                    <span class="alerta-erro-validacao" id="spanEmailInvalido"></span>
                 </div>
             </div>
+          
+            <!-- <div class="empresa-cnpj">
+                <div class="empresa">
+                    <label for="inputEmpresa">Empresa</label>
+                    <input id="inputEmpresa" type="text">
+                </div>
+                <div class="cnpj">
+                    <label for="inputCNPJ">CNPJ</label>
+                    <input id="inputCNPJ" type="text">
+                </div>
+            </div> -->
+          
             <div class="username-senha-confirm">
                 <div class="username">
                     <label for="inputUsername">Username <b>*</b></label>
@@ -48,15 +73,17 @@
                 </div>
                 <div class="senha">
                     <label for="inputSenha">Senha <b>*</b></label>
-                    <input id="inputSenha" type="text">
+                    <input id="inputSenha" type="password">
+                    <span class="alerta-erro-validacao" id="spanSenhaInvalida"></span>
                 </div>
                 <div class="confirm-senha">
                     <label for="inputConfirmSenha">Confirmação de Senha <b>*</b></label>
-                    <input id="inputConfirmSenha" type="text">
+                    <input id="inputConfirmSenha" type="password">
+                    <span class="alerta-erro-validacao" id="spanConfirmSenhaInvalido"></span>
                 </div>
             </div>
         </section>
-        <button style="cursor: pointer;">Cadastrar</button>
+        <button onclick="cadastrar()">Cadastrar</button>
     </main>
 </body>
 
@@ -64,4 +91,130 @@
 
 <script>
     imgExplorar.src="./img/lupaLocal.png";
+
+    function cadastrar(){
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomeVar = inputNome.value;
+        var sobrenomeVar = inputSobrenome.value;
+        var cpfVar = inputCPF.value;
+        var telVar = inputTelefone.value;
+        var emailVar = inputEmail.value;
+        var usernameVar = inputUsername.value;
+        var senhaVar = inputSenha.value;
+        var verificarSenhaVar = inputConfirmSenha.value;
+
+        if (nomeVar == "" || sobrenomeVar == "" || cpfVar == "" || telVar == "" || emailVar == "" || usernameVar == "" || senhaVar == "" || verificarSenhaVar == "") {
+            cardErro.style.display = "flex"
+            mensagem_erro.innerHTML = "ERRO! Preencha todos os campos adequadamente.";
+        } else {
+            //VALIDAÇÃO DE CPF
+            var cpfInvalido = false;
+            const cpfValido = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
+
+            if (!cpfValido.test(cpfVar)) {
+                cpfInvalido = true;
+                spanCPFInvalido.innerHTML = `
+                Digite um CPF válido.
+                `;
+            }
+            else if (cpfInvalido == false) {
+                spanCPFInvalido.innerHTML = "";
+            }
+
+            //VALIDAÇÃO DE TELEFONE
+            var telefoneInvalido = false;
+            const telefoneValido = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
+            
+            if(!telefoneValido.test(telVar)){
+                telefoneInvalido = true;
+                spanTelInvalido.innerHTML = `
+                Digite um telefone válido.
+                `;
+            }else if(telefoneInvalido == false){
+                spanTelInvalido.innerHTML = "";
+            }
+
+            //VALIDAÇÃO DE EMAIL
+            var emailInvalido = false;
+            const emailValido = /^[A-Za-z0-9]{1}[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*/
+
+            if (!emailValido.test(emailVar)) {
+                emailInvalido = true;
+                spanEmailInvalido.innerHTML = `
+                Digite um endereço de e-mail válido.
+                `;
+            }
+            else if (emailInvalido == false) {
+                spanEmailInvalido.innerHTML = "";
+            }
+
+            //VALIDAÇÃO DE SENHA
+            var senhaInvalida = false;
+            var confirmSenhaInvalido = false;
+
+            if (senhaVar.length < 8) {
+                senhaInvalida = true;
+                spanSenhaInvalida.innerHTML = `
+                Senha inválida! Digite uma senha de pelo menos 8 caracteres.
+                `;
+            }
+            else if (verificarSenhaVar != senhaVar) {
+                confirmSenhaInvalido = true;
+                spanConfirmSenhaInvalido.innerHTML = `
+                Senha incorreta! Digite a mesma senha digitada anteriormente.
+                `;
+            }
+            else if (senhaInvalida == false) {
+                spanSenhaInvalida.innerHTML = "";
+            }
+            else if (confirmSenhaInvalido == false) {
+                spanConfirmSenhaInvalido.innerHTML = "";
+            }
+        }
+
+        //cadastrar
+
+        if (cpfInvalido == false && telefoneInvalido == false && emailInvalido == false && senhaInvalida == false && confirmSenhaInvalido == false) {
+
+            /*
+            // Enviando o valor da nova input
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    sobrenomeServer: sobrenomeVar,
+                    cpfServer: cpfVar,
+                    telServer: telVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+
+                    setTimeout(() => {
+                        window.location = "detalhesUsuario.html";
+                    }, "2000")
+
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+            return false;
+
+            */
+        }
+    }
 </script>

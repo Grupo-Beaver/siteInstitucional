@@ -76,6 +76,9 @@ input:focus{
 }
 
 .botoes{
+    position: fixed;
+    bottom: 75px;
+    right: 350px;
     width: 40%;
     height: 5em;
     display: flex;
