@@ -1,17 +1,10 @@
 var database = require("../database/config")
 
 function listarMaquina(idUsuario) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarMaquina(idSuporteTI)");
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarMaquina(idUsuario)");
     var instrucao = `
-    SELECT maquina.*, editor.nome as nomeEditor, empresa.nome as nomeEmpresa
-    FROM editorVideoSuporteTI AS editorSP
-    INNER JOIN editorVideo AS editor
-        ON editor.idEditorVideo = editorSP.fkEditorVideo
-    INNER JOIN maquina
-        ON editor.idEditorVideo = maquina.fkEditorVideo
-    INNER JOIN empresa
-        ON empresa.idEmpresa = editor.fkEmpresa
-    WHERE editorSP.fkSuporteTI = ${idSuporteTI};    
+    SELECT m.*, ev.username as nomeEditor, e.nome as nomeEmpresa FROM usuario u INNER JOIN suporteTI st ON u.idUsuario = st.fkUsuario INNER JOIN editorVideoSuporteTI evst ON st.idSuporteTI = evst.fkSuporteTI INNER JOIN editorVideo ev ON evst.fkEditorVideo = ev.idEditorVideo INNER JOIN maquina m ON m.fkEditorVideo = ev.idEditorVideo INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa  WHERE u.idUsuario  = ${idUsuario};
+    
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

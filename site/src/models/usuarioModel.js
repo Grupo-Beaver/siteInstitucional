@@ -31,6 +31,18 @@ function cadastrarSuport(nome, sobrenome, email, senha) {
     return database.executar(instrucao);
 }
 
+function cadastrarSuportEnmpresa(fkUsuario, fkEmpresa) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", fkUsuario, fkEmpresa);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO suporteTI(fkUsuario, fkEmpresa) VALUES ('${fkUsuario}', '${fkEmpresa}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function listIdByEmail(email) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listIdByEmail():", email);
     var instrucao = `
@@ -45,5 +57,6 @@ module.exports = {
     login,
     cadastrarSuport,
     listar,
-    listIdByEmail
+    listIdByEmail,
+    cadastrarSuportEnmpresa
 };
