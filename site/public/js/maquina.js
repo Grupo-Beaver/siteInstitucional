@@ -4,7 +4,6 @@ var idMaquina = sessionStorage.ID_MAQUINA;
 var maquina;
 
 function listarMaquinaByIdSuporte() {
-
     fetch(`/maquinas/listarMaquina/${idSuporteTI}`, {
         method: "GET",
         headers: {
@@ -37,7 +36,6 @@ function listarMaquinaByIdSuporte() {
 }
 
 function listarByIdMaquina() {
-    console.log("ta entrando");
 
     fetch(`/maquinas/listarByIdMaquina/${idMaquina}`, {
         method: "GET",

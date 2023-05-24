@@ -12,12 +12,22 @@ router.get("/listar", function (req, res) {
 });
 
 //Recebendo os dados do html e direcionando para a função cadastrar de usuarioController.js
-router.post("/cadastrar", function (req, res) {
-    usuarioController.cadastrar(req, res);
+router.post("/cadastrarSuportEnmpresa", function (req, res) {
+    usuarioController.cadastrarSuportEnmpresa(req, res);
+})
+
+router.post("/cadastrarSuport", function (req, res) {
+    usuarioController.cadastrarSuport(req, res);
 })
 
 router.post("/login", function (req, res) {
     usuarioController.login(req, res);
 });
+
+
+router.get("/listIdByEmail/:email", function (req, res) {
+    usuarioController.listIdByEmail(req, res);
+});
+
 
 module.exports = router;
