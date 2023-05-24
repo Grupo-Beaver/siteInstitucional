@@ -14,35 +14,30 @@
 
 <body>
     <main-menu-editor></main-menu-editor>
-    <div class="container-pai">
+    <section>
+        <p class="titulo-principal">Bem-vindo(a), <span id="nome"></span>!</p>
 
-        <div class="titulos">
-
-            <p class="titulo-principal">Bem-vindo(a), <span id="nome"></span>!</p>
-
-            <p class="titulo-secundario">Suas Máquinas:</p>
-            <p class="subtitulo">Você tem 2 máquinas cadastradas no nosso sistema.</p>
-
-            <div class="container-titulo">
-                <h2>Máquina</h2>
-                <h2>Tipo</h2>
-                <h2>Sistema Operacional</h2>
-            </div>
-
-            <div class="container-conteudo">
-                <p>Dell - Latitude 5480</p>
-                <p>Notebook</p>
-                <p>Windows</p>
-            </div>
-           
-
-            <div class="container-conteudo">
-                <p>Asus - Vivobook 16</p>
-                <p>Notebook</p>
-                <p>Windows</p>
+        <div class="container">
+            <p class="titulo-secundario">Sua Máquina:</p>
+            <div class="container-principal">
+                <div class="container-maquina">
+                    <label>Máquina</label>
+                    <p id="maquinaUser"></p>
+                </div>
+    
+                <div class="container-tipo">
+                    <label>Tipo</label>
+                    <p id="tipoUser"></p>
+                </div>
+    
+    
+                <div class="container-so">
+                    <label>Sistema Operacional</label>
+                    <p id="soUser"></p>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
 </body>
 
