@@ -12,7 +12,7 @@
     <title>Beaver</title>
 </head>
 
-<body>
+<body onload="list()">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
     <div class="cabecalho">
@@ -20,11 +20,11 @@
         <div class="container-dados">
             <div class="empresa">
                 <label>Empresa</label>
-                <p class="display-dado" id="empresa"></p>
+                <p id="nomeEmpresa" class="display-dado" id="empresa"></p>
             </div>
             <div class="maquina-padrao">
                 <label>Máquina Padrão</label>
-                <p class="display-dado" id="maquinaPadrao"></p>
+                <p id="nomeMaquina" class="display-dado" id="maquinaPadrao"></p>
             </div>
         </div>
         <div class="container-btn">
@@ -38,4 +38,35 @@
 
 <script>
     imgPadronizacao.src = "img/padronizacaoLocal.png";
+
+    function list(){
+        fetch(`/empresas/listPadronizacaoMaquina/${sessionStorage.ID_EMPRESA}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.ID_MAQUINA = json[0].idMaquina;
+                    nomeMaquina.innerHTML = json[0].nomeMaquina;
+                    nomeEmpresa.innerHTML = json[0].nomeEmpresa;
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+    }
+
 </script>

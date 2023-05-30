@@ -99,8 +99,8 @@
         var sobrenomeVar = inputSobrenome.value;
         var cpfVar = inputCPF.value;
         var telVar = inputTelefone.value;
-        var emailVar = inputEmail.value;
         var usernameVar = inputUsername.value;
+        var emailVar = inputEmail.value;
         var senhaVar = inputSenha.value;
         var verificarSenhaVar = inputConfirmSenha.value;
 
@@ -111,29 +111,6 @@
             //VALIDAÇÃO DE CPF
             var cpfInvalido = false;
             const cpfValido = /^\d{3}\.\d{3}\.\d{3}\-\d{2}$/
-
-            if (!cpfValido.test(cpfVar)) {
-                cpfInvalido = true;
-                spanCPFInvalido.innerHTML = `
-                Digite um CPF válido.
-                `;
-            }
-            else if (cpfInvalido == false) {
-                spanCPFInvalido.innerHTML = "";
-            }
-
-            //VALIDAÇÃO DE TELEFONE
-            var telefoneInvalido = false;
-            const telefoneValido = /^(?:(?:\+|00)?(55)\s?)?(?:\(?([1-9][0-9])\)?\s?)?(?:((?:9\d|[2-9])\d{3})\-?(\d{4}))$/;
-            
-            if(!telefoneValido.test(telVar)){
-                telefoneInvalido = true;
-                spanTelInvalido.innerHTML = `
-                Digite um telefone válido.
-                `;
-            }else if(telefoneInvalido == false){
-                spanTelInvalido.innerHTML = "";
-            }
 
             //VALIDAÇÃO DE EMAIL
             var emailInvalido = false;
@@ -175,11 +152,9 @@
 
         //cadastrar
 
-        if (cpfInvalido == false && telefoneInvalido == false && emailInvalido == false && senhaInvalida == false && confirmSenhaInvalido == false) {
+        if (emailInvalido == false && senhaInvalida == false && confirmSenhaInvalido == false) {
 
-            /*
-            // Enviando o valor da nova input
-            fetch("/usuarios/cadastrar", {
+            fetch("/usuarios/cadastrarEditor", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -189,8 +164,6 @@
                     // Agora vá para o arquivo routes/usuario.js
                     nomeServer: nomeVar,
                     sobrenomeServer: sobrenomeVar,
-                    cpfServer: cpfVar,
-                    telServer: telVar,
                     emailServer: emailVar,
                     senhaServer: senhaVar
                 })
@@ -199,11 +172,7 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-
-                    setTimeout(() => {
-                        window.location = "detalhesUsuario.html";
-                    }, "2000")
-
+                 listIdByEmail(emailVar);   
                 } else {
                     throw ("Houve um erro ao tentar realizar o cadastro!");
                 }
@@ -211,10 +180,130 @@
                 console.log(`#ERRO: ${resposta}`);
                 finalizarAguardar();
             });
-
-            return false;
-
-            */
         }
     }
+
+    function listIdByEmail(email){
+            fetch(`/usuarios/listIdByEmail/${email}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    var id = json[0].idUsuario;
+                    cadastrarEditor(id);
+                    
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+        }
+
+        function cadastrarEditor(idUsuario){
+            
+            var cpfVar = inputCPF.value;
+            var telVar = inputTelefone.value;
+            var usernameVar = inputUsername.value;
+            
+
+            fetch("/usuarios/cadastrarEditorEmpresa", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    cpfServer: cpfVar,
+                    telefoneServer: telVar,
+                    usernameServer: usernameVar,
+                    fkUsuarioServer: idUsuario,
+                    fkEmpresaServer: sessionStorage.ID_EMPRESA,
+
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    listIdByEditorId(idUsuario);
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        }
+
+        function listIdByEditorId(idUsuario){
+
+            fetch(`/usuarios/listIdByEditorId/${idUsuario}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    var id = json[0].idEditorVideo;
+                    associarEditorAndSuport(id);
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+
+        }
+
+        function associarEditorAndSuport(idEditorVideo){
+            fetch("/usuarios/associarEditorAndSuport", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    fkSuporteTIServer: sessionStorage.ID_SUPORTE,
+                    fkEditorVideoServer: idEditorVideo
+
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    alert("Cadastrado com sucesso");
+                    window.location = "./explorar.html";
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        }
+
 </script>

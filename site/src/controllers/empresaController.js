@@ -22,6 +22,46 @@ function verificarCnpj(req, res){
 
 }
 
+function getEmpresa(req, res){
+
+    var idUsuario = req.params.idUsuario;
+    empresaModel.getEmpresa(idUsuario)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
+function listPadronizacaoMaquina(req, res){
+
+    var idEmpresa = req.params.idEmpresa;
+    empresaModel.listPadronizacaoMaquina(idEmpresa)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
@@ -55,5 +95,7 @@ function cadastrar(req, res) {
 
 module.exports = {
     cadastrar,
-    verificarCnpj
+    verificarCnpj,
+    getEmpresa,
+    listPadronizacaoMaquina
 }

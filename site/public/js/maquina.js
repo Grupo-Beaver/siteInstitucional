@@ -95,6 +95,5 @@ function getByIdSession(id){
 
 function getByIdMaq(id){
     idMaquina = id;
-    console.log(idMaquina);
 
 }
