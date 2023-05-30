@@ -11,6 +11,18 @@ router.get("/listarByIdMaquina/:idMaquina", function (req, res) {
     maquinaController.listarByIdMaquina(req, res);
 });
 
+router.get("/listMaqCadastra", function (req, res) {
+    maquinaController.listMaqCadastra(req, res);
+});
+
+router.put("/cadastroFinalizado", function (req, res) {
+    maquinaController.cadastroFinalizado(req, res);
+});
+
+router.put("/atualizarPadronizacao/:idPadronizacaoMaquina", function (req, res) {
+    maquinaController.atualizarPadronizacao(req, res);
+});
+
 router.delete("/deletarMaquina/:idMaquina", function (req, res) {
     maquinaController.deletar(req, res);
 });

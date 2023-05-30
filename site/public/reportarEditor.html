@@ -153,7 +153,7 @@
         }
         
         function relatarProblema(){
-        var data = `${now.getFullYear()}-${now.getMonth()}-${now.getDate()}`
+        var data = `${now.getFullYear()}-${now.getMonth() + 1}-${now.getDate()}`
         if(!frequencia || !problema){
             alert("Preencha todos os campos")
         }else{

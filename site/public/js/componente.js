@@ -20,10 +20,6 @@ class Menu extends HTMLElement {
                   <img onclick="window.location.href='./insights.html'" id="imgInsights" src="./img/historico.png" alt="">
                   <p>Insights</p>
                 </div>
-                <div class="container_icon_menu">
-                  <img onclick="window.location.href='./configuracoes.html'" id="imgConfiguracoes" src="./img/configuracoes.png" alt="">
-                  <p>Configurações</p>
-                </div>
               </div>
               <img onclick="window.location.href='./index.html'" id="imgLogout" src="./img/logout.png" alt="">
             </div>
