@@ -16,15 +16,12 @@
     <link rel="stylesheet" href="./css/componente.css">
     <script src="./js/componente.js"></script>
 </head>
-<body>
+<body onload="getEmpresa()">
   <main-menu></main-menu>
   <main-iconitsm></main-iconitsm>
 
   <main>
     <div class="container">
-      <div class="sino-notificacao">
-        <img src="./img/notificacoes.svg" alt="">
-      </div>
       <div class="topo">
         <div class="titulo-dash">
           <p>DashBoard Geral</p>
@@ -99,4 +96,38 @@ Toastify({
       }]
     }
   });
+  
+
+  function getEmpresa(){
+        fetch(`/empresas/getEmpresa/${sessionStorage.ID_USUARIO}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.ID_EMPRESA = json[0].idEmpresa;
+                    sessionStorage.ID_SUPORTE = json[0].idSuporteTI;
+                    sessionStorage.ID_PADRONIZACAO = json[0].idPadronizacaoMaquina;
+                    sessionStorage.ID_MAQUINA_PADRAO = json[0].maquinaPadrao;
+                    
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+        }
+
 </script>

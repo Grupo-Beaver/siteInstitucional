@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/componente.css">
+    <link rel="stylesheet" href="./css/homeEditor.css">
+    <script src="./js/componente.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Beaver</title>
+</head>
+
+<body>
+    <main-menu-editor></main-menu-editor>
+    <section>
+        <p class="titulo-principal">Bem-vindo(a), <span id="nome"></span>!</p>
+
+        <div class="container">
+            <p class="titulo-secundario">Sua Máquina:</p>
+            <div class="container-principal">
+                <div class="container-maquina">
+                    <label>Máquina</label>
+                    <p id="maquinaUser"></p>
+                </div>
+    
+                <div class="container-tipo">
+                    <label>Tipo</label>
+                    <p id="tipoUser"></p>
+                </div>
+    
+    
+                <div class="container-so">
+                    <label>Sistema Operacional</label>
+                    <p id="soUser"></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+
+</html>
+
+<script>
+    imgHome.src = "./img/homeLocal.png";
+    nome.innerHTML = sessionStorage.NOME_USUARIO;
+</script>

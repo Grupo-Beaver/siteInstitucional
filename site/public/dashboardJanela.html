@@ -1,24 +1,26 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/componente.css">
-    <link rel="stylesheet" href="./css/dashboardCPU.css">
+    <link rel="stylesheet" href="./css/dashboardRede.css">
     <script src="./js/componente.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
-    <title>CPU</title>
+    <title>Rede</title>
 </head>
+
 <body>
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
-<main>  
+    <main>
 
-    <div class="cabecalho">
-        
-        
+        <div class="cabecalho">
+
+
             <div class="maquina_usuario">
                 <p class="span_maq">Máquina: <span id="maquina">INSV15</span></p>
                 <p class="span_maq">Usuário: <span id="usuario">Gustavo</span></p>
@@ -39,69 +41,69 @@
                     </div>
                 </div>
             </div>
-        
-        
-        <div class="container-dash">
-            <div class="container_dash_estado">
-                <div class="estado">
-                    <label for="">ESTADO</label>
-                    <span>SAUDÁVEL</span>
-                </div>
-                <div class="dash">
-                    <label for="">DESEMPENHO</label>
-                    <canvas id="myChart"></canvas>
-                </div>
-            </div>
-            <div class="container_cpu">
-                <div class="cpu">
-                    <div class="utilizacao">
+
+
+            <div class="container-dash">
+                <div class="container_dash_estado">
+                    <div class="estado">
+                        <label for="">ESTADO</label>
+                        <span>ATENÇÃO</span>
+                    </div>
+                    <div class="dash">
                         <label for="">UTILIZAÇÃO</label>
-                        <span>40%</span>
+                        <canvas id="myChart"></canvas>
                     </div>
-                    <div class="processos">
-                        <label for="">PROCESSOS</label>
-                        <span>256</span>
-                    </div>
-                    <div class="threads">
-                        <label for="">THREADS</label>
-                        <span>2578</span>
-                    </div>
-                    <div class="velocidade">
-                        <label for="">VELOCIDADE</label>
-                        <span>2,68 GHz</span>
+                </div>
+                <div class="container_rede">
+                    <div class="rede">
+                        <div class="envio">
+                            <label for="">TOTAL DE<br>JANELAS</label>
+                            <span>10</span>
+                        </div>
+                        <div class="recebimento">
+                            <label for="">JANELAS<br>INVISÍVEIS (%)</label>
+                            <span>80%</span>
+                        </div>
                     </div>
                 </div>
             </div>
+
         </div>
-    </div>
-</main>
+    </main>
+
 </body>
 
 <script>
     const ctx = document.getElementById('myChart');
-    imgExplorar.src = "./img/lupaLocal.png";
+
     new Chart(ctx, {
-        type: 'line',
-      data: {
-        labels: ['10:00', '10:15', '10:30', '10:45', '11:00', '11:15'],
-        datasets: [{
-          label: '% Utilização',
-          data: [50, 65, 45, 50, 69, 40],
-          borderWidth: 3
-        }]
-      },
-      options: {
-        color:'black',
-      scales: {
-        y: {
-          ticks: { color: 'black', beginAtZero: true }
+        type: 'bar',
+        data: {
+            labels: ['Janelas Visíveis', 'Janelas Invisíveis'],
+            datasets: [{
+                backgroundColor: 'rgb(112, 94, 220)',
+                data: [2, 8],
+                borderWidth: 1
+            }]
         },
-        x: {
-          ticks: { color: 'black', beginAtZero: true }
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { color: 'black', beginAtZero: true }
+                },
+                x: {
+                    ticks: { color: 'black', beginAtZero: true }
+                }
+
+            },
+            indexAxis: 'x',
         }
-      }
-      }
     });
-  </script>
-  
+</script>
+
 </html>

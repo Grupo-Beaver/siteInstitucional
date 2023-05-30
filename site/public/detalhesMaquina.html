@@ -69,16 +69,10 @@
             <div class="linha4">
                 <div class="processador">
                  <label>Processador</label>
-                 <p>Intel(R) Core(TM) i5-6300U CPU @ 2.40GHz   2.50 GHz</p>
+                 <p id="processador"></p>
                 </div>
 
             </div>
-        
-            <div class="botoes">
-                
-                <button onclick="window.location.href='./atualizarMaquina.html'" class="botao">Atualizar Dados</button>
-            </div>
-          
 
         </div>
     </div>
@@ -100,9 +94,16 @@
         modeloUser.innerHTML = maquina[0].modelo;
         fabricanteUser.innerHTML = maquina[0].fabricante;
         soUser.innerHTML = maquina[0].sistemaOperacional;
-        ramUser.innerHTML = maquina[0].memoriaRAMTotal;
-        discoUser.innerHTML = maquina[0].memoriaDiscoTotal;
+        ramUser.innerHTML = formatBytes(maquina[0].memoriaRAMTotal);
+        discoUser.innerHTML = formatBytes(maquina[0].memoriaDiscoTotal);
+        processador.innerHTML = maquina[0].processador;
 
+    }
 
+    function formatBytes(bytes) {
+        const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(1024));
+        const formatted = parseFloat((bytes / Math.pow(1024, i)).toFixed(2));
+        return formatted + sizes[i];
     }
 </script>

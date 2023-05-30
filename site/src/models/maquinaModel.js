@@ -1,17 +1,10 @@
 var database = require("../database/config")
 
-function listarMaquina(idSuporteTI) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarMaquina(idSuporteTI)");
+function listarMaquina(idUsuario) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarMaquina(idUsuario)");
     var instrucao = `
-    SELECT maquina.*, editor.nome as nomeEditor, empresa.nome as nomeEmpresa
-    FROM editorVideoSuporteTI AS editorSP
-    INNER JOIN editorVideo AS editor
-        ON editor.idEditorVideo = editorSP.fkEditorVideo
-    INNER JOIN maquina
-        ON editor.idEditorVideo = maquina.fkEditorVideo
-    INNER JOIN empresa
-        ON empresa.idEmpresa = editor.fkEmpresa
-    WHERE editorSP.fkSuporteTI = ${idSuporteTI};    
+    SELECT m.*, ev.username as nomeEditor, e.nome as nomeEmpresa FROM usuario u INNER JOIN suporteTI st ON u.idUsuario = st.fkUsuario INNER JOIN editorVideoSuporteTI evst ON st.idSuporteTI = evst.fkSuporteTI INNER JOIN editorVideo ev ON evst.fkEditorVideo = ev.idEditorVideo INNER JOIN maquina m ON m.fkEditorVideo = ev.idEditorVideo INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa  WHERE u.idUsuario  = ${idUsuario};
+    
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -20,7 +13,14 @@ function listarMaquina(idSuporteTI) {
 function deletar(idMaquina) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function deletar():", idMaquina);
     var instrucao = `
+        DELETE FROM ram WHERE fkMaquina = ${idMaquina};
+        DELETE FROM cpu WHERE fkMaquina = ${idMaquina};
+        DELETE FROM parametrizacaoMetrica WHERE fkMaquina = ${idMaquina};
+        DELETE FROM reporteProblema WHERE fkMaquina = ${idMaquina};
         DELETE FROM maquina WHERE idMaquina = ${idMaquina};
+
+
+
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -29,15 +29,95 @@ function deletar(idMaquina) {
 function listarByIdMaquina(idMaquina) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarByIdMaquina():", idMaquina);
     var instrucao = `
-    select maquina.*, editor.nome as nomeEditor from editorVideo AS editor INNER JOIN maquina ON editor.idEditorVideo = maquina.fkEditorVideo WHERE maquina.idMaquina = ${idMaquina};
+    SELECT m.*, ev.username as nomeEditor, e.nome as nomeEmpresa FROM usuario u INNER JOIN suporteTI st ON u.idUsuario = st.fkUsuario INNER JOIN editorVideoSuporteTI evst ON st.idSuporteTI = evst.fkSuporteTI INNER JOIN editorVideo ev ON evst.fkEditorVideo = ev.idEditorVideo INNER JOIN maquina m ON m.fkEditorVideo = ev.idEditorVideo INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa  WHERE m.idMaquina  = ${idMaquina};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
 
 }
 
+
+function cadastroFinalizado(nome, modelo, tipo, idMaquina){
+
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarByIdDetalhe():", nome, modelo, tipo, idMaquina);
+    var instrucao = `
+    UPDATE maquina SET nome = '${nome}', modelo = '${modelo}', tipo = '${tipo}' WHERE idMaquina = ${idMaquina};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function listarByIdDetalhe(idMaquina){
+
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarByIdDetalhe():", idMaquina);
+    var instrucao = `
+    SELECT u.nome, u.sobrenome, ev.cpf, ev.telefone, u.email, ev.username FROM maquina m INNER JOIN editorVideo ev ON m.fkEditorVideo = ev.idEditorVideo INNER JOIN usuario u ON u.idUsuario = ev.idEditorVideo INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa WHERE m.idMaquina = 1;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function nameMaquinaById(idUsuario) {
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function nameMaquinaById():", idUsuario);
+    var instrucao = `
+    SELECT m.* FROM usuario inner join editorVideo ev on idUsuario = ev.fkUsuario  INNER JOIN maquina m on ev.idEditorVideo = m.fkEditorVideo WHERE idUsuario = ${idUsuario};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
+function listReporte(idUsuario){
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listReporte():", idUsuario);
+    var instrucao = `
+    SELECT rp.frequencia, rp.problema, rp.fkMaquina  , FORMAT(rp.data, 'dd/MM/yyyy') as data , m.nome FROM usuario inner join editorVideo ev on idUsuario = ev.fkUsuario  INNER JOIN maquina m on ev.idEditorVideo = m.fkEditorVideo inner join reporteProblema rp on rp.fkMaquina = m.idMaquina WHERE idUsuario = ${idUsuario};
+
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function listMaqCadastra(){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listMaqCadastra():");
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    SELECT m.*, ev.username FROM maquina m INNER JOIN editorVideo ev  ON ev.idEditorVideo  = m.fkEditorVideo  WHERE nome = '---' AND modelo = '---' AND tipo = '---';
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function reporteProblema(data, frequencia, problema, fkMaquina){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function reporteProblema():", data, frequencia, problema, fkMaquina);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO reporteProblema(data, frequencia, problema, fkMaquina) VALUES ('${data}', '${frequencia}', '${problema}', '${fkMaquina}');
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function atualizarPadronizacao(idPadronizacaoMaquina, fkMaquina){
+    var instrucao = `
+    UPDATE padronizacaoMaquina  SET fkMaquina = ${fkMaquina} WHERE idPadronizacaoMaquina = ${idPadronizacaoMaquina};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     listarMaquina,
     deletar,
-    listarByIdMaquina
+    listarByIdMaquina,
+    nameMaquinaById,
+    listReporte,
+    reporteProblema,
+    listarByIdDetalhe,
+    listMaqCadastra,
+    cadastroFinalizado,
+    atualizarPadronizacao
 };

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/atualizarPadrao.css">
+    <link rel="stylesheet" href="./css/componente.css">
+    <script src="./js/componente.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Beaver</title>
+</head>
+
+<body onload="listarMaquinaByIdSuporte()">
+    <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
+    <div class="cabecalho">
+        <p class="titulo">Atualizar Padrão</p>
+        <p class="subtitulo">Selecione a máquina que deseja utilizar como parâmetro para definir o padrão de máquina da sua empresa.</p>
+        <div class="container-dados">
+            <div class="maquina">
+                <label>Máquina</label>
+                <select onchange="mostrarCadastro()" name="" id="select_maquina">
+                    <option value=""></option>
+                </select>
+            </div>
+        </div>
+        <div class="container-btn">
+            <button onclick="window.location.href='./padronizacaoMaquina.html'" class="botao">Cancelar</button>
+            <button onclick="atualizarPadronizacao()" class="botao">Salvar</button>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    imgPadronizacao.src = "img/padronizacaoLocal.png";
+
+    function listarMaquinaByIdSuporte() {
+    fetch(`/maquinas/listarMaquina/${sessionStorage.ID_USUARIO}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (var i = 0; i < json.length; i++) {
+                        select_maquina.innerHTML += `<option value="${json[i].idMaquina}">${json[i].nome}</option>`
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+}
+
+function atualizarPadronizacao(){
+    var maquinaPadrao = sessionStorage.ID_MAQUINA_PADRAO;
+    var id = select_maquina.value;
+    
+    if(id == ""){
+        alert("Selecione uma Maquina")
+    }else if(id == maquinaPadrao){
+        alert("Essa maquina já e o padrão, selecione outra")
+    } else{
+
+        fetch(`/maquinas/atualizarPadronizacao/${maquinaPadrao}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    fkMaquinaServer: id
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    alert("Atualizado com sucesso");
+                    window.location = "./explorar.html";
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+    }
+    
+}
+</script>

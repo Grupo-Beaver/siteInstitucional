@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/insights.css">
+    <link rel="stylesheet" href="./css/componente.css">
+    <script src="./js/componente.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Beaver</title>
+</head>
+
+<body>
+    <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
+
+    <div class="cabecalho">
+        <p class="titulo">Insights</p>
+        <div class="container">
+            <div class="linha1">
+                <div class="maquina">
+                    <label>Máquina</label>
+                    <select onchange="mostrarCadastro()" name="" id="select_maquina">
+                        <option value=""></option>
+                        <option value="maq">Maquina 1</option>
+                        <option value="maq">Maquina 2</option>
+                        <option value="maq">Maquina 3</option>
+                    </select>
+                    <p id="selecionar_maquina">Selecione a máquina desejada para visualizar os problemas reportados</p>
+                </div>
+                <div id="exibir">
+                    <button onclick="window.location.href='./historicoReportes.html'">Visualizar Histórico</button>
+                </div>
+            </div>
+            <div class="linha2" id="exibir1">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+
+
+
+
+</body>
+
+</html>
+
+<script>
+    imgInsights.src = "./img/historicoLocal.png";
+
+    function mostrarCadastro() {
+
+        var tipo = select_maquina.value;
+
+        if (tipo == "maq") {
+            exibir.style.display = "flex";
+            exibir1.style.display = "flex";
+            selecionar_maquina.style.display = "none";
+        } else {
+
+            exibir.style.display = "none";
+            exibir1.style.display = "none";
+            selecionar_maquina.style.display = "block";
+
+        }
+
+    }
+
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Travamento', 'Lentidão', 'Desligamento', 'Superaquecimento', 'Outros'],
+            datasets: [{
+                backgroundColor: 'rgb(112, 94, 220)',
+                data: [12, 19, 3, 5, 2, 3],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { color: 'black', beginAtZero: true }
+                },
+                x: {
+                    ticks: { color: 'black', beginAtZero: true }
+                }
+                
+            },
+            indexAxis: 'y',
+        }
+    });
+</script>

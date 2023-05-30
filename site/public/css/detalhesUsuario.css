@@ -62,7 +62,7 @@ input::placeholder{
     display: flex;
     flex-direction: row;
     gap: 1vw;
-    margin-bottom: 5vh;
+    margin-bottom: 8vh;
     width: 100%;
     justify-content: center;
 }
@@ -81,6 +81,9 @@ input::placeholder{
 }
 
 button{
+    position: fixed;
+    bottom: 75px;
+    right: 500px;
     padding: 1vh 4vw;
     border-style: none;
     background-color: #0F1126;

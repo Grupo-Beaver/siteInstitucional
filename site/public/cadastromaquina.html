@@ -12,84 +12,76 @@
     <title>Beaver</title>
 </head>
 
-<body>
+<body onload="listMaqCadastra()">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
-    
+
     <div class="cabecalho">
         <p class="titulo">Cadastro de Máquina</p>
         <div class="container">
             <div class="linha1">
                 <div class="maquina">
                     <label>Máquina</label>
-                    <select onchange="mostrarCadastro()" name="" id="select_maquina">  
-                        <option value=""></option>
-                        <option value="maq">Maquina 1</option>
-                        <option value="maq">Maquina 2</option>
-                        <option value="maq">Maquina 3</option>
+                    <select onchange="verificar()" name="" id="select_maquina">
+
                     </select>
                     <p id="selecionar_maquina">Selecione a máquina que deseja cadastrar</p>
                 </div>
 
                 <div id="exibir" class="modelo">
                     <label>Modelo <b>*</b></label>
-                    <input type="text">
+                    <input id="input_modelo" type="text">
                 </div>
             </div>
 
             <div id="exibir1" class="linha2">
                 <div class="tipo">
                     <label>Tipo <b>*</b></label>
-                    <select name="" id="">
+                    <select name="" id="select_tipo">
                         <option value=""></option>
-                        <option value="">Tipo 1</option>
-                        <option value="">Tipo 2</option>
-                        <option value="">Tipo 3</option>
-                        <option value="">Tipo 4</option>
+                        <option value="Desktop">Desktop</option>
+                        <option value="Notebook">Notebook</option>
+
                     </select>
                 </div>
 
                 <div class="fabricante">
                     <label>Fabricante</label>
-                    <input type="text">
+                    <input id="input_fabricante" type="text" disabled>
                 </div>
             </div>
 
             <div id="exibir2" class="linha3">
                 <div class="sistemas">
                     <label>Sistema Operacional</label>
-                    <select name="" id="">
-                        <option value=""></option>
-                        <option value="">Windows</option>
-                        <option value="">Linux</option>
-                    </select>
+                    <input id="input_so" type="text" disabled>
                 </div>
 
                 <div class="memoriaRam">
                     <label>Memoria Ram Total</label>
-                    <input type="text">
+                    <input id="input_ram" type="text" disabled>
                 </div>
 
                 <div class="memoriaDisco">
                     <label>Memoria Disco Total</label>
-                    <input type="text">
+                    <input id="input_disco" type="text" disabled>
                 </div>
 
             </div>
 
             <div id="exibir3" class="linha4">
                 <div class="processador">
-                 <label>Processador</label>
-                 <input type="text">
+                    <label>Processador</label>
+                    <input id="input_proc" type="text" disabled>
                 </div>
 
             </div>
-        
+
             <div id="exibir4" class="botoes">
                 <button onclick="window.location.href='./explorar.html'" class="botao1">Cancelar</button>
-                <button class="botao2">Cadastrar</button>
+                <button onclick="cadastrar()" class="botao2">Cadastrar</button>
             </div>
-          
+
         </div>
     </div>
 
@@ -103,18 +95,65 @@
 <script>
     imgExplorar.src = "./img/lupaLocal.png";
 
-    function mostrarCadastro(){
+    var nome = "";
+
+    function cadastrar(){
+
+        var modelo = input_modelo.value;
+        var tipo = select_tipo.value;
+        var idMaquina = select_maquina.value;
+        if(!modelo == "" && !tipo ==  ""){
+
+
+        
+        fetch("/maquinas/cadastroFinalizado", {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nome,
+                    modeloServer: modelo,
+                    tipoServer: tipo,
+                    idMaquinaServer: idMaquina
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    alert("Cadastrado com sucesso");
+                    window.location = "./explorar.html";
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+        }else{
+            alert("Preencha todos os campos");
+        }
+
+    }
+
+
+    function verificar() {
 
         var tipo = select_maquina.value;
 
-        if(tipo == "maq"){
+
+        if (!tipo == 0) {
             exibir.style.display = "flex";
             exibir1.style.display = "flex";
             exibir2.style.display = "flex";
             exibir3.style.display = "flex";
             exibir4.style.display = "flex";
             selecionar_maquina.style.display = "none";
-        } else{
+            list(tipo)
+
+        } else {
 
             exibir.style.display = "none";
             exibir1.style.display = "none";
@@ -122,8 +161,85 @@
             exibir3.style.display = "none";
             exibir4.style.display = "none";
             selecionar_maquina.style.display = "block";
-
         }
+    }
 
+    function formatBytes(bytes) {
+        const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(1024));
+        const formatted = parseFloat((bytes / Math.pow(1024, i)).toFixed(2));
+        return formatted + sizes[i];
+    }
+
+    function list(idMaquina) {
+        fetch(`/maquinas/listarByIdMaquina/${idMaquina}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        })
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        input_fabricante.value = json[0].fabricante;
+                        input_so.value = json[0].sistemaOperacional;
+                        input_ram.value = formatBytes(json[0].memoriaRAMTotal);
+                        input_proc.value = json[0].processador;
+                        input_disco.value = formatBytes(json[0].memoriaDiscoTotal);
+                        nome = `${json[0].idMaquina} - Maquina/${json[0].nomeEditor}`;
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
+    }
+
+
+
+    function listMaqCadastra() {
+
+        fetch(`/maquinas/listMaqCadastra`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        })
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+
+                        select_maquina.innerHTML += `<option value="0"></option>`
+
+                        for (var i = 0; i < json.length; i++) {
+
+                            select_maquina.innerHTML += `<option value="${json[i].idMaquina}">${json[i].idMaquina} - Maquina/${json[i].username}</option>`
+
+                        }
+
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
     }
 </script>
