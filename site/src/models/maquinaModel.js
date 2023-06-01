@@ -15,6 +15,8 @@ function deletar(idMaquina) {
     var instrucao = `
         DELETE FROM ram WHERE fkMaquina = ${idMaquina};
         DELETE FROM cpu WHERE fkMaquina = ${idMaquina};
+        DELETE FROM disco WHERE fkMaquina = ${idMaquina};
+        DELETE FROM janela WHERE fkMaquina = ${idMaquina};
         DELETE FROM parametrizacaoMetrica WHERE fkMaquina = ${idMaquina};
         DELETE FROM reporteProblema WHERE fkMaquina = ${idMaquina};
         DELETE FROM maquina WHERE idMaquina = ${idMaquina};
