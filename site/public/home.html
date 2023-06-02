@@ -46,12 +46,29 @@
       </div>
       <div class="containerGrafico">
         <div class="fundoGrafico">
-          <p>Visão geral de todas as maquinas</p>
+          <div class="container-titulo-legenda">
+            <div class="titulo-grafico">
+              <p>Visão geral de todas as maquinas</p>
+            </div>
+            <div class="tooltip">
+              <img class="img-legenda" src="./img/pontoInterrogacao.png" alt="" width="20vh">
+              <span class="tooltiptext">
+                <span style="font-size: 1.5vh; font-weight: 600;">ESTADO DAS MÁQUINAS</span>
+                <br><span style="font-size: 1.5vh;">- DESEMPENHO</span>
+                <br>
+                <br>SAUDÁVEL - até 50%
+                <br>
+                <br>ATENÇÃO - entre 50% e 70%
+                <br>
+                <br>CRÍTICO - acima de 70%
+              </span>
+            </div>
+          </div>
           <div class="grafico">
             <canvas id="myChart"></canvas>
           </div>
         </div>
-      </div>  
+      </div>
     </div>
   </main>
   

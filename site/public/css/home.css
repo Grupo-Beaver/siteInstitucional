@@ -88,18 +88,71 @@ main{
     height: 100%;
 }
 
-.fundoGrafico p{
-    font-size:24px;
-    padding-bottom: 2vh;
-}
-
 .grafico{
     border-radius: 25px;
     padding: 0 19vw;
     background-color: #F5F5F5;
 }
 
+.container-titulo-legenda{
+    display: flex;
+}
+
+.container-legenda{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.img-legenda{
+    margin-left: 2vh;
+    cursor: pointer;
+}
+
+.titulo-grafico{
+    font-size: 24px;
+    margin-bottom: 2vh;
+}
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+    width: 200px;
+    background-color: #0F1126;
+    font-size: 1.8vh;
+    color: #fff;
+    border-radius: 6px;
+    padding: 10px;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 120%;
+  }
+
+  .tooltip .tooltiptext::after {
+    content: " ";
+    position: absolute;
+    top: 12%;
+    right: 100%; /* To the left of the tooltip */
+    margin-top: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: transparent black transparent transparent;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
+
 .grafico #myChart{
     height: 44vh !important;
-
 }
+
+
