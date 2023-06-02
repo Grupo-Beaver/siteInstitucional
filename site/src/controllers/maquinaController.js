@@ -218,6 +218,62 @@ function reporteProblema(req, res) {
     }
 }
 
+function listReporteById(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var idMaquina = req.params.idMaquina;    
+
+    // Faça as validações dos valores
+    if (idMaquina == undefined) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    }else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        maquinaModel.listReporteById(idMaquina)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o reporte de problema! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+
+function contReportProb(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var idMaquina = req.params.idMaquina;    
+
+    // Faça as validações dos valores
+    if (idMaquina == undefined) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    }else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        maquinaModel.contReportProb(idMaquina)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o reporte de problema! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
 
 module.exports = {
     listarMaquina,
@@ -228,5 +284,7 @@ module.exports = {
     reporteProblema,
     listMaqCadastra,
     cadastroFinalizado,
-    atualizarPadronizacao
+    atualizarPadronizacao,
+    contReportProb,
+    listReporteById
 }

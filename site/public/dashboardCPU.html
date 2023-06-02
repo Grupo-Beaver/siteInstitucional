@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
     <title>CPU</title>
 </head>
-<body>
+<body onload="buscarMedidaCpu()">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
 <main>  
@@ -20,8 +20,8 @@
         
         
             <div class="maquina_usuario">
-                <p class="span_maq">Máquina: <span id="maquina">INSV15</span></p>
-                <p class="span_maq">Usuário: <span id="usuario">Gustavo</span></p>
+                <p class="span_maq">Máquina: <span id="maquina"></span></p>
+                <p class="span_maq">Usuário: <span id="usuario"></span></p>
                 <div class="span_maq"></div>
                 <div class="span_maq"></div>
                 <div class="span_maq_test"></div>
@@ -45,7 +45,7 @@
             <div class="container_dash_estado">
                 <div class="estado">
                     <label for="">ESTADO</label>
-                    <span>SAUDÁVEL</span>
+                    <span id="estado"></span>
                 </div>
                 <div class="dash">
                     <label for="">DESEMPENHO</label>
@@ -56,19 +56,19 @@
                 <div class="cpu">
                     <div class="utilizacao">
                         <label for="">UTILIZAÇÃO</label>
-                        <span>40%</span>
+                        <span id="utilizacao"></span>
                     </div>
                     <div class="processos">
                         <label for="">PROCESSOS</label>
-                        <span>256</span>
+                        <span id="processos"></span>
                     </div>
                     <div class="threads">
                         <label for="">THREADS</label>
-                        <span>2578</span>
+                        <span id="threads"></span>
                     </div>
                     <div class="velocidade">
                         <label for="">VELOCIDADE</label>
-                        <span>2,68 GHz</span>
+                        <span id="velocidade"></span>
                     </div>
                 </div>
             </div>
@@ -78,18 +78,74 @@
 </body>
 
 <script>
-
-    
-
-    const ctx = document.getElementById('myChart');
     imgExplorar.src = "./img/lupaLocal.png";
-    new Chart(ctx, {
+
+    function formatBytes(bytes) {
+        const sizes = ["Bytes", "KB", "MB", "GHz", "TB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(1024));
+        const formatted = parseFloat((bytes / Math.pow(1024, i)).toFixed(2));
+        return formatted + sizes[i];
+    }
+
+    function buscarMedidaCpu(){
+        fetch(`/dashboards/buscarMedidaCpu/${sessionStorage.ID_MAQUINA}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(`Dados recebidos: ${JSON.stringify(json)}`);
+                    maquina.innerHTML = json[0].nomeMaquina;
+                    usuario.innerHTML = json[0].username;
+                    utilizacao.innerHTML = `${json[0].utilizacao}%`;
+                    processos.innerHTML = json[0].qtdProcessos;
+                    threads.innerHTML = json[0].threads;
+                    velocidade.innerHTML = formatBytes(json[0].velocidade);
+                    atencao(json[0].minAtencao, json[0].maxAtencao, json[0].utilizacao);
+
+                    plotarGraficoCpu(json);
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+    }
+
+    function atencao(minAtencao, maxAtencao, utilizacao){
+
+        if(utilizacao <= minAtencao){
+            estado.innerHTML = "SAUDÁVEL";
+            estado.style = "background-color: #3ABEFF;";
+        }else if(utilizacao <= maxAtencao){
+            estado.innerHTML = "ATENÇÃO";
+            estado.style = "background-color: #FFCF4D;";
+        }else{
+            estado.innerHTML = "CRÍTICO";
+            estado.style = "background-color: #FF3C38;";
+        }
+
+    }
+
+    function plotarGraficoCpu(){
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
         type: 'line',
       data: {
-        labels: ['10:00', '10:15', '10:30', '10:45', '11:00', '11:15'],
+        labels: [],
         datasets: [{
           label: '% Utilização',
-          data: [50, 65, 45, 50, 69, 40],
+          data: [],
           borderWidth: 3
         }]
       },
@@ -105,6 +161,9 @@
       }
       }
     });
+    }
+
+
   </script>
   
 </html>

@@ -12,14 +12,14 @@
     <title>Beaver</title>
 </head>
 
-<body>
+<body onload="listar()">
     <main-menu></main-menu>
 
     <div class="container-pai">
 
         <div class="maquina_usuario">
-            <p class="span_maq">Máquina: <span id="maquina">INSV15</span></p>
-            <p class="span_maq">Usuário: <span id="usuario">Gustavo</span></p>
+            <p class="span_maq">Máquina: <span id="maquina"></span></p>
+            <p class="span_maq">Usuário: <span id="usuario"></span></p>
         </div>
 
         <div class="titulos">
@@ -31,18 +31,9 @@
                 <h2>Problema</h2>
                 <h2>Frequência</h2>
             </div>
+            <div id="conteudo">
 
-            <div class="container-conteudo">
-                <p>XX/XX/XXXX</p>
-                <p>Travamento</p>
-                <p>Média</p>
-            </div>
-           
 
-            <div class="container-conteudo">
-                <p>XX/XX/XXXX</p>
-                <p>Superaquecimento</p>
-                <p>Alta</p>
             </div>
         </div>
     </div>
@@ -53,4 +44,48 @@
 
 <script>
     imgInsights.src = "./img/historicoLocal.png";
+
+
+    function listar() {
+        fetch(`/maquinas/listReporteById/${sessionStorage.ID_MAQUINA}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        })
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(json);
+                        console.log(JSON.stringify(json));
+                        maquina.innerHTML = json[0].nomeMaquina;
+                        usuario.innerHTML = json[0].username;
+                        for (var i = 0; i < json.length; i++) {
+                            var dataString = json[i].data;
+                            var now = new Date(dataString);
+                            var data = `${now.getDate() + 1}/${now.getMonth() + 1}/${now.getFullYear()}`;
+
+                            conteudo.innerHTML += `
+                        <div class="container-conteudo">
+                            <p>${data}</p>
+                            <p>${json[i].problema}</p>
+                            <p>${json[i].frequencia}</p>
+                        </div>
+                        `
+                        }
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
+
+
+    }
 </script>

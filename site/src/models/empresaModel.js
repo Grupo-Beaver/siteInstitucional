@@ -31,6 +31,27 @@ function listPadronizacaoMaquina(idEmpresa){
     return database.executar(instrucao);
 }
 
+function atualizarParametrizacaoMetrica(minAtencao, maxAtencao ,idParametrizacaoMetrica){
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function atualizarParametrizacaoMetrica():", minAtencao, maxAtencao, idParametrizacaoMetrica);
+    var instrucao = `
+    UPDATE parametrizacaoMetrica SET minAtencao = ${minAtencao}, maxAtencao = ${maxAtencao} WHERE idParametrizacaoMetrica = ${idParametrizacaoMetrica};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function listMetricas(idMaquina){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listMetricas():", idMaquina);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    SELECT pm.*, m.nome nomeMaquina, ev.username FROM maquina m INNER JOIN parametrizacaoMetrica pm ON m.idMaquina = pm.fkMaquina INNER JOIN editorVideo ev ON ev.idEditorVideo = m.fkEditorVideo WHERE m.idMaquina = ${idMaquina};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 function verificarCnpj(cnpj) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function verificarCnpj():", cnpj);
     var instrucao = `
@@ -46,5 +67,7 @@ module.exports = {
     cadastrar,
     verificarCnpj,
     getEmpresa,
-    listPadronizacaoMaquina
+    listPadronizacaoMaquina,
+    listMetricas,
+    atualizarParametrizacaoMetrica
 };

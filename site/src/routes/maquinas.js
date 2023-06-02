@@ -27,6 +27,11 @@ router.delete("/deletarMaquina/:idMaquina", function (req, res) {
     maquinaController.deletar(req, res);
 });
 
+router.get("/listReporteById/:idMaquina", function (req, res) {
+    maquinaController.listReporteById(req, res);
+});
+
+
 router.get("/nameMaquinaById/:idUsuario", function (req, res) {
     maquinaController.nameMaquinaById(req, res);
 });
@@ -34,6 +39,11 @@ router.get("/nameMaquinaById/:idUsuario", function (req, res) {
 router.get("/listReporte/:idUsuario", function (req, res) {
     maquinaController.listReporte(req, res);
 });
+
+router.get("/contReportProb/:idMaquina", function (req, res) {
+    maquinaController.contReportProb(req, res);
+});
+
 
 router.post("/reporteProblema", function (req, res) {
     maquinaController.reporteProblema(req, res);

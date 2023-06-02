@@ -62,6 +62,26 @@ function listPadronizacaoMaquina(req, res){
 
 }
 
+function listMetricas(req, res){
+
+    var idMaquina = req.params.idMaquina;
+    empresaModel.listMetricas(idMaquina)
+        .then(function (resultado) {
+            if (resultado.length > 0) {
+                res.status(200).json(resultado);
+            } else {
+                res.status(204).send("Nenhum resultado encontrado!")
+            }
+        }).catch(
+            function (erro) {
+                console.log(erro);
+                console.log("Houve um erro ao realizar a consulta! Erro: ", erro.sqlMessage);
+                res.status(500).json(erro.sqlMessage);
+            }
+        );
+
+}
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
@@ -93,9 +113,37 @@ function cadastrar(req, res) {
     }
 }
 
+function atualizarParametrizacaoMetrica(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var idParametrizacaoMetrica = req.params.idParametrizacaoMetrica;
+    var minAtencao = req.body.minAtencaoServer;
+    var maxAtencao = req.body.maxAtencaoServer;
+    
+
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        empresaModel.atualizarParametrizacaoMetrica(minAtencao, maxAtencao, idParametrizacaoMetrica)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o reporte de problema! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+}
+
 module.exports = {
     cadastrar,
     verificarCnpj,
     getEmpresa,
-    listPadronizacaoMaquina
+    listPadronizacaoMaquina,
+    listMetricas,
+    atualizarParametrizacaoMetrica
 }

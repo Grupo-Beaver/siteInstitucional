@@ -20,4 +20,12 @@ router.get("/listPadronizacaoMaquina/:idEmpresa", function (req, res) {
     empresaController.listPadronizacaoMaquina(req, res);
 });
 
+router.get("/listMetricas/:idMaquina", function (req, res) {
+    empresaController.listMetricas(req, res);
+});
+
+router.put("/atualizarParametrizacaoMetrica/:idParametrizacaoMetrica", function (req, res) {
+    empresaController.atualizarParametrizacaoMetrica(req, res);
+});
+
 module.exports = router;

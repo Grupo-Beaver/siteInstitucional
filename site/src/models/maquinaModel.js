@@ -31,7 +31,8 @@ function deletar(idMaquina) {
 function listarByIdMaquina(idMaquina) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarByIdMaquina():", idMaquina);
     var instrucao = `
-    SELECT m.*, ev.username as nomeEditor, e.nome as nomeEmpresa FROM usuario u INNER JOIN suporteTI st ON u.idUsuario = st.fkUsuario INNER JOIN editorVideoSuporteTI evst ON st.idSuporteTI = evst.fkSuporteTI INNER JOIN editorVideo ev ON evst.fkEditorVideo = ev.idEditorVideo INNER JOIN maquina m ON m.fkEditorVideo = ev.idEditorVideo INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa  WHERE m.idMaquina  = ${idMaquina};
+    SELECT m.*, ev.*, e.nome nomeEmpresa, u.nome nomeUser, u.sobrenome, u.email FROM usuario u INNER JOIN editorVideo ev ON u.idUsuario  = ev.fkUsuario INNER JOIN maquina m ON m.fkEditorVideo = ev.idEditorVideo INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa  WHERE m.idMaquina  = ${idMaquina};
+    
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -53,7 +54,23 @@ function listarByIdDetalhe(idMaquina){
 
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarByIdDetalhe():", idMaquina);
     var instrucao = `
-    SELECT u.nome, u.sobrenome, ev.cpf, ev.telefone, u.email, ev.username FROM maquina m INNER JOIN editorVideo ev ON m.fkEditorVideo = ev.idEditorVideo INNER JOIN usuario u ON u.idUsuario = ev.idEditorVideo INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa WHERE m.idMaquina = 1;
+    SELECT u.nome, u.sobrenome, ev.cpf, ev.telefone, u.email, ev.username FROM maquina m INNER JOIN editorVideo ev ON m.fkEditorVideo = ev.idEditorVideo INNER JOIN usuario u ON u.idUsuario = ev.idEditorVideo INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa WHERE m.idMaquina = ${idMaquina};
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function contReportProb(idMaquina){
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function contReportProb():", idMaquina);
+    var instrucao = `
+    SELECT
+    COUNT(CASE WHEN problema = 'Travamento' THEN 1 END) AS Travamento,
+    COUNT(CASE WHEN problema = 'Lentidão' THEN 1 END) AS Lentidao,
+    COUNT(CASE WHEN problema = 'Desligamento' THEN 1 END) AS Desligamento,
+    COUNT(CASE WHEN problema = 'Superaquecimento' THEN 1 END) AS Superaquecimento,
+    COUNT (*) AS Total
+    FROM reporteProblema WHERE fkMaquina = ${idMaquina};
+  
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -111,6 +128,16 @@ function atualizarPadronizacao(idPadronizacaoMaquina, fkMaquina){
     return database.executar(instrucao);
 }
 
+function listReporteById(idMaquina){
+
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listReporteById():", idMaquina);
+    var instrucao = `
+    SELECT rp.*, m.nome nomeMaquina, ev.username FROM maquina m INNER JOIN reporteProblema rp ON m.idMaquina = rp.fkMaquina INNER JOIN editorVideo ev  ON ev.idEditorVideo = m.fkEditorVideo WHERE m.idMaquina = ${idMaquina}; 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     listarMaquina,
     deletar,
@@ -121,5 +148,7 @@ module.exports = {
     listarByIdDetalhe,
     listMaqCadastra,
     cadastroFinalizado,
-    atualizarPadronizacao
+    atualizarPadronizacao,
+    contReportProb,
+    listReporteById
 };
