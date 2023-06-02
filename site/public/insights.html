@@ -13,7 +13,7 @@
     <title>Beaver</title>
 </head>
 
-<body>
+<body onload="listarMaquinaByIdSuporte()">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
 
@@ -25,14 +25,12 @@
                     <label>Máquina</label>
                     <select onchange="mostrarCadastro()" name="" id="select_maquina">
                         <option value=""></option>
-                        <option value="maq">Maquina 1</option>
-                        <option value="maq">Maquina 2</option>
-                        <option value="maq">Maquina 3</option>
+                        
                     </select>
                     <p id="selecionar_maquina">Selecione a máquina desejada para visualizar os problemas reportados</p>
                 </div>
                 <div id="exibir">
-                    <button onclick="window.location.href='./historicoReportes.html'">Visualizar Histórico</button>
+                    <button onclick="mudarId()">Visualizar Histórico</button>
                 </div>
             </div>
             <div class="linha2" id="exibir1">
@@ -50,14 +48,52 @@
 <script>
     imgInsights.src = "./img/historicoLocal.png";
 
+    var Travamento = 0;
+    var Lentidao = 0;
+    var Desligamento = 0;
+    var Superaquecimento = 0;
+    var Outro = 0;
+
+    function listarMaquinaByIdSuporte() {
+    fetch(`/maquinas/listarMaquina/${sessionStorage.ID_USUARIO}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (var i = 0; i < json.length; i++) {
+                        select_maquina.innerHTML += `<option value="${json[i].idMaquina}">${json[i].nome}</option>`
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+
+
+}
+
     function mostrarCadastro() {
 
         var tipo = select_maquina.value;
 
-        if (tipo == "maq") {
+        if (!tipo == "") {
             exibir.style.display = "flex";
             exibir1.style.display = "flex";
             selecionar_maquina.style.display = "none";
+            buscarDados(tipo);
         } else {
 
             exibir.style.display = "none";
@@ -68,7 +104,43 @@
 
     }
 
-    const ctx = document.getElementById('myChart');
+    function buscarDados(idMaquina){
+
+        fetch(`/maquinas/contReportProb/${idMaquina}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    Travamento = json[0].Travamento;
+                    Lentidao = json[0].Lentidao;
+                    Desligamento = json[0].Desligamento;
+                    Superaquecimento = json[0].Superaquecimento;
+                    Outro = json[0].Total - (Travamento + Lentidao + Desligamento + Superaquecimento);
+                    plotarGraficoReport()
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+
+    }
+    
+    function plotarGraficoReport(){
+        const ctx = document.getElementById('myChart');
 
     new Chart(ctx, {
         type: 'bar',
@@ -76,7 +148,7 @@
             labels: ['Travamento', 'Lentidão', 'Desligamento', 'Superaquecimento', 'Outros'],
             datasets: [{
                 backgroundColor: 'rgb(112, 94, 220)',
-                data: [12, 19, 3, 5, 2, 3],
+                data: [Travamento, Lentidao, Desligamento, Superaquecimento, Outro],
                 borderWidth: 1
             }]
         },
@@ -98,4 +170,11 @@
             indexAxis: 'y',
         }
     });
+    }
+
+    function mudarId(){
+        sessionStorage.ID_MAQUINA = select_maquina.value;
+        window.location.href="./historicoReportes.html";
+    }
+
 </script>

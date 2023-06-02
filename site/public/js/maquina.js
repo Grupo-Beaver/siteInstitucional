@@ -69,6 +69,9 @@ function listarByIdMaquina() {
 
 
 function deletar() {
+    if(sessionStorage.ID_MAQUINA_PADRAO == idMaquina){
+        alert("Essa maquina de padronização, então não e possivel deletar")
+    }else{
     fetch(`/maquinas/deletarMaquina/${idMaquina}`, {
         method: "DELETE",
         headers: {
@@ -86,6 +89,7 @@ function deletar() {
     }).catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
     });
+}
 }
 
 function getByIdSession(id){

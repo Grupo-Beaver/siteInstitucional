@@ -111,28 +111,6 @@
 
     imgExplorar.src = "./img/lupaLocal.png";
 
-    titulo.innerHTML = `
-            <div class="container_titulo"></div>
-            <h2>Maquina</h2>
-            <h2>Tipo</h2>
-            <h2>Estado</h2>
-            <h2>Usuários</h2>
-            <div class="none"></div>`
-
-            for (var i = 0; i < 20; i++) {
-                list.innerHTML += `<div class="container_conteudo">
-                    <div class="aviso"><img src="./img/aviso 1.png"></div>
-                        <p>arrobado</p>
-                        <p>arrobado</p>
-                        <p>Crítico</p>
-                        <p>arrobado</p>
-                        <div class="button_list">
-                            <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
-                            <button onclick="getByIdMaquina(1), window.location.href='./detalhesMaquina.html'" class="button_detalhe" onclick="getByIdMaquina(1)">+ Detalhes</button>
-                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaquina()">Excluir</button>
-                        </div>
-                    </div>`
-                }
     function verificarLista() {
 
         var tipo = select_tipo.value;
@@ -161,7 +139,7 @@
                         <p>Crítico</p>
                         <p>${listMaq[i].nomeEditor}</p>
                         <div class="button_list">
-                            <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
+                            <button onclick="getByIdSession(${listMaq[i].idMaquina}), window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
                             <button onclick="getByIdSession(${listMaq[i].idMaquina}), window.location.href='./detalhesMaquina.html'" class="button_detalhe">+ Detalhes</button>
                             <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaq(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
@@ -192,8 +170,8 @@
                         <p>${listMaq[i].modelo}</p>
                         <p>ATENÇÃO</p>
                         <div class="button_list">
-                            <button onclick="window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
-                            <button onclick="window.location.href='./detalhesUsuario.html'" class="button_detalhe">+ Detalhes</button>
+                            <button onclick="getByIdSession(${listMaq[i].idMaquina}) ,window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
+                            <button onclick="getByIdSession(${listMaq[i].idMaquina}) ,window.location.href='./detalhesUsuario.html'" class="button_detalhe">+ Detalhes</button>
                             <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getById(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
                     </div>`

@@ -12,54 +12,195 @@
     <title>Beaver</title>
 </head>
 
-<body>
+<body onload="list()">
     <main-menu></main-menu>
     <main>
         <div class="maquina_usuario">
-            <p class="span_maq">Máquina: <span id="maquina">09578-G</span></p>
-            <p class="span_maq">Usuário: <span id="usuario">Fulano</span></p>
+            <p class="span_maq">Máquina: <span id="maquina"></span></p>
+            <p class="span_maq">Usuário: <span id="usuario"></span></p>
         </div>
         <div class="componente">
             <label>Componente</label>
-            <select name="" id="">
+            <select name="" id="selectComponente" onchange="verificar()">
                 <option value=""></option>
-                <option value="">CPU</option>
-                <option value="">RAM</option>
-                <option value="">Disco</option>
-                <option value="">Rede</option>
+                
             </select>
+        </div>
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
         </div>
         <div class="container-parametro">
             <div class="metrica-critico">
-                <label class="label-critico">CRÍTICO</label>
-                <input class="input-metrica-critico" type="text">
+                <label class="label-saudavel">SAUDÁVEL (%)</label>
+                <input id="saudavel" class="input-metrica-saudavel" type="text">
             </div>
             <p><img src="./img/sinalMaior.png" alt=""></p>
             <div class="parametro">
                 <label class="label-parametro">Parâmetro</label>
-                <select name="" id="">
+                <p class="txt-parametro" id="txtParametro"></p>
+                <!-- <select name="" id="">
                     <option value=""></option>
                     <option value="">Utilização</option>
                     <option value="">Velocidade</option>
                     <option value="">Processos</option>
                     <option value="">Threads</option>
-                </select>
+                </select> -->
             </div>
-            <div><img src="./img/sinalMenor.png" alt=""></div>
+            <div><img src="./img/sinalMaior.png" alt=""></div>
             <div class="metrica-critico">
-                <label class="label-saudavel">SAUDÁVEL</label>
-                <input class="input-metrica-saudavel" type="text">
+                <label class="label-critico">CRÍTICO (%)</label>
+                <input id="critico" class="input-metrica-critico" type="text">
             </div>
         </div>
         <div class="botoes">
             <button onclick="window.location.href='./dashboardCPU.html'" class="botao1">Cancelar</button>
-            <button class="botao2">Salvar</button>
+            <button class="botao2" onclick="salvar()">Salvar</button>
         </div>
     </main>
 </body>
+
 </html>
 
 <script>
-        imgExplorar.src = "./img/lupaLocal.png";
-</script>
+    imgExplorar.src = "./img/lupaLocal.png";
 
+    var Cpu = 0;
+    var cpuSaudavel = 0;
+    var cpuCritico = 0;
+    var Ram = 0;
+    var ramSaudavel = 0;
+    var ramCritico = 0;
+    var Janela = 0;
+    var janSaudavel = 0;
+    var janCritico = 0;
+    var Disco = 0;
+    var discSaudavel = 0;
+    var discCritico = 0;
+
+    function verificar() {
+
+        var verif = selectComponente.value;
+        if(verif == Cpu){
+            txtParametro.innerHTML = "Utilização"
+            saudavel.value = cpuSaudavel;
+            critico.value = cpuCritico;
+        }else if(verif == Ram){
+            txtParametro.innerHTML = "Utilização"
+            saudavel.value = ramSaudavel;
+            critico.value = ramCritico;
+        }else if(verif == Janela){
+            txtParametro.innerHTML = "Janelas Invisíveis"
+            saudavel.value = janSaudavel;
+            critico.value = janCritico;
+        }else if(verif == Disco){
+            txtParametro.innerHTML = "Taxa de Transferência"
+            saudavel.value = discSaudavel;
+            critico.value = discCritico;
+        }else{
+            txtParametro.innerHTML = ""
+            saudavel.value = "";
+            critico.value = "";
+        }
+
+    }
+
+    function salvar(){
+        var saudavelVar = saudavel.value;
+        var criticoVar = critico.value;
+        var valorComp = selectComponente.value;
+
+        if(valorComp == ""){
+            cardErro.style.display = "flex"
+            mensagem_erro.innerHTML = "Erro! Escolha um componente.";
+
+        }else if (saudavelVar == "" || criticoVar == "") {
+            cardErro.style.display = "flex"
+            mensagem_erro.innerHTML = "ERRO! Preencha todos os campos adequadamente.";
+        }else {
+            //VALIDAÇÃO DE EMAIL
+            var metricaInvalida = false;
+            const metricaValida = '^[0-9]+$';
+
+            fetch(`/empresas/atualizarParametrizacaoMetrica/${valorComp}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    minAtencaoServer: saudavelVar,
+                    maxAtencaoServer: criticoVar
+
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    alert("Atualizado com sucesso");
+                    window.location = "./dashboardCPU.html";
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
+
+        }
+    }
+
+    function list(){
+        fetch(`/empresas/listMetricas/${sessionStorage.ID_MAQUINA}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    maquina.innerHTML = json[0].nomeMaquina;
+                    usuario.innerHTML = json[0].username;
+
+                    for (var i = 0; i < json.length; i++){
+                        selectComponente.innerHTML += `
+                        <option value="${json[i].idParametrizacaoMetrica}">${json[i].nome}</option>
+                        `;
+
+                        
+                        if(json[i].nome == "Cpu"){
+                            Cpu = json[i].idParametrizacaoMetrica;
+                            cpuSaudavel = json[i].minAtencao;
+                            cpuCritico = json[i].maxAtencao;
+                        }else if(json[i].nome == "Ram"){
+                            Ram = json[i].idParametrizacaoMetrica;
+                            ramSaudavel = json[i].minAtencao;
+                            ramCritico = json[i].maxAtencao;
+                        }else if(json[i].nome == "Janela"){
+                            Janela = json[i].idParametrizacaoMetrica;
+                            janSaudavel = json[i].minAtencao;
+                            janCritico = json[i].maxAtencao;
+                        }else{
+                            Disco = json[i].idParametrizacaoMetrica;
+                            discSaudavel = json[i].minAtencao;
+                            discCritico = json[i].maxAtencao;
+                        }
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+    }
+</script>

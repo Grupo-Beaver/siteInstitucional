@@ -23,7 +23,7 @@ a{
 }
 
 .maquina_usuario .span_maq{
-    width: 14vw;
+    margin-left: 4vw;
 }
 
 .container-dash{
@@ -119,7 +119,6 @@ button:hover{
 }
 
 .estado span{
-    background-color: #3ABEFF;
     letter-spacing: 2px;
     width: 51vw;
     padding: 1vh 0;

@@ -77,7 +77,7 @@ function atualizarPadronizacao(){
         alert("Essa maquina já e o padrão, selecione outra")
     } else{
 
-        fetch(`/maquinas/atualizarPadronizacao/${maquinaPadrao}`, {
+        fetch(`/maquinas/atualizarPadronizacao/${sessionStorage.ID_PADRONIZACAO}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json"
@@ -93,6 +93,7 @@ function atualizarPadronizacao(){
 
                 if (resposta.ok) {
                     alert("Atualizado com sucesso");
+                    sessionStorage.ID_MAQUINA_PADRAO = id;
                     window.location = "./explorar.html";
                 } else {
                     throw ("Houve um erro ao tentar realizar o cadastro!");
