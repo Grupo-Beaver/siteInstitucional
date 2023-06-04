@@ -52,7 +52,7 @@
                     </select> -->
                 </div>
                 <div class="container_list">
-                    
+
                     <div id="titulo" class="container_titulo_maquina">
                         <div class="container_titulo"></div>
                         <h2>Maquina</h2>
@@ -133,7 +133,11 @@
             for (var i = 0; i < listMaq.length; i++) {
 
                 list.innerHTML += `<div class="container_conteudo">
-                    <div class="aviso"><img src="./img/aviso 1.png"></div>
+                    <div class="aviso"><img src="./img/aviso 1.png">
+                        <span class="tooltiptext">
+                        Máquina fora do padrão!
+                        </span>
+                    </div>
                         <p>${listMaq[i].modelo}</p>
                         <p>${listMaq[i].tipo}</p>
                         <p>Crítico</p>
