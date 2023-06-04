@@ -134,6 +134,42 @@
     padding: 0 0.5vw;
     margin-bottom: 3vh;
 }
+  
+  .container_conteudo .tooltiptext {
+    visibility: hidden;
+    margin-bottom: 1vh;
+    width: 150px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    background-color: #0F1126;
+    font-size: 1.5vh;
+    color: #fff;
+    border-radius: 6px;
+    padding: 5px 2px;
+    text-align: center;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+
+  .container_conteudo .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 40%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  }
+  
+  .container_conteudo:hover .tooltiptext {
+    visibility: visible;
+  }
 
 .container_conteudo:nth-last-child(1){
     margin: 0;
@@ -183,7 +219,7 @@
     display: flex;
     flex-direction: column;
     height: 58vh;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 .container_list_conteudo .aviso {
@@ -193,7 +229,7 @@
 }
 
 .container_list_conteudo .aviso img {
-    display: none;
+    display: block;
 }
 
 .container_list_conteudo::-webkit-scrollbar-track {
