@@ -31,9 +31,7 @@
     <main-iconitsm></main-iconitsm>
 
     <div>
-
         <div class="header_explorar"></div>
-
 
         <div class="container_main">
 
@@ -98,6 +96,7 @@
                     <button onclick="deletar()">Sim</button>
                     <button id="margin_button" data-dismiss="modal">Não</button>
                 </div>
+
             </div>
         </div>
     </div>
@@ -133,7 +132,12 @@
             for (var i = 0; i < listMaq.length; i++) {
 
                 list.innerHTML += `<div class="container_conteudo">
-                    <div class="aviso"><img src="./img/aviso 1.png"></div>
+                    <div class="tooltip">
+                        <img src="./img/aviso.png">
+                        <span class="tooltiptext">
+                            Máquina fora do padrão
+                        <span>
+                    </div>
                         <p>${listMaq[i].modelo}</p>
                         <p>${listMaq[i].tipo}</p>
                         <p>Crítico</p>
@@ -164,7 +168,12 @@
             for (var i = 0; i < listMaq.length; i++) {
 
                 list.innerHTML += `<div class="container_conteudo">
-                    <div class="aviso"><img src="./img/aviso 1.png"></div>
+                    <div class="tooltip">
+                        <img src="./img/aviso.png">
+                        <span class="tooltiptext">
+                            Máquina fora do padrão
+                        <span>
+                    </div>
                         <p>${listMaq[i].nomeEditor}</p>
                         <p>${listMaq[i].nomeEmpresa}</p>
                         <p>${listMaq[i].modelo}</p>
