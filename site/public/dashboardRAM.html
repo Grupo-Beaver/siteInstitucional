@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,14 +12,15 @@
     <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
     <title>RAM</title>
 </head>
-<body>
+
+<body onload="buscarMedidaRam()">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
-<main>  
+    <main>
 
-    <div class="cabecalho">
-        
-        
+        <div class="cabecalho">
+
+
             <div class="maquina_usuario">
                 <p class="span_maq">Máquina: <span id="maquina">INSV15</span></p>
                 <p class="span_maq">Usuário: <span id="usuario">Gustavo</span></p>
@@ -31,7 +33,7 @@
                 <a href="./dashboardRAM.html"><button id="RAM">RAM</button></a>
                 <a href="./dashboardDisco.html"><button id="Disco">Disco</button></a>
                 <a href="./dashboardJanela.html"><button id="Rede">Janela</button></a>
-                <div class="container_metricas"  onclick="window.location.href='./atualizarMetricas.html'">
+                <div class="container_metricas" onclick="window.location.href='./atualizarMetricas.html'">
                     <img src="./img/metricas.png" alt="">
                     <div class="container_metricas_label">
                         <label for="">Atualizar</label>
@@ -39,58 +41,207 @@
                     </div>
                 </div>
             </div>
-        
-        
-        <div class="container-dash">
-            <div class="container_dash_estado">
-                <div class="estado">
-                    <label for="">ESTADO</label>
-                    <span>CRÍTICO</span>
+
+
+            <div class="container-dash">
+                <div class="container_dash_estado">
+                    <div class="estado">
+                        <label for="">ESTADO</label>
+                        <span id="estado"></span>
+                    </div>
+                    <div class="dash">
+                        <label for="">UTILIZAÇÃO</label>
+                        <canvas id="myChart"></canvas>
+                    </div>
                 </div>
-                <div class="dash">
-                    <label for="">UTILIZAÇÃO</label>
-                    <canvas id="myChart"></canvas>
+                <div class="container_ram">
+                    <div class="ram">
+                        <div class="total">
+                            <label for="">TOTAL</label>
+                            <span id="totalRam"></span>
+                        </div>
+                        <div class="uso">
+                            <label for="">EM USO</label>
+                            <span id="totalUtilizacao"></span>
+                        </div>
+                        <div class="disponivel">
+                            <label for="">DISPONÍVEL</label>
+                            <span id="totalDisponivel"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="container_ram">
-                <div class="ram">
-                    <div class="total">
-                        <label for="">TOTAL</label>
-                        <span>64GB</span>
-                    </div>
-                    <div class="uso">
-                        <label for="">EM USO</label>
-                        <span>51,2GB</span>
-                    </div>
-                    <div class="disponivel">
-                        <label for="">DISPONÍVEL</label>
-                        <span>12,8GB</span>
-                    </div>
-                </div>
-            </div>
+
         </div>
-        
-    </div>
-</main>
-    
+    </main>
+
 </body>
 
 <script>
-    const ctx = document.getElementById('myChart');
     imgExplorar.src = "./img/lupaLocal.png";
-    new Chart(ctx, {
-        type: 'pie',
-      data: {
-        labels: ['20% Livre', '80% Em uso'],
-        datasets: [{
-          label: '% Utilização',
-          data: [20, 80],
-          borderWidth: 3
-        }]
-      },options: {
-        color: 'black'
-      }
-    });
-  </script>
-  
+    // const ctx = document.getElementById('myChart');
+    // new Chart(ctx, {
+    //     type: 'pie',
+    //   data: {
+    //     labels: ['20% Livre', '80% Em uso'],
+    //     datasets: [{
+    //       label: '% Utilização',
+    //       data: [20, 80],
+    //       borderWidth: 3
+    //     }]
+    //   },options: {
+    //     color: 'black'
+    //   }
+    // });
+
+    var ultData;
+
+    function formatBytes(bytes) {
+        const sizes = ["Bytes", "KB", "MB", "GB", "TB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(1024));
+        const formatted = parseFloat((bytes / Math.pow(1024, i)).toFixed(2));
+        return formatted + sizes[i];
+    }
+
+    function atencao(minAtencao, maxAtencao, utilizacao) {
+
+        if (utilizacao <= minAtencao) {
+            estado.innerHTML = "SAUDÁVEL";
+            estado.style = "background-color: #3ABEFF;";
+        } else if (utilizacao <= maxAtencao) {
+            estado.innerHTML = "ATENÇÃO";
+            estado.style = "background-color: #FFCF4D;";
+        } else {
+            estado.innerHTML = "CRÍTICO";
+            estado.style = "background-color: #FF3C38;";
+        }
+
+    }
+
+    function buscarMedidaRam() {
+        fetch(`/dashboards/buscarMedidaRam/${sessionStorage.ID_MAQUINA}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        })
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(`Dados recebidos: ${JSON.stringify(json)}`);
+                        maquina.innerHTML = json[0].nomeMaquina;
+                        usuario.innerHTML = json[0].username;
+                        ultData = json[0].data;
+                        totalRam.innerHTML = formatBytes(json[0].total);
+                        totalUtilizacao.innerHTML = formatBytes(json[0].utilizacao);
+                        totalDisponivel.innerHTML = formatBytes(json[0].disponivel);
+                        var utilizacao = (json[0].utilizacao * 100) / json[0].total;
+
+                        atencao(json[0].minAtencao, json[0].maxAtencao, utilizacao);
+
+                        plotarGraficoCpu(json);
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
+    }
+
+    function plotarGraficoCpu(dadosInput) {
+
+        var dadosUlt = (dadosInput[0].utilizacao * 100) / dadosInput[0].total;
+        var dadosDisp = 100 - dadosUlt;
+        let labels = [`${dadosDisp.toFixed(2)}% Livre            `, `${dadosUlt.toFixed(2)}% Em uso`];
+        let dados = {
+            labels: labels,
+            datasets: [
+                {
+                    label: '% Utilização',
+                    data: [dadosDisp.toFixed(3), dadosUlt.toFixed(3)],
+                    fill: false,
+                    backgroundColor: [
+                        '#3ABEFF',
+                        '#FF3C38'
+                    ]
+                },
+            ]
+        };
+
+        const config = {
+            type: 'pie',
+            data: dados,
+        };
+
+        let myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        setTimeout(() => atualizarGrafico(dados, labels, myChart), 10000);
+
+    }
+
+    function atualizarGrafico(dados, labels, myChart) {
+
+        fetch(`/dashboards/buscarMedidaRam/${sessionStorage.ID_MAQUINA}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        })
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+
+                        if (json[0].data == ultData) {
+                            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        } else {
+                            // tirando e colocando valores no gráfico
+                            var dadosUlt = (json[0].utilizacao * 100) / json[0].total;
+                            var dadosDisp = 100 - dadosUlt;
+                            labels.length = 0;
+                            labels.push(`${dadosDisp.toFixed(2)}% Livre            `);
+                            labels.push(`${dadosUlt.toFixed(2)}% Em uso`);
+
+                            dados.datasets[0].data.length = 0;
+                            dados.datasets[0].data.push(dadosDisp.toFixed(3)); // incluir uma nova medida
+                            dados.datasets[0].data.push(dadosUlt.toFixed(3));
+                            myChart.update();
+
+                            totalRam.innerHTML = formatBytes(json[0].total);
+                            totalUtilizacao.innerHTML = formatBytes(json[0].utilizacao);
+                            totalDisponivel.innerHTML = formatBytes(json[0].disponivel);
+                            atencao(json[0].minAtencao, json[0].maxAtencao, dadosUlt);
+                            ultData = json[0].data;
+
+
+                        }
+
+                        proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, labels, myChart), 10000);
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
+
+    }
+
+</script>
+
 </html>

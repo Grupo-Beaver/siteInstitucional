@@ -12,7 +12,7 @@
     <title>Beaver</title>
 </head>
 
-<body>
+<body onload="listar()">
     <main-menu-editor></main-menu-editor>
     <section>
         <p class="titulo-principal">Bem-vindo(a), <span id="nome"></span>!</p>
@@ -46,4 +46,36 @@
 <script>
     imgHome.src = "./img/homeLocal.png";
     nome.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function listar() {
+
+fetch(`/usuarios/listarDadosMaquinaById/${sessionStorage.ID_USUARIO}`, {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json"
+    },
+
+})
+    .then(resposta => {
+
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+                maquinaUser.innerHTML = json[0].nome;
+                tipoUser.innerHTML = json[0].tipo;
+                soUser.innerHTML = json[0].sistemaOperacional;
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+    });
+
+
+}
 </script>

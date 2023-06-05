@@ -87,6 +87,16 @@ function listIdByEditorId(idUsuario){
     return database.executar(instrucao);
 }
 
+function listarDadosMaquinaById(idUsuario){
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarDadosMaquinaById():", idUsuario);
+    var instrucao = `
+    SELECT ev.*, m.* FROM usuario u INNER JOIN editorVideo ev ON u.idUsuario = ev.fkUsuario INNER JOIN maquina m ON m.fkEditorVideo  = ev.idEditorVideo WHERE idUsuario = ${idUsuario}; 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+
+}
+
 function associarEditorAndSuport(fkSuporteTI, fkEditorVideo){
 
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function associarEditorAndSuport():", fkEditorVideo, fkSuporteTI);
@@ -107,5 +117,6 @@ module.exports = {
     cadastrarEditor,
     cadastrarEditorEmpresa,
     listIdByEditorId,
-    associarEditorAndSuport
+    associarEditorAndSuport,
+    listarDadosMaquinaById
 };
