@@ -45,5 +45,9 @@ router.get("/listIdByEmail/:email", function (req, res) {
     usuarioController.listIdByEmail(req, res);
 });
 
+router.get("/listarDadosMaquinaById/:idUsuario", function (req, res) {
+    usuarioController.listarDadosMaquinaById(req, res);
+});
+
 
 module.exports = router;

@@ -46,13 +46,8 @@
 </html>
 
 <script>
+    var chart;
     imgInsights.src = "./img/historicoLocal.png";
-
-    var Travamento = 0;
-    var Lentidao = 0;
-    var Desligamento = 0;
-    var Superaquecimento = 0;
-    var Outro = 0;
 
     function listarMaquinaByIdSuporte() {
     fetch(`/maquinas/listarMaquina/${sessionStorage.ID_USUARIO}`, {
@@ -105,7 +100,7 @@
     }
 
     function buscarDados(idMaquina){
-
+alert(idMaquina);
         fetch(`/maquinas/contReportProb/${idMaquina}`, {
         method: "GET",
         headers: {
@@ -121,12 +116,13 @@
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
-                    Travamento = json[0].Travamento;
-                    Lentidao = json[0].Lentidao;
-                    Desligamento = json[0].Desligamento;
-                    Superaquecimento = json[0].Superaquecimento;
-                    Outro = json[0].Total - (Travamento + Lentidao + Desligamento + Superaquecimento);
-                    plotarGraficoReport()
+                    var Travamento = json[0].Travamento;
+                    var Lentidao = json[0].Lentidao;
+                    var Desligamento = json[0].Desligamento;
+                    var Superaquecimento = json[0].Superaquecimento;
+                    var Outro = json[0].Total - (Travamento + Lentidao + Desligamento + Superaquecimento);
+                    alert(json[0].Total);
+                    plotarGraficoReport(Travamento, Lentidao, Desligamento, Superaquecimento, Outro)
                     
                 });
             } else {
@@ -139,10 +135,15 @@
 
     }
     
-    function plotarGraficoReport(){
+    function plotarGraficoReport(Travamento, Lentidao, Desligamento, Superaquecimento, Outro){
+
+        if (chart != undefined) {
+            chart.destroy();
+        }
+
         const ctx = document.getElementById('myChart');
 
-    new Chart(ctx, {
+    chart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: ['Travamento', 'Lentidão', 'Desligamento', 'Superaquecimento', 'Outros'],

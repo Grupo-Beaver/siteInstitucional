@@ -13,7 +13,7 @@
     <title>Rede</title>
 </head>
 
-<body>
+<body onload="buscarMedidaJanela()">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
     <main>
@@ -22,8 +22,8 @@
 
 
             <div class="maquina_usuario">
-                <p class="span_maq">Máquina: <span id="maquina">INSV15</span></p>
-                <p class="span_maq">Usuário: <span id="usuario">Gustavo</span></p>
+                <p class="span_maq">Máquina: <span id="maquina"></span></p>
+                <p class="span_maq">Usuário: <span id="usuario"></span></p>
                 <div class="span_maq"></div>
                 <div class="span_maq"></div>
                 <div class="span_maq_test"></div>
@@ -47,7 +47,7 @@
                 <div class="container_dash_estado">
                     <div class="estado">
                         <label for="">ESTADO</label>
-                        <span>ATENÇÃO</span>
+                        <span id="estado"></span>
                     </div>
                     <div class="dash">
                         <label for="">UTILIZAÇÃO</label>
@@ -58,11 +58,11 @@
                     <div class="rede">
                         <div class="envio">
                             <label for="">TOTAL DE<br>JANELAS</label>
-                            <span>10</span>
+                            <span id="tdJanela"></span>
                         </div>
                         <div class="recebimento">
                             <label for="">JANELAS<br>INVISÍVEIS (%)</label>
-                            <span>80%</span>
+                            <span id="janelasInvi"></span>
                         </div>
                     </div>
                 </div>
@@ -74,36 +74,164 @@
 </body>
 
 <script>
-    const ctx = document.getElementById('myChart');
+    // const ctx = document.getElementById('myChart');
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Janelas Visíveis', 'Janelas Invisíveis'],
-            datasets: [{
-                backgroundColor: 'rgb(112, 94, 220)',
-                data: [2, 8],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                legend: {
-                    display: false
-                }
-            },
-            scales: {
-                y: {
-                    ticks: { color: 'black', beginAtZero: true }
-                },
-                x: {
-                    ticks: { color: 'black', beginAtZero: true }
-                }
+    // new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Janelas Visíveis', 'Janelas Invisíveis'],
+    //         datasets: [{
+    //             backgroundColor: 'rgb(112, 94, 220)',
+    //             data: [2, 8],
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         plugins: {
+    //             legend: {
+    //                 display: false
+    //             }
+    //         },
+    //         scales: {
+    //             y: {
+    //                 ticks: { color: 'black', beginAtZero: true }
+    //             },
+    //             x: {
+    //                 ticks: { color: 'black', beginAtZero: true }
+    //             }
 
+    //         },
+    //         indexAxis: 'x',
+    //     }
+    // });]
+    var ultData;
+
+    function buscarMedidaJanela() {
+        fetch(`/dashboards/buscarMedidaJanela/${sessionStorage.ID_MAQUINA}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
             },
-            indexAxis: 'x',
+
+        })
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(`Dados recebidos: ${JSON.stringify(json)}`);
+                        maquina.innerHTML = json[0].nomeMaquina;
+                        usuario.innerHTML = json[0].username;
+                        tdJanela.innerHTML = json[0].totalJanelas;
+                        var utilizacao = (json[0].janelasInvisiveis * 100) / json[0].totalJanelas;
+                        janelasInvi.innerHTML = `${utilizacao.toFixed(2)}%`;
+                        ultData = json[0].data;
+                        atencao(json[0].minAtencao, json[0].maxAtencao, utilizacao);
+                        //atencao(json[0].minAtencao, json[0].maxAtencao, json[].);
+
+                        plotarGraficoCpu(json);
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
+    }
+
+    function atencao(minAtencao, maxAtencao, utilizacao) {
+
+        if (utilizacao <= minAtencao) {
+            estado.innerHTML = "SAUDÁVEL";
+            estado.style = "background-color: #3ABEFF;";
+        } else if (utilizacao <= maxAtencao) {
+            estado.innerHTML = "ATENÇÃO";
+            estado.style = "background-color: #FFCF4D;";
+        } else {
+            estado.innerHTML = "CRÍTICO";
+            estado.style = "background-color: #FF3C38;";
         }
-    });
+
+    }
+
+    function plotarGraficoCpu(dadosInput) {
+        let labels = ['Janelas Visíveis', 'Janelas Invisíveis'];
+        let dados = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Janelas',
+                    data: [dadosInput[0].janelasVisiveis, dadosInput[0].janelasInvisiveis],
+                    fill: false,
+                    backgroundColor: 'rgb(112, 94, 220)',
+                },
+            ]
+        };
+
+        const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+        let myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+        setTimeout(() => atualizarGrafico(dados, myChart), 10000);
+
+    }
+
+    function atualizarGrafico(dados, myChart) {
+
+        fetch(`/dashboards/buscarMedidaJanela/${sessionStorage.ID_MAQUINA}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        })
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+
+                        if (json[0].data == ultData) {
+                            console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        } else {
+                            // tirando e colocando valores no gráfico
+
+                            dados.datasets[0].data.shift();
+                            dados.datasets[0].data.shift();  // apagar o primeiro
+                            dados.datasets[0].data.push(json[0].janelasVisiveis); // incluir uma nova medida
+                            dados.datasets[0].data.push(json[0].janelasInvisiveis);
+                            tdJanela.innerHTML = json[0].totalJanelas;
+                            janelasInvi.innerHTML = `${(json[0].janelasInvisiveis * 100) / json[0].totalJanelas}%`;
+                            atencao(json[0].minAtencao, json[0].maxAtencao, (json[0].janelasInvisiveis * 100) / json[0].totalJanelas);
+                            myChart.update();
+
+                            ultData = json[0].data;
+
+
+                        }
+
+                        proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChart), 10000);
+
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
+
+    }
 </script>
 
 </html>

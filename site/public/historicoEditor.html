@@ -28,17 +28,8 @@
                 <h2>Frequência</h2>
             </div>
 
-            <div class="container-conteudo">
-                <p>XX/XX/XXXX</p>
-                <p>Travamento</p>
-                <p>Média</p>
-            </div>
-           
+            <div style="margin-top: 2vh;" id="list">
 
-            <div class="container-conteudo">
-                <p>XX/XX/XXXX</p>
-                <p>Superaquecimento</p>
-                <p>Alta</p>
             </div>
 
         </div>
@@ -65,16 +56,22 @@
             .then(resposta => {
 
                 if (resposta.ok) {
-                    console.log(resposta);
+                    console.log(resposta.length);
 
-                    resposta.json().then(json => {
-                        console.log(json);
-                        console.log(JSON.stringify(json));
-                        for (var i = 0; i < json.length; i++) {
-                            listReport.push(json[i]);
-                        }
-                        verificarListaReport();
-                    });
+                    if(!resposta.length){
+                        console.error('Nenhum dado encontrado ou erro na API'); 
+                    }else{
+
+                        resposta.json().then(json => {
+                            console.log(json);
+                            console.log(JSON.stringify(json));
+                            for (var i = 0; i < json.length; i++) {
+                                listReport.push(json[i]);
+                            }
+                            verificarListaReport();
+                        });
+
+                    }
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
                 }

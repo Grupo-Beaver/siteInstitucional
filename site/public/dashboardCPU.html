@@ -102,13 +102,13 @@
 
                 resposta.json().then(json => {
                     console.log(`Dados recebidos: ${JSON.stringify(json)}`);
-                    maquina.innerHTML = json[0].nomeMaquina;
-                    usuario.innerHTML = json[0].username;
-                    utilizacao.innerHTML = `${json[0].utilizacao}%`;
-                    processos.innerHTML = json[0].qtdProcessos;
-                    threads.innerHTML = json[0].threads;
-                    velocidade.innerHTML = formatBytes(json[0].velocidade);
-                    atencao(json[0].minAtencao, json[0].maxAtencao, json[0].utilizacao);
+                    maquina.innerHTML = json[json.length - 1].nomeMaquina;
+                    usuario.innerHTML = json[json.length - 1].username;
+                    utilizacao.innerHTML = `${json[json.length - 1].utilizacao}%`;
+                    processos.innerHTML = json[json.length - 1].qtdProcessos;
+                    threads.innerHTML = json[json.length - 1].threads;
+                    velocidade.innerHTML = formatBytes(json[json.length - 1].velocidade);
+                    atencao(json[0].minAtencao, json[0].maxAtencao, json[json.length - 1].utilizacao);
 
                     plotarGraficoCpu(json);
         
@@ -137,30 +137,91 @@
 
     }
 
-    function plotarGraficoCpu(){
-        const ctx = document.getElementById('myChart');
-        new Chart(ctx, {
-        type: 'line',
-      data: {
-        labels: [],
-        datasets: [{
-          label: '% Utilização',
-          data: [],
-          borderWidth: 3
-        }]
-      },
-      options: {
-        color:'black',
-      scales: {
-        y: {
-          ticks: { color: 'black', beginAtZero: true }
+    function plotarGraficoCpu(dadosInput) {
+  let labels = [];
+  let dados = {
+    labels: labels,
+    datasets: [{
+      label: '% Utilização',
+      data: [],
+      fill: false
+    }]
+  };
+
+  for (var i = 0; i < dadosInput.length; i++) {
+    const dataJson = dadosInput[i].data;
+    const horaMinutos = dataJson.split('T')[1].split('.')[0];
+    labels.push(horaMinutos);
+    dados.datasets[0].data.push(dadosInput[i].utilizacao);
+  }
+
+  const config = {
+    type: 'line',
+    data: dados,
+  };
+
+  let myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+
+    setTimeout(() => atualizarGrafico(dados, myChart), 10000);
+
+    }
+
+    function atualizarGrafico(dados, myChart){
+
+        fetch(`/dashboards/buscarUltimaMedidaCpu/${sessionStorage.ID_MAQUINA}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
         },
-        x: {
-          ticks: { color: 'black', beginAtZero: true }
-        }
-      }
-      }
-    });
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    const dataJson = json[0].data;
+                    const horaMinutos = dataJson.split('T')[1].split('.')[0];
+
+                    if (horaMinutos == dados.labels[dados.labels.length - 1]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        console.log("Horário do novo dado capturado:")
+                        console.log(horaMinutos)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length - 1])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(horaMinutos); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro
+                        dados.datasets[0].data.push(json[0].utilizacao); // incluir uma nova medida 
+
+                        myChart.update();
+                        utilizacao.innerHTML = `${json[0].utilizacao}%`;
+                        processos.innerHTML = json[0].qtdProcessos;
+                        threads.innerHTML = json[0].threads;
+                        velocidade.innerHTML = formatBytes(json[0].velocidade);
+                        atencao(json[0].minAtencao, json[0].maxAtencao, json[0].utilizacao);
+                    }
+
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChart), 10000);
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+
     }
 
 
