@@ -159,6 +159,8 @@
 
         var dadosUlt = (dadosInput[0].utilizacao * 100) / dadosInput[0].total;
         var dadosDisp = 100 - dadosUlt;
+
+        
         let labels = [`${dadosDisp.toFixed(2)}% Livre            `, `${dadosUlt.toFixed(2)}% Em uso`];
         let dados = {
             labels: labels,
