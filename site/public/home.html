@@ -62,6 +62,12 @@
 
 imgHome.src="./img/homeLocal.png";
 
+var Saudavel = 0;
+var Atencao = 0;
+var Critico = 0;
+var Ram = 0;
+var Disco = 0;
+
 nome = sessionStorage.NOME_USUARIO;
 console.log(sessionStorage.ID_USUARIO);
 Toastify({
@@ -118,7 +124,10 @@ Toastify({
                     sessionStorage.ID_SUPORTE = json[0].idSuporteTI;
                     sessionStorage.ID_PADRONIZACAO = json[0].idPadronizacaoMaquina;
                     sessionStorage.ID_MAQUINA_PADRAO = json[0].maquinaPadrao;
-                    
+                    Ram = json[0].memoriaRAMTotal * 0.95;
+                    Disco = json[0].memoriaDiscoTotal * 0.95;
+
+                    listarMaquinaByIdSuporte();
         
                 });
             } else {
@@ -129,5 +138,41 @@ Toastify({
             console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
         });
         }
+
+        function listarMaquinaByIdSuporte() {
+    fetch(`/maquinas/listarMaquina/${sessionStorage.ID_USUARIO}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (var i = 0; i < json.length; i++) {
+                        if(Ram <= json[i].memoriaRAMTotal || Disco <= json[i].memoriaDiscoTotal){
+                          Saudavel++;
+                        }else{
+                          Critico++;
+                        }
+                    }
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+
+
+}
 
 </script>

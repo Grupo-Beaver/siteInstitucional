@@ -3,7 +3,7 @@ var database = require("../database/config")
 function getEmpresa(idUsuario) {
     console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function getEmpresa():", idUsuario);
     var instrucao = `
-    SELECT e.*, st.idSuporteTI, pm.idPadronizacaoMaquina, pm.fkMaquina maquinaPadrao FROM usuario u INNER JOIN suporteTI st ON u.idUsuario = st.fkUsuario INNER JOIN empresa e ON e.idEmpresa = st.fkEmpresa INNER JOIN padronizacaoMaquina pm ON pm.fkEmpresa = e.idEmpresa WHERE u.idUsuario = ${idUsuario};
+    SELECT e.*, st.idSuporteTI, pm.idPadronizacaoMaquina, pm.fkMaquina maquinaPadrao, m.* FROM usuario u INNER JOIN suporteTI st ON u.idUsuario = st.fkUsuario INNER JOIN empresa e ON e.idEmpresa = st.fkEmpresa INNER JOIN padronizacaoMaquina pm ON pm.fkEmpresa = e.idEmpresa INNER JOIN maquina m ON m.idMaquina = pm.fkMaquina WHERE u.idUsuario = ${idUsuario};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
