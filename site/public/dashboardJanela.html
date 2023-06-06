@@ -124,10 +124,9 @@
                         maquina.innerHTML = json[0].nomeMaquina;
                         usuario.innerHTML = json[0].username;
                         tdJanela.innerHTML = json[0].totalJanelas;
-                        var utilizacao = (json[0].janelasInvisiveis * 100) / json[0].totalJanelas;
-                        janelasInvi.innerHTML = `${utilizacao.toFixed(2)}%`;
+                        
                         ultData = json[0].data;
-                        atencao(json[0].minAtencao, json[0].maxAtencao, utilizacao);
+                        //atencao(json[0].minAtencao, json[0].maxAtencao, utilizacao);
                         //atencao(json[0].minAtencao, json[0].maxAtencao, json[].);
 
                         plotarGraficoCpu(json);
@@ -158,13 +157,13 @@
     }
 
     function plotarGraficoCpu(dadosInput) {
-        let labels = ['Janelas Visíveis', 'Janelas Invisíveis'];
+        let labels = ['Janelas Totais'];
         let dados = {
             labels: labels,
             datasets: [
                 {
                     label: 'Janelas',
-                    data: [dadosInput[0].janelasVisiveis, dadosInput[0].janelasInvisiveis],
+                    data: [dadosInput[0].totalJanelas],
                     fill: false,
                     backgroundColor: 'rgb(112, 94, 220)',
                 },
@@ -207,12 +206,9 @@
                             // tirando e colocando valores no gráfico
 
                             dados.datasets[0].data.shift();
-                            dados.datasets[0].data.shift();  // apagar o primeiro
-                            dados.datasets[0].data.push(json[0].janelasVisiveis); // incluir uma nova medida
-                            dados.datasets[0].data.push(json[0].janelasInvisiveis);
+                            dados.datasets[0].data.push(json[0].totalJanelas); // incluir uma nova medida
                             tdJanela.innerHTML = json[0].totalJanelas;
-                            janelasInvi.innerHTML = `${(json[0].janelasInvisiveis * 100) / json[0].totalJanelas}%`;
-                            atencao(json[0].minAtencao, json[0].maxAtencao, (json[0].janelasInvisiveis * 100) / json[0].totalJanelas);
+                            
                             myChart.update();
 
                             ultData = json[0].data;

@@ -65,13 +65,9 @@
                         maquina.innerHTML = json[0].nomeMaquina;
                         usuario.innerHTML = json[0].username;
                         for (var i = 0; i < json.length; i++) {
-                            var dataString = json[i].data;
-                            var now = new Date(dataString);
-                            var data = `${now.getDate() + 1}/${now.getMonth() + 1}/${now.getFullYear()}`;
-
                             conteudo.innerHTML += `
                         <div class="container-conteudo">
-                            <p>${data}</p>
+                            <p>${json[i].data}</p>
                             <p>${json[i].problema}</p>
                             <p>${json[i].frequencia}</p>
                         </div>

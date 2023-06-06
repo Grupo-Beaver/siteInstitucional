@@ -10,7 +10,7 @@ function buscarMedidaCpu(idMaquina){
         INNER JOIN parametrizacaoMetrica pm ON m.idMaquina = pm.fkMaquina
         INNER JOIN cpu ON cpu.fkMaquina = m.idMaquina
         INNER JOIN editorVideo ev ON ev.idEditorVideo = m.fkEditorVideo 
-        WHERE m.idMaquina = 19 AND pm.nome = 'Cpu'
+        WHERE m.idMaquina = ${idMaquina} AND pm.nome = 'Cpu'
         ORDER BY cpu.idCPU DESC
     ) AS subquery
     ORDER BY idCPU ASC;
@@ -41,12 +41,12 @@ function buscarMedidaJanela(idMaquina){
     var instrucao = `
     SELECT *
     FROM (
-        SELECT TOP 1 j.idJanela, j.janelasVisiveis,j.janelasInvisiveis,j.totalJanelas, j.data , pm.*, m.nome AS nomeMaquina, ev.username
+        SELECT TOP 1 j.idJanela, j.totalJanelas, j.nomeJanela , pm.*, m.nome AS nomeMaquina, ev.username
         FROM maquina m
         INNER JOIN parametrizacaoMetrica pm ON m.idMaquina = pm.fkMaquina
         INNER JOIN janela j ON j.fkMaquina = m.idMaquina
         INNER JOIN editorVideo ev ON ev.idEditorVideo = m.fkEditorVideo 
-        WHERE m.idMaquina = ${idMaquina} AND pm.nome = 'Cpu'
+        WHERE m.idMaquina = 19 AND pm.nome = 'Janela'
         ORDER BY j.idJanela DESC
     ) AS subquery
     ORDER BY idJanela ASC;
@@ -67,7 +67,7 @@ function buscarMedidaRam(idMaquina){
         INNER JOIN parametrizacaoMetrica pm ON m.idMaquina = pm.fkMaquina
         INNER JOIN ram r ON r.fkMaquina = m.idMaquina
         INNER JOIN editorVideo ev ON ev.idEditorVideo = m.fkEditorVideo 
-        WHERE m.idMaquina = 19 AND pm.nome = 'Cpu'
+        WHERE m.idMaquina = ${idMaquina} AND pm.nome = 'Ram'
         ORDER BY r.idRAM DESC
     ) AS subquery
     ORDER BY idRam ASC;

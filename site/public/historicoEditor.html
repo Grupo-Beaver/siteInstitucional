@@ -24,6 +24,7 @@
 
             <div class="container-titulo">
                 <h2>Data</h2>
+                <h2>Maquina</h2>
                 <h2>Problema</h2>
                 <h2>Frequência</h2>
             </div>
@@ -58,9 +59,7 @@
                 if (resposta.ok) {
                     console.log(resposta.length);
 
-                    if(!resposta.length){
-                        console.error('Nenhum dado encontrado ou erro na API'); 
-                    }else{
+                    
 
                         resposta.json().then(json => {
                             console.log(json);
@@ -71,7 +70,7 @@
                             verificarListaReport();
                         });
 
-                    }
+                    
                 } else {
                     console.error('Nenhum dado encontrado ou erro na API');
                 }

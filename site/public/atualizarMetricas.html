@@ -171,27 +171,35 @@
                     usuario.innerHTML = json[0].username;
 
                     for (var i = 0; i < json.length; i++){
-                        selectComponente.innerHTML += `
-                        <option value="${json[i].idParametrizacaoMetrica}">${json[i].nome}</option>
-                        `;
+                       
 
                         
                         if(json[i].nome == "Cpu"){
+                            selectComponente.innerHTML += `
+                        <option value="${json[i].idParametrizacaoMetrica}">${json[i].nome}</option>
+                        `;
                             Cpu = json[i].idParametrizacaoMetrica;
                             cpuSaudavel = json[i].minAtencao;
                             cpuCritico = json[i].maxAtencao;
                         }else if(json[i].nome == "Ram"){
+                            selectComponente.innerHTML += `
+                        <option value="${json[i].idParametrizacaoMetrica}">${json[i].nome}</option>
+                        `;
                             Ram = json[i].idParametrizacaoMetrica;
                             ramSaudavel = json[i].minAtencao;
                             ramCritico = json[i].maxAtencao;
-                        }else if(json[i].nome == "Janela"){
-                            Janela = json[i].idParametrizacaoMetrica;
-                            janSaudavel = json[i].minAtencao;
-                            janCritico = json[i].maxAtencao;
-                        }else{
+                        }else if(json[i].nome == "Disco"){
+                            selectComponente.innerHTML += `
+                        <option value="${json[i].idParametrizacaoMetrica}">${json[i].nome}</option>
+                        `;
                             Disco = json[i].idParametrizacaoMetrica;
                             discSaudavel = json[i].minAtencao;
                             discCritico = json[i].maxAtencao;
+                            
+                        }else{
+                            Janela = json[i].idParametrizacaoMetrica;
+                            janSaudavel = json[i].minAtencao;
+                            janCritico = json[i].maxAtencao;
                         }
                     }
                 });
