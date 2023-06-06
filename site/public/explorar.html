@@ -26,14 +26,13 @@
 
 </head>
 
-<body onload="listarMaquinaByIdSuporte()">
+<body onload="listarMaquinaByIdSuporte().then(()=>{setTimeout(verificarLista, 2000)})">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
 
     <div>
 
         <div class="header_explorar"></div>
-
 
         <div class="container_main">
 
@@ -52,7 +51,7 @@
                     </select> -->
                 </div>
                 <div class="container_list">
-                    
+
                     <div id="titulo" class="container_titulo_maquina">
                         <div class="container_titulo"></div>
                         <h2>Maquina</h2>
@@ -107,8 +106,6 @@
 
 
 <script>
-
-
     imgExplorar.src = "./img/lupaLocal.png";
 
     function verificarLista() {
@@ -130,13 +127,22 @@
             <div class="none"></div>
         `
 
+
             for (var i = 0; i < listMaq.length; i++) {
+                var padrao = ``;
+                var pad = pd[i];
+                if(pad == 0){
+                    padrao = `style="display: none;"`
+                }else{
+                    padrao = `style="display: block;"`
+                }
+                
 
                 list.innerHTML += `<div class="container_conteudo">
-                    <div class="aviso"><img src="./img/aviso 1.png"></div>
+                    <div class="aviso"><img ${padrao} src="./img/aviso 1.png"></div>
                         <p>${listMaq[i].modelo}</p>
                         <p>${listMaq[i].tipo}</p>
-                        <p>Crítico</p>
+                        <p>${etd[i]}</p>
                         <p>${listMaq[i].nomeEditor}</p>
                         <div class="button_list">
                             <button onclick="getByIdSession(${listMaq[i].idMaquina}), window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
@@ -146,9 +152,8 @@
                     </div>`
 
             }
-            buttonUsu.style.display = "block";
-            buttonMaq.style.display = "block";
-            select_alert_status.style.display = "block";
+
+            //imgPd.style.display = "block";
 
         } else if (tipo == "usuario") {
 
@@ -161,25 +166,30 @@
             <div class="none"></div>
         `
 
+
             for (var i = 0; i < listMaq.length; i++) {
+                var padrao = ``;
+                var pad = pd[i];
+                if(pad == 0){
+                    padrao = `style="display: none;"`
+                }else{
+                    padrao = `style="display: block;"`
+                }
 
                 list.innerHTML += `<div class="container_conteudo">
-                    <div class="aviso"><img src="./img/aviso 1.png"></div>
+                    <div class="aviso"><img ${padrao} src="./img/aviso 1.png"></div>
                         <p>${listMaq[i].nomeEditor}</p>
                         <p>${listMaq[i].nomeEmpresa}</p>
                         <p>${listMaq[i].modelo}</p>
-                        <p>ATENÇÃO</p>
+                        <p>${etd[i]}</p>
                         <div class="button_list">
                             <button onclick="getByIdSession(${listMaq[i].idMaquina}) ,window.location.href='./dashboardCPU.html'" class="button_dashbord">Dashbord</button>
                             <button onclick="getByIdSession(${listMaq[i].idMaquina}) ,window.location.href='./detalhesUsuario.html'" class="button_detalhe">+ Detalhes</button>
-                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getById(${listMaq[i].idMaquina})">Excluir</button>
+                            <button  type="button" data-toggle="modal" data-target="#ExemploModalCentralizado" onclick="getByIdMaq(${listMaq[i].idMaquina})">Excluir</button>
                         </div>
-                    </div>`
-
+                        </div>`
             }
-            buttonUsu.style.display = "block";
-            buttonMaq.style.display = "block";
-            select_alert_status.style.display = "block";
+            
 
         } else {
             titulo.innerHTML = ''
@@ -190,5 +200,11 @@
         }
 
     }
+
+
+
+
+
+
 
 </script>

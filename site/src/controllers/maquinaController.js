@@ -218,6 +218,35 @@ function reporteProblema(req, res) {
     }
 }
 
+function verifcarPadraoMaq(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var idPadronizacaoMaquina = req.query.idPadronizacaoMaquina;
+    var idMaquina = req.query.idMaquina; 
+
+    // Faça as validações dos valores
+    if (idMaquina == undefined) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    }else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        maquinaModel.verifcarPadraoMaq(idPadronizacaoMaquina, idMaquina)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o reporte de problema! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 function listReporteById(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var idMaquina = req.params.idMaquina;    
@@ -229,6 +258,34 @@ function listReporteById(req, res) {
         
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
         maquinaModel.listReporteById(idMaquina)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o reporte de problema! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function listarEstado(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var idMaquina = req.params.idMaquina;    
+
+    // Faça as validações dos valores
+    if (idMaquina == undefined) {
+        res.status(400).send("Seu idMaquina está undefined!");
+    }else {
+        
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        maquinaModel.listarEstado(idMaquina)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -286,5 +343,7 @@ module.exports = {
     cadastroFinalizado,
     atualizarPadronizacao,
     contReportProb,
-    listReporteById
+    listReporteById,
+    listarEstado,
+    verifcarPadraoMaq
 }

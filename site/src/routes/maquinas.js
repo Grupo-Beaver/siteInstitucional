@@ -44,10 +44,19 @@ router.get("/contReportProb/:idMaquina", function (req, res) {
     maquinaController.contReportProb(req, res);
 });
 
+router.get("/listarEstado/:idMaquina", function (req, res) {
+    maquinaController.listarEstado(req, res);
+});
 
 router.post("/reporteProblema", function (req, res) {
     maquinaController.reporteProblema(req, res);
 });
+
+router.get("/verifcarPadraoMaq", function (req, res) {
+    maquinaController.verifcarPadraoMaq(req, res);
+});
+
+
 
 
 module.exports = router;

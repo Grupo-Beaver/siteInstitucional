@@ -100,7 +100,7 @@
     }
 
     function buscarDados(idMaquina){
-alert(idMaquina);
+
         fetch(`/maquinas/contReportProb/${idMaquina}`, {
         method: "GET",
         headers: {
@@ -121,7 +121,7 @@ alert(idMaquina);
                     var Desligamento = json[0].Desligamento;
                     var Superaquecimento = json[0].Superaquecimento;
                     var Outro = json[0].Total - (Travamento + Lentidao + Desligamento + Superaquecimento);
-                    alert(json[0].Total);
+                    
                     plotarGraficoReport(Travamento, Lentidao, Desligamento, Superaquecimento, Outro)
                     
                 });

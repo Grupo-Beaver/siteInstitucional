@@ -132,7 +132,45 @@ function listReporteById(idMaquina){
 
     console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listReporteById():", idMaquina);
     var instrucao = `
-    SELECT rp.*, m.nome nomeMaquina, ev.username FROM maquina m INNER JOIN reporteProblema rp ON m.idMaquina = rp.fkMaquina INNER JOIN editorVideo ev  ON ev.idEditorVideo = m.fkEditorVideo WHERE m.idMaquina = ${idMaquina}; 
+    SELECT rp.frequencia, rp.problema, rp.fkMaquina , FORMAT(rp.data, 'dd/MM/yyyy') as data, m.nome nomeMaquina, ev.username FROM maquina m INNER JOIN reporteProblema rp ON m.idMaquina = rp.fkMaquina INNER JOIN editorVideo ev  ON ev.idEditorVideo = m.fkEditorVideo WHERE m.idMaquina = ${idMaquina}; 
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function listarEstado(idMaquina){
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listarEstado():", idMaquina);
+    var instrucao = `
+    select * from 
+	(select top 1 fkMaquina as id, idCPU as idTipo, utilizacao as leitura, 'CPU' as tipo, cpu.qtdProcessos as adicional from cpu WHERE fkMaquina = ${idMaquina} order by idCPU DESC) as c
+inner join parametrizacaoMetrica pm on pm.fkMaquina = id and upper(pm.nome) = tipo
+union select * from (select TOP 1 fkMaquina as id, idRAM as idTipo, utilizacao as leitura, 'RAM' as tipo, ram.total as adicional from ram WHERE fkMaquina = ${idMaquina} order by idRam DESC) as r
+inner join parametrizacaoMetrica pm on pm.fkMaquina = id and upper(pm.nome) = tipo
+union select * from (select TOP 1 fkMaquina as id, idJanela as idTipo, nomeJanela as leitura, 'JANELA' as tipo, janela.totalJanelas as adicional from janela WHERE fkMaquina = ${idMaquina} order by idJanela DESC) as j
+inner join parametrizacaoMetrica pm on pm.fkMaquina = id and upper(pm.nome) = tipo
+union select * from (select TOP 1 fkMaquina as id, idDisco as idTipo, taxaTransferencia as leitura, 'DISCO' as tipo, disco.velocidadeGravacao as adicional from disco WHERE fkMaquina = ${idMaquina} order by idDisco DESC) as j
+inner join parametrizacaoMetrica pm on pm.fkMaquina = id and upper(pm.nome) = tipo;
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function verifcarPadraoMaq(idPadronizacaoMaquina, idMaquina){
+
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function verifcarPadraoMaq():", idPadronizacaoMaquina, idMaquina);
+    var instrucao = `
+    SELECT m.*, 'MAQ' as tipoVer
+FROM maquina m
+INNER JOIN editorVideo ev ON m.fkEditorVideo = ev.idEditorVideo
+INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa
+WHERE m.idMaquina = ${idMaquina}
+UNION ALL
+SELECT m.*, 'PADRAO' as tipoVer
+FROM padronizacaoMaquina pm
+INNER JOIN maquina m ON m.idMaquina = pm.fkMaquina
+INNER JOIN editorVideo ev ON ev.idEditorVideo = m.fkEditorVideo
+INNER JOIN empresa e ON e.idEmpresa = ev.fkEmpresa
+WHERE pm.idPadronizacaoMaquina = ${idPadronizacaoMaquina};
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -150,5 +188,7 @@ module.exports = {
     cadastroFinalizado,
     atualizarPadronizacao,
     contReportProb,
-    listReporteById
+    listReporteById,
+    listarEstado,
+    verifcarPadraoMaq
 };
