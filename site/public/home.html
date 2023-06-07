@@ -1,195 +1,203 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/home.css">
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> 
-    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/home.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css"
+    />
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/toastify-js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon" />
     <title>Home</title>
 
     <!-- Preciso para aparecer menu -->
-    <link rel="stylesheet" href="./css/componente.css">
+    <link rel="stylesheet" href="./css/componente.css" />
     <script src="./js/componente.js"></script>
-</head>
-<body onload="getEmpresa()">
-  <main-menu></main-menu>
-  <main-iconitsm></main-iconitsm>
+  </head>
+  <body onload="getEmpresa()">
+    <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
 
-  <main>
-    <div class="container">
-      <div class="topo">
-        <div class="titulo-dash">
-          <p>DashBoard Geral</p>
-        </div>
-      </div>
-      <div class="kpis">
-          <div class="kpi-box saudavel">
-            <p class="titulo-kpi">Saudável</p>
-            <b class="qtdMaquina">3</b>
-            <p>Qtd. Máquinas</p>
+    <main>
+      <div class="container">
+        <div class="topo">
+          <div class="titulo-dash">
+            <p>DashBoard Geral</p>
           </div>
-          <div class="kpi-box atencao">
-            <p class="titulo-kpi">Atenção</p>
-            <b class="qtdMaquina">2</b>
+        </div>
+        <div class="kpis">
+          <div class="kpi-box saudavel">
+            <p class="titulo-kpi">Padronizadas</p>
+            <b id="qtdMaquinasPadronizadas" class="qtdMaquina"></b>
             <p>Qtd. Máquinas</p>
           </div>
           <div class="kpi-box critico">
-            <p class="titulo-kpi">Crítico</p>
-            <b class="qtdMaquina">1</b>
+            <p class="titulo-kpi">Despadronizadas</p>
+            <b id="qtdMaquinasDespadronizadas" class="qtdMaquina"></b>
             <p>Qtd. Máquinas</p>
           </div>
-      </div>
-      <div class="containerGrafico">
-        <div class="fundoGrafico">
-          <div class="container-titulo-legenda">
-            <div class="titulo-grafico">
-              <p>Visão geral de todas as maquinas</p>
+        </div>
+        <div class="containerGrafico">
+          <div class="fundoGrafico">
+            <div class="container-titulo-legenda">
+              <div class="titulo-grafico">
+                <p>Visão geral de todas as maquinas</p>
+              </div>
+              <div class="tooltip">
+                <img
+                  class="img-legenda"
+                  src="./img/pontoInterrogacao.png"
+                  alt=""
+                  width="20vh"
+                />
+                <span class="tooltiptext">
+                  <span style="font-size: 1.5vh; font-weight: 600"
+                    >ESTADO DAS MÁQUINAS</span
+                  >
+                  <br /><span style="font-size: 1.5vh">- PADRONIZADAS</span>
+                  <br />
+                  <br />PADRONIZADAS - Máquinas Seguindo o padrão da empresa
+                  <br /><a style=" font-weight: 800; color: #ebd48d; text-decoration: underline;" href="./padronizacaoMaquina.html">+Detalhes</a>    
+                  <br />
+                  <br />DESPADRONIZADAS - Máquinas fora do padrão da empresa
+                </span>
+              </div>
             </div>
-            <div class="tooltip">
-              <img class="img-legenda" src="./img/pontoInterrogacao.png" alt="" width="20vh">
-              <span class="tooltiptext">
-                <span style="font-size: 1.5vh; font-weight: 600;">ESTADO DAS MÁQUINAS</span>
-                <br><span style="font-size: 1.5vh;">- DESEMPENHO</span>
-                <br>
-                <br>SAUDÁVEL - até 50%
-                <br>
-                <br>ATENÇÃO - entre 50% e 70%
-                <br>
-                <br>CRÍTICO - acima de 70%
-              </span>
+            <div class="grafico">
+              <canvas id="myChart"></canvas>
             </div>
-          </div>
-          <div class="grafico">
-            <canvas id="myChart"></canvas>
           </div>
         </div>
       </div>
-    </div>
-  </main>
-  
-</body>
+    </main>
+  </body>
 </html>
 
 <script>
+  imgHome.src = "./img/homeLocal.png";
 
-imgHome.src="./img/homeLocal.png";
+  var padrao = 0;
+  var foraPadrao = 0;
+  var Critico = 0;
+  var Ram = 0;
+  var Disco = 0;
 
-var Saudavel = 0;
-var Atencao = 0;
-var Critico = 0;
-var Ram = 0;
-var Disco = 0;
-
-nome = sessionStorage.NOME_USUARIO;
-console.log(sessionStorage.ID_USUARIO);
-Toastify({
-  text: "Bem vindo " + nome,
-  className: "info",
-  style: {
-    background: "linear-gradient(to right, #00b09b, #96c93d)",
-    "text-align": "center",
-    padding: "3vh 5vw",
-    "border-radius": "2vh"
-    
-  }
-}).showToast();
+  nome = sessionStorage.NOME_USUARIO;
+  console.log(sessionStorage.ID_USUARIO);
+  Toastify({
+    text: "Bem vindo " + nome,
+    className: "info",
+    style: {
+      background: "linear-gradient(to right, #00b09b, #96c93d)",
+      "text-align": "center",
+      padding: "3vh 5vw",
+      "border-radius": "2vh",
+    },
+  }).showToast();
 </script>
 
 <script>
-  const ctx = document.getElementById('myChart');
+  function grafico() {
+    const ctx = document.getElementById("myChart");
 
-  new Chart(ctx, {
-    type: 'pie',
-    data: {
-      labels: ['Saudável', 'Atenção' ,'Critico' ],
-      datasets: [{
-        // label: '# of Votes',
-        data: [12, 19, 3 ],
-        borderWidth: 1,
-        backgroundColor: [
-        'rgb(54, 162, 235)',
-        'rgb(255, 205, 86)',
-        'rgb(255, 99, 132)'
-        ]
-      }]
-    }
-  });
-  
+    new Chart(ctx, {
+      type: "pie",
+      data: {
+        labels: ["Padronizadas", "Despadronizadas"],
+        datasets: [
+          {
+            // label: '# of Votes',
+            data: [padrao, foraPadrao],
+            borderWidth: 1,
+            backgroundColor: ["rgb(54, 162, 235)", "rgb(255, 99, 132)"],
+          },
+        ],
+      },
+    });
+  }
 
-  function getEmpresa(){
-        fetch(`/empresas/getEmpresa/${sessionStorage.ID_USUARIO}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-
+  function getEmpresa() {
+    fetch(`/empresas/getEmpresa/${sessionStorage.ID_USUARIO}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-        .then(resposta => {
+      .then((resposta) => {
+        if (resposta.ok) {
+          console.log(resposta);
 
-            if (resposta.ok) {
-                console.log(resposta);
+          resposta.json().then((json) => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            sessionStorage.ID_EMPRESA = json[0].idEmpresa;
+            sessionStorage.ID_SUPORTE = json[0].idSuporteTI;
+            sessionStorage.ID_PADRONIZACAO = json[0].idPadronizacaoMaquina;
+            sessionStorage.ID_MAQUINA_PADRAO = json[0].maquinaPadrao;
+            Ram = json[0].memoriaRAMTotal * 0.95;
+            Disco = json[0].memoriaDiscoTotal * 0.95;
 
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    sessionStorage.ID_EMPRESA = json[0].idEmpresa;
-                    sessionStorage.ID_SUPORTE = json[0].idSuporteTI;
-                    sessionStorage.ID_PADRONIZACAO = json[0].idPadronizacaoMaquina;
-                    sessionStorage.ID_MAQUINA_PADRAO = json[0].maquinaPadrao;
-                    Ram = json[0].memoriaRAMTotal * 0.95;
-                    Disco = json[0].memoriaDiscoTotal * 0.95;
-
-                    listarMaquinaByIdSuporte();
-        
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
-        });
+            listarMaquinaByIdSuporte();
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
         }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados da maquina: ${error.message}`
+        );
+      });
+  }
 
-        function listarMaquinaByIdSuporte() {
+  function listarMaquinaByIdSuporte() {
     fetch(`/maquinas/listarMaquina/${sessionStorage.ID_USUARIO}`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json"
-        },
-
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-        .then(resposta => {
+      .then((resposta) => {
+        if (resposta.ok) {
+          console.log(resposta);
 
-            if (resposta.ok) {
-                console.log(resposta);
-
-                resposta.json().then(json => {
-                    console.log(json);
-                    console.log(JSON.stringify(json));
-                    for (var i = 0; i < json.length; i++) {
-                        if(Ram <= json[i].memoriaRAMTotal || Disco <= json[i].memoriaDiscoTotal){
-                          Saudavel++;
-                        }else{
-                          Critico++;
-                        }
-                    }
-                    
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
+          resposta.json().then((json) => {
+            console.log(json);
+            console.log(JSON.stringify(json));
+            for (var i = 0; i < json.length; i++) {
+              if (
+                Ram <= json[i].memoriaRAMTotal &&
+                Disco <= json[i].memoriaDiscoTotal
+              ) {
+                padrao++;
+              } else {
+                foraPadrao++;
+              }
             }
-        })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
-        });
-
-
-}
+            grafico();
+            document.getElementById("qtdMaquinasPadronizadas").innerHTML =
+              padrao;
+            document.getElementById("qtdMaquinasDespadronizadas").innerHTML =
+              foraPadrao;
+          });
+        } else {
+          console.error("Nenhum dado encontrado ou erro na API");
+        }
+      })
+      .catch(function (error) {
+        console.error(
+          `Erro na obtenção dos dados da maquina: ${error.message}`
+        );
+      });
+  }
 
 </script>
