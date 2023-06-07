@@ -78,7 +78,6 @@ input:focus{
 button{
     position: fixed;
     bottom: 75px;
-    right: 500px;
     padding: 1vh 4vw;
     border-style: none;
     background-color: #0F1126;
