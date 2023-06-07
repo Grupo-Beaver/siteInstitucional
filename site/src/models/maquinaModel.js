@@ -146,9 +146,7 @@ function listarEstado(idMaquina){
 inner join parametrizacaoMetrica pm on pm.fkMaquina = id and upper(pm.nome) = tipo
 union select * from (select TOP 1 fkMaquina as id, idRAM as idTipo, utilizacao as leitura, 'RAM' as tipo, ram.total as adicional from ram WHERE fkMaquina = ${idMaquina} order by idRam DESC) as r
 inner join parametrizacaoMetrica pm on pm.fkMaquina = id and upper(pm.nome) = tipo
-union select * from (select TOP 1 fkMaquina as id, idJanela as idTipo, nomeJanela as leitura, 'JANELA' as tipo, janela.totalJanelas as adicional from janela WHERE fkMaquina = ${idMaquina} order by idJanela DESC) as j
-inner join parametrizacaoMetrica pm on pm.fkMaquina = id and upper(pm.nome) = tipo
-union select * from (select TOP 1 fkMaquina as id, idDisco as idTipo, taxaTransferencia as leitura, 'DISCO' as tipo, disco.velocidadeGravacao as adicional from disco WHERE fkMaquina = ${idMaquina} order by idDisco DESC) as j
+union select * from (select TOP 1 fkMaquina as id, idDisco as idTipo, taxaTransferencia as leitura, 'DISCO' as tipo, disco.velocidadeGravacao as adicional from disco WHERE fkMaquina = ${idMaquina} order by idDisco DESC) as d
 inner join parametrizacaoMetrica pm on pm.fkMaquina = id and upper(pm.nome) = tipo;
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);

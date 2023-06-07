@@ -77,9 +77,50 @@ function buscarMedidaRam(idMaquina){
     return database.executar(instrucao);
 }
 
+function buscarMedidaDisco(idMaquina){
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarMedidaDisco():", idMaquina);
+    var instrucao = `
+    
+    SELECT *
+    FROM (
+        SELECT TOP 6 d.idDisco, d.velocidadeGravacao, d.velocidadeLeitura, d.taxaTransferencia, d.data, pm.*, m.nome AS nomeMaquina, ev.username
+        FROM maquina m
+        INNER JOIN parametrizacaoMetrica pm ON m.idMaquina = pm.fkMaquina
+        INNER JOIN disco d  ON d.fkMaquina = m.idMaquina
+        INNER JOIN editorVideo ev ON ev.idEditorVideo = m.fkEditorVideo 
+        WHERE m.idMaquina = ${idMaquina} AND pm.nome = 'Disco'
+        ORDER BY d.idDisco DESC
+    ) AS subquery
+    ORDER BY idDisco ASC;
+    
+   SELECT * from disco d ;
+
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function buscarUltimaMedidaDisco(idMaquina){
+    console.log("ACESSEI O AVISO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function buscarUltimaMedidaDisco():", idMaquina);
+    var instrucao = `
+    SELECT TOP 1 d.idDisco, d.velocidadeGravacao, d.velocidadeLeitura, d.taxaTransferencia, d.data, pm.*, m.nome AS nomeMaquina, ev.username
+    FROM maquina m
+    INNER JOIN parametrizacaoMetrica pm ON m.idMaquina = pm.fkMaquina
+    INNER JOIN disco d  ON d.fkMaquina = m.idMaquina
+    INNER JOIN editorVideo ev ON ev.idEditorVideo = m.fkEditorVideo 
+    WHERE m.idMaquina = ${idMaquina} AND pm.nome = 'Disco'
+    ORDER BY d.idDisco DESC;
+
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     buscarMedidaCpu,
     buscarUltimaMedidaCpu,
     buscarMedidaJanela,
-    buscarMedidaRam
+    buscarMedidaRam,
+    buscarMedidaDisco,
+    buscarUltimaMedidaDisco
 };

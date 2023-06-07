@@ -19,4 +19,31 @@ router.get("/buscarMedidaRam/:idMaquina", function (req, res) {
     dashboardController.buscarMedidaRam(req, res);
 });
 
+router.get("/buscarMedidaDisco/:idMaquina", function (req, res) {
+    dashboardController.buscarMedidaDisco(req, res);
+});
+
+router.get("/buscarUltimaMedidaDisco/:idMaquina", function (req, res) {
+    dashboardController.buscarUltimaMedidaDisco(req, res);
+});
+
 module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

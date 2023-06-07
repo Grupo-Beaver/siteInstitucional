@@ -126,15 +126,7 @@ function estado(idMaquina) {
                             } else {
                                 total += 2
                             }
-                        } else if (tipo == "JANELA") {
-                            if (leitura <= minAtencao) {
-                                total += 0
-                            } else if (leitura <= maxAtencao) {
-                                total += 1
-                            } else {
-                                total += 2
-                            }
-                        } else {
+                        } else{
                             total += 0;
                         }
 
