@@ -37,6 +37,7 @@ a{
 .txt-janela{
     font-size: 2.5vh;
     font-weight: 500;
+    word-wrap: break-word;
 }
 
 .cabecalho{

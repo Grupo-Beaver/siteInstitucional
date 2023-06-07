@@ -26,7 +26,7 @@
 
 </head>
 
-<body onload="listarMaquinaByIdSuporte().then(()=>{setTimeout(verificarLista, 4000)})">
+<body onload="listarMaquinaByIdSuporte().then(()=>{setTimeout(verificarLista, 2000)})">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
 
@@ -107,6 +107,9 @@
 
 <script>
     imgExplorar.src = "./img/lupaLocal.png";
+
+    etd.length = 0;
+    pd.length = 0;
 
     function verificarLista() {
 

@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
     <title>Disco</title>
 </head>
-<body>
+<body onload="buscarMedidaDisco()">
     <main-menu></main-menu>
     <main-iconitsm></main-iconitsm>
 <main>  
@@ -20,8 +20,8 @@
         
         
             <div class="maquina_usuario">
-                <p class="span_maq">Máquina: <span id="maquina">INSV15</span></p>
-                <p class="span_maq">Usuário: <span id="usuario">Gustavo</span></p>
+                <p class="span_maq">Máquina: <span id="maquina"></span></p>
+                <p class="span_maq">Usuário: <span id="usuario"></span></p>
                 <div class="span_maq"></div>
                 <div class="span_maq"></div>
                 <div class="span_maq_test"></div>
@@ -45,7 +45,7 @@
             <div class="container_dash_estado">
                 <div class="estado">
                     <label for="">ESTADO</label>
-                    <span>ATENÇÃO</span>
+                    <span id="estado"></span>
                 </div>
                 <div class="dash">
                     <label for="">DESEMPENHO</label>
@@ -56,11 +56,11 @@
                 <div class="disco">
                     <div class="leitura">
                         <label for="">VELOCIDADE<br>LEITURA</label>
-                        <span>30,2 KB/s</span>
+                        <span id="velocidadeLeitura"></span>
                     </div>
                     <div class="gravacao">
                         <label for="">VELOCIDADE<br>GRAVAÇÃO</label>
-                        <span>100 KB/s</span>
+                        <span id="velocidadeGravacao"></span>
                     </div>
                 </div>
             </div>
@@ -72,30 +72,172 @@
 </body>
 
 <script>
-    const ctx = document.getElementById('myChart');
-    imgExplorar.src = "./img/lupaLocal.png";
-    new Chart(ctx, {
-        type: 'line',
-      data: {
-        labels: ['10:00', '10:15', '10:30', '10:45', '11:00', '11:15'],
-        datasets: [{
-          label: '% Tempo de atividade',
-          data: [50, 65, 45, 50, 69, 75],
-          borderWidth: 3
-        }]
-      },
-      options: {
-        color:'black',
-      scales: {
-        y: {
-          ticks: { color: 'black', beginAtZero: true }
+
+    // const ctx = document.getElementById('myChart');
+    // imgExplorar.src = "./img/lupaLocal.png";
+    // new Chart(ctx, {
+    //     type: 'line',
+    //   data: {
+    //     labels: ['10:00', '10:15', '10:30', '10:45', '11:00', '11:15'],
+    //     datasets: [{
+    //       label: '% Tempo de atividade',
+    //       data: [50, 65, 45, 50, 69, 75],
+    //       borderWidth: 3
+    //     }]
+    //   },
+    //   options: {
+    //     color:'black',
+    //   scales: {
+    //     y: {
+    //       ticks: { color: 'black', beginAtZero: true }
+    //     },
+    //     x: {
+    //       ticks: { color: 'black', beginAtZero: true }
+    //     }
+    //   }
+    //   }
+    // });
+
+    function formatBytes(bytes) {
+        const sizes = ["Bytes", "KB/s", "MB/s", "GHz/s", "TB/s"];
+        const i = Math.floor(Math.log(bytes) / Math.log(1024));
+        const formatted = parseFloat((bytes / Math.pow(1024, i)).toFixed(2));
+        return formatted + sizes[i];
+    }
+
+    function atencao(minAtencao, maxAtencao, utilizacao) {
+
+if (utilizacao >= minAtencao) {
+    estado.innerHTML = "SAUDÁVEL";
+    estado.style = "background-color: #3ABEFF;";
+} else if (utilizacao >= maxAtencao) {
+    estado.innerHTML = "ATENÇÃO";
+    estado.style = "background-color: #FFCF4D;";
+} else {
+    estado.innerHTML = "CRÍTICO";
+    estado.style = "background-color: #FF3C38;";
+}
+
+}
+
+    function buscarMedidaDisco(){
+        fetch(`/dashboards/buscarMedidaDisco/${sessionStorage.ID_MAQUINA}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
         },
-        x: {
-          ticks: { color: 'black', beginAtZero: true }
-        }
-      }
-      }
-    });
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    maquina.innerHTML = json[0].nomeMaquina;
+                    usuario.innerHTML = json[0].username;
+                    velocidadeLeitura.innerHTML = formatBytes(json[json.length - 1].velocidadeLeitura);
+                    velocidadeGravacao.innerHTML = formatBytes(json[json.length - 1].velocidadeGravacao);
+                    
+                    atencao(json[0].minAtencao, json[0].maxAtencao, json[json.length - 1].taxaTransferencia);
+
+                    plotarGraficoCpu(json);
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+    }
+
+    function plotarGraficoCpu(dadosInput) {
+  let labels = [];
+  let dados = {
+    labels: labels,
+    datasets: [{
+      label: '% Tempo de atividade',
+      data: [],
+      fill: false
+    }]
+  };
+
+  for (var i = 0; i < dadosInput.length; i++) {
+    const dataJson = dadosInput[i].data;
+    const horaMinutos = dataJson.split('T')[1].split('.')[0];
+    labels.push(horaMinutos);
+    dados.datasets[0].data.push(dadosInput[i].taxaTransferencia);
+  }
+
+  const config = {
+    type: 'line',
+    data: dados,
+  };
+
+  let myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+
+    setTimeout(() => atualizarGrafico(dados, myChart), 10000);
+
+    }
+
+    function atualizarGrafico(dados, myChart){
+
+fetch(`/dashboards/buscarUltimaMedidaDisco/${sessionStorage.ID_MAQUINA}`, {
+method: "GET",
+headers: {
+    "Content-Type": "application/json"
+},
+
+})
+.then(resposta => {
+
+    if (resposta.ok) {
+        console.log(resposta);
+
+        resposta.json().then(json => {
+            const dataJson = json[0].data;
+            const horaMinutos = dataJson.split('T')[1].split('.')[0];
+
+            if (horaMinutos == dados.labels[dados.labels.length - 1]) {
+                console.log("---------------------------------------------------------------")
+                console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                console.log("Horário do novo dado capturado:")
+                console.log(horaMinutos)
+                console.log("Horário do último dado capturado:")
+                console.log(dados.labels[dados.labels.length - 1])
+                console.log("---------------------------------------------------------------")
+            } else {
+                // tirando e colocando valores no gráfico
+                dados.labels.shift(); // apagar o primeiro
+                dados.labels.push(horaMinutos); // incluir um novo momento
+
+                dados.datasets[0].data.shift();  // apagar o primeiro
+                dados.datasets[0].data.push(json[0].taxaTransferencia); // incluir uma nova medida 
+                velocidadeLeitura.innerHTML = formatBytes(json[0].velocidadeLeitura);
+                velocidadeGravacao.innerHTML = formatBytes(json[0].velocidadeGravacao);
+                myChart.update();
+                
+                atencao(json[0].minAtencao, json[0].maxAtencao, json[0].taxaTransferencia);
+            }
+
+            proximaAtualizacao = setTimeout(() => atualizarGrafico(dados, myChart), 10000);
+
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+.catch(function (error) {
+    console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+});
+
+}
+
   </script>
   
 </html>

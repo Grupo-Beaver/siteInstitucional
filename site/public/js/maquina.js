@@ -126,7 +126,16 @@ function estado(idMaquina) {
                             } else {
                                 total += 2
                             }
-                        } else{
+                        }else if(tipo == "DISCO"){
+                            if (leitura >= minAtencao) {
+                                total += 0
+                            } else if (leitura >= maxAtencao) {
+                                total += 1
+                            } else {
+                                total += 2
+                            }
+                        } 
+                        else{
                             total += 0;
                         }
 
@@ -195,6 +204,8 @@ function deletar() {
     }).then(function (resposta) {
 
         if (resposta.ok) {  
+            etd.length = 0;
+            pd.length = 0;
             location.reload();
         } else if (resposta.status == 404) {
             window.alert("Deu 404!");

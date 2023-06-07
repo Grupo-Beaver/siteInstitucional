@@ -46,7 +46,7 @@ function buscarMedidaJanela(idMaquina){
         INNER JOIN parametrizacaoMetrica pm ON m.idMaquina = pm.fkMaquina
         INNER JOIN janela j ON j.fkMaquina = m.idMaquina
         INNER JOIN editorVideo ev ON ev.idEditorVideo = m.fkEditorVideo 
-        WHERE m.idMaquina = 19 AND pm.nome = 'Janela'
+        WHERE m.idMaquina = ${idMaquina} AND pm.nome = 'Janela'
         ORDER BY j.idJanela DESC
     ) AS subquery
     ORDER BY idJanela ASC;
@@ -92,8 +92,6 @@ function buscarMedidaDisco(idMaquina){
         ORDER BY d.idDisco DESC
     ) AS subquery
     ORDER BY idDisco ASC;
-    
-   SELECT * from disco d ;
 
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
