@@ -10,7 +10,7 @@
     <script src="./js/componente.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
-    <title>Rede</title>
+    <title>Janela</title>
 </head>
 
 <body onload="buscarMedidaJanela()">
@@ -45,13 +45,12 @@
 
             <div class="container-dash">
                 <div class="container_dash_estado">
-                    <div class="estado">
-                        <label for="">ESTADO</label>
-                        <span id="estado"></span>
-                    </div>
                     <div class="dash">
-                        <label for="">UTILIZAÇÃO</label>
-                        <canvas id="myChart"></canvas>
+                        <label for="">JANELA COM MAIOR CONSUMO DE DADOS</label>
+                        <div class="bg-dash">
+                            <p class="txt-janela">Visual Studio Code</p>
+                        </div>
+                        <!-- <canvas id="myChart"></canvas> -->
                     </div>
                 </div>
                 <div class="container_rede">
@@ -59,10 +58,6 @@
                         <div class="envio">
                             <label for="">TOTAL DE<br>JANELAS</label>
                             <span id="tdJanela"></span>
-                        </div>
-                        <div class="recebimento">
-                            <label for="">JANELAS<br>INVISÍVEIS (%)</label>
-                            <span id="janelasInvi"></span>
                         </div>
                     </div>
                 </div>
