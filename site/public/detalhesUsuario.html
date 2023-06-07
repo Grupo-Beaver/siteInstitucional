@@ -12,7 +12,7 @@
     <title>Beaver</title>
 </head>
 
-<body>
+<body onload="listarByIdMaquina()">
     <main-menu></main-menu>
     <main>
         <p class="titulo">Detalhes do Usuário</p>
@@ -20,29 +20,29 @@
             <div class="nome-sobrenome-cpf">
                 <div class="nome">
                     <label for="inputNome">Nome</label>
-                    <input id="inputNome" type="text" disabled="true" placeholder="Augusto">
+                    <input id="inputNome" type="text" disabled="true">
                 </div>
                 <div class="sobrenome">
                     <label for="inputSobrenome">Sobrenome</label>
-                    <input id="inputSobrenome" type="text" disabled="true" placeholder="Cesar"> 
+                    <input id="inputSobrenome" type="text" disabled="true"> 
                    
                 </div>
                 <div class="cpf">
                     <label for="inputCPF">CPF</label>
-                    <input id="inputCPF" type="text" disabled="true" placeholder="470.296.428-40">
+                    <input id="inputCPF" type="text" disabled="true">
                 </div>
             </div>
             <div class="telefone-email">
                 <div class="telefone">
                     <label for="inputTelefone">Telefone </label>
-                    <input id="inputTelefone" type="text" disabled="true" placeholder="(11)94940-8447">
+                    <input id="inputTelefone" type="text" disabled="true">
                 </div>
                 <div class="email">
                     <label for="inputEmail">E-mail <b>*</b></label>
-                    <input id="inputEmail" type="text" disabled="true" placeholder="augusto@augusto.com">
+                    <input id="inputEmail" type="text" disabled="true">
                 </div>
             </div>
-            <div class="empresa-cnpj">
+            <!-- <div class="empresa-cnpj">
                 <div class="empresa">
                     <label for="inputEmpresa">Empresa</label>
                     <input id="inputEmpresa" type="text" disabled="true" placeholder="O Mundo das Edições">
@@ -51,21 +51,20 @@
                     <label for="inputCNPJ">CNPJ</label>
                     <input id="inputCNPJ" type="text"disabled="true" placeholder=" 80.434.730/0001-30">
                 </div>
-            </div>
+            </div> -->
             <div class="username-senha-confirm">
                 <div class="username">
                     <label for="inputUsername">Username</label>
-                    <input id="inputUsername" type="text" disabled="true" placeholder=" augusto.cesar">
+                    <input id="inputUsername" type="text" disabled="true" >
                    
                 </div>
-                <div class="senha">
-                    <label for="inputSenha">Senha</label>
-                    <input id="inputSenha" type="text" disabled="true" placeholder="12345">
+                <div class="empresa">
+                    <label for="inputEmpresa">Empresa</label>
+                    <input id="inputEmpresa" type="text" disabled="true">
                 </div>
               
             </div>
         </section>
-        <button style="cursor: pointer;" onclick="window.location.href='./atualizarUsuario.html'">Atualizar Dados</button>
     </main>
 </body>
 
@@ -73,4 +72,43 @@
 
 <script>
     imgExplorar.src="./img/lupaLocal.png";
+
+
+    function listarByIdMaquina() {
+
+fetch(`/maquinas/listarByIdMaquina/${sessionStorage.ID_MAQUINA}`, {
+    method: "GET",
+    headers: {
+        "Content-Type": "application/json"
+    },
+
+})
+    .then(resposta => {
+
+        if (resposta.ok) {
+            console.log(resposta);
+
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+                inputNome.value = json[0].nomeUser;
+                inputSobrenome.value = json[0].sobrenome;
+                inputCPF.value = json[0].cpf;
+                inputTelefone.value = json[0].telefone;
+                inputEmail.value = json[0].email;
+                inputUsername.value =json[0].username;
+                inputEmpresa.value = json[0].nomeEmpresa;
+    
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+    });
+
+
+}
+
 </script>

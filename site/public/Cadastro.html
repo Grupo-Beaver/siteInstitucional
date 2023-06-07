@@ -35,33 +35,52 @@
                 </div>
                 <div class="inputDados">
                     <div class="inputDadosMin marginInput">
-                        <label for="">Nome</label>
+                        <label for="nome_input">Nome</label>
                         <input id="nome_input" type="text">
                     </div>
                     <div class="inputDadosMin">
-                        <label for="">Sobrenome</label>
+                        <label for="sobrenome_input">Sobrenome</label>
                         <input id="sobrenome_input" type="text">
                     </div>
                 </div>
                 <div class="inputDadosMax">
-                    <label for="">Email</label>
+                    <label for="email_input">Email</label>
                     <input id="email_input" type="email">
                     <span class="alerta-erro-validacao" id="spanEmailInvalido"></span>
                 </div>
                 <div class="inputDados">
                     <div class="inputDadosMin marginInput">
-                        <label for="">Senha</label>
+                        <label for="cnpj_input">CNPJ</label>
+                        <input id="cnpj_input" type="text">
+                        <span class="alerta-erro-validacao" id="spanCNPJInvalido"></span>
+                    </div>
+                    <div class="inputDadosMin">
+                        <div class="container-explicativo-cadastro-empresa">
+                            <div class="img-atencao">
+                                <img src="./img/alertErro.png" alt="" width="20px">
+                            </div>
+                            <div class="explicativo-cadastro-empresa">
+                                <p class="frase-cadastro-empresa"> Atenção! Se sua empresa ainda não foi cadastrada, <a
+                                        href="./cadastroEmpresa.html"><b>clique aqui</b></a> e cadastre-a para
+                                    prosseguir.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="inputDados">
+                    <div class="inputDadosMin marginInput">
+                        <label for="senha_input">Senha</label>
                         <input id="senha_input" type="password">
                         <span class="alerta-erro-validacao" id="spanSenhaInvalida"></span>
                     </div>
                     <div class="inputDadosMin">
-                        <label for="">Confirmação de Senha</label>
+                        <label for="verificar_senha_input">Confirmação de Senha</label>
                         <input id="verificar_senha_input" type="password">
                         <span class="alerta-erro-validacao" id="spanConfirmSenhaInvalido"></span>
                     </div>
                 </div>
                 <div class="containerButton">
-                    <button type="button" onclick="cadastrar()">Criar Conta</button>
+                    <button type="button" onclick="verificarCnpj()">Criar Conta</button>
                     <div class="containerJaTemConta">
                         <p>Já tem uma conta? <a href="./login.html">Conecte-se</a></p>
 
@@ -69,8 +88,8 @@
                 </div>
             </form>
             <div class="voltarHome">
-                <img onclick="window.location.href='../index.html'" src="./img/volta.png" alt="Logo">
-                <a href="../index.html">Voltar</a>
+                <img class="img-volta" onclick="window.location.href='./index.html'" src="./img/volta.png" alt="Logo">
+                <a href="./index.html">Voltar</a>
             </div>
         </div>
     </main>
@@ -80,16 +99,54 @@
 
 <script>
 
+function verificarCnpj(){
+
+var cnpj = cnpj_input.value;
+var empresa = 0;
+
+fetch(`/empresas/verificarCnpj/${cnpj}`, {
+method: "GET",
+headers: {
+    "Content-Type": "application/json"
+},
+
+})
+.then(resposta => {
+
+    if (resposta.ok) {
+        console.log(resposta);
+
+        if(resposta.status == 200){
+            resposta.json().then(json => {
+                console.log(json);
+                console.log(JSON.stringify(json));
+                this.empresa = json[0].idEmpresa;
+                cadastrar()
+            });
+        }else{
+            alert("Empresa não existe, cadastre-a");
+        }
+
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+.catch(function (error) {
+    console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+});
+}
+
     function cadastrar() {
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
         var nomeVar = nome_input.value;
         var sobrenomeVar = sobrenome_input.value;
         var emailVar = email_input.value;
+        var cnpjVar = cnpj_input.value
         var senhaVar = senha_input.value;
         var verificarSenhaVar = verificar_senha_input.value;
 
-        if (nomeVar == "" || sobrenomeVar == "" || emailVar == "" || senhaVar == "" || verificarSenhaVar == "") {
+        if (nomeVar == "" || sobrenomeVar == "" || emailVar == "" || cnpjVar == "" || senhaVar == "" || verificarSenhaVar == "") {
             cardErro.style.display = "flex"
             mensagem_erro.innerHTML = "ERRO! Preencha todos os campos adequadamente.";
         } else {
@@ -106,6 +163,9 @@
             else if (emailInvalido == false) {
                 spanEmailInvalido.innerHTML = "";
             }
+
+            //VALIDAÇÃO DE CNPJ
+
 
             //VALIDAÇÃO DE SENHA
             var senhaInvalida = false;
@@ -136,7 +196,7 @@
         if (emailInvalido == false && senhaInvalida == false && confirmSenhaInvalido == false) {
 
             // Enviando o valor da nova input
-            fetch("/usuarios/cadastrar", {
+            fetch("/usuarios/cadastrarSuport", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -147,6 +207,7 @@
                     nomeServer: nomeVar,
                     sobrenomeServer: sobrenomeVar,
                     emailServer: emailVar,
+                    cnpjServer: cnpjVar,
                     senhaServer: senhaVar
                 })
             }).then(function (resposta) {
@@ -154,11 +215,7 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
-
-                    setTimeout(() => {
-                        window.location = "login.html";
-                    }, "2000")
-
+                    listIdByEmail(emailVar);
                 } else {
                     throw ("Houve um erro ao tentar realizar o cadastro!");
                 }
@@ -169,19 +226,68 @@
 
             return false;
 
-            // Toastify({
-            //     text: "Erro cadastro, senha invalida",
-            //     className: "info",
-
-            //     style: {
-            //         background: "linear-gradient(to right, #7D0505, #FF0000)",
-            //         "text-align": "center",
-            //         padding: "3vh 5vw",
-            //         "border-radius": "2vh"
-
-            //     }
-            // }).showToast();
         }
+
+        function listIdByEmail(email){
+            fetch(`/usuarios/listIdByEmail/${email}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    var id = json[0].idUsuario;
+                    cadastrarSuporteTi(id);
+                    
+        
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+        }
+    }
+
+    function cadastrarSuporteTi(idSuport){
+     
+        fetch("/usuarios/cadastrarSuportEmpresa", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    fkUsuarioServer: idSuport,
+                    fkEmpresaServer: this.empresa
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    window.location.href="./login.html"
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+                finalizarAguardar();
+            });
+
+            return false;
+
     }
 
 </script>

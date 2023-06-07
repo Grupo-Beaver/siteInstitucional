@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/componente.css">
+    <link rel="stylesheet" href="./css/historicoEditor.css">
+    <script src="./js/componente.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Beaver</title>
+</head>
+
+<body onload="listarReport()">
+    <main-menu-editor></main-menu-editor>
+    <div  class="container-pai">
+
+        <div class="titulos">
+
+            <p class="titulo-principal">Histórco de Reportes Enviados</p>
+
+
+
+            <div class="container-titulo">
+                <h2>Data</h2>
+                <h2>Maquina</h2>
+                <h2>Problema</h2>
+                <h2>Frequência</h2>
+            </div>
+
+            <div style="margin-top: 2vh;" id="list">
+
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+    imgHistorico.src = "img/historicoLocal.png";
+    var listReport = [];
+    var idUsuario = sessionStorage.ID_USUARIO;
+
+    function listarReport() {
+
+        fetch(`/maquinas/listReporte/${idUsuario}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        })
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta.length);
+
+                    
+
+                        resposta.json().then(json => {
+                            console.log(json);
+                            console.log(JSON.stringify(json));
+                            for (var i = 0; i < json.length; i++) {
+                                listReport.push(json[i]);
+                            }
+                            verificarListaReport();
+                        });
+
+                    
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
+
+
+    }
+    function verificarListaReport() {
+        for (var i = 0; i < listReport.length; i++) {
+            var data = listReport[i].data
+            list.innerHTML += `
+            <div class="container-conteudo" >
+                <p>${listReport[i].data}</p>
+                <p>${listReport[i].nome}</p>
+                <p>${listReport[i].problema}</p>
+                <p>${listReport[i].frequencia}</p>
+            </div>
+        `
+        }
+    }
+
+</script>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/componente.css">
+    <link rel="stylesheet" href="./css/dashboardRede.css">
+    <script src="./js/componente.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Janela</title>
+</head>
+
+<body onload="buscarMedidaJanela()">
+    <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
+    <main>
+
+        <div class="cabecalho">
+
+
+            <div class="maquina_usuario">
+                <p class="span_maq">Máquina: <span id="maquina"></span></p>
+                <p class="span_maq">Usuário: <span id="usuario"></span></p>
+                <div class="span_maq"></div>
+                <div class="span_maq"></div>
+                <div class="span_maq_test"></div>
+            </div>
+            <div class="tipos_leitura">
+                <a href="./dashboardCPU.html"><button id="CPU">CPU</button></a>
+                <a href="./dashboardRAM.html"><button id="RAM">RAM</button></a>
+                <a href="./dashboardDisco.html"><button id="Disco">Disco</button></a>
+                <a href="./dashboardJanela.html"><button id="Rede">Janela</button></a>
+                <div class="container_metricas" onclick="window.location.href='./atualizarMetricas.html'">
+                    <img src="./img/metricas.png" alt="">
+                    <div class="container_metricas_label">
+                        <label for="">Atualizar</label>
+                        <label for="">Métricas</label>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="container-dash">
+                <div class="container_dash_estado">
+                    <div class="dash">
+                        <label for="">JANELA COM MAIOR CONSUMO DE DADOS</label>
+                        <div class="bg-dash">
+                            <p class="txt-janela" id="nomeJanela"></p>
+                        </div>
+                        <!-- <canvas id="myChart"></canvas> -->
+                    </div>
+                </div>
+                <div class="container_rede">
+                    <div class="rede">
+                        <div class="envio">
+                            <label for="">TOTAL DE<br>JANELAS</label>
+                            <span id="tdJanela"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+
+<script>
+    // const ctx = document.getElementById('myChart');
+
+    // new Chart(ctx, {
+    //     type: 'bar',
+    //     data: {
+    //         labels: ['Janelas Visíveis', 'Janelas Invisíveis'],
+    //         datasets: [{
+    //             backgroundColor: 'rgb(112, 94, 220)',
+    //             data: [2, 8],
+    //             borderWidth: 1
+    //         }]
+    //     },
+    //     options: {
+    //         plugins: {
+    //             legend: {
+    //                 display: false
+    //             }
+    //         },
+    //         scales: {
+    //             y: {
+    //                 ticks: { color: 'black', beginAtZero: true }
+    //             },
+    //             x: {
+    //                 ticks: { color: 'black', beginAtZero: true }
+    //             }
+
+    //         },
+    //         indexAxis: 'x',
+    //     }
+    // });]
+    var ultData;
+
+    function buscarMedidaJanela() {
+        fetch(`/dashboards/buscarMedidaJanela/${sessionStorage.ID_MAQUINA}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            },
+
+        })
+            .then(resposta => {
+
+                if (resposta.ok) {
+                    console.log(resposta);
+
+                    resposta.json().then(json => {
+                        console.log(`Dados recebidos: ${JSON.stringify(json)}`);
+                        maquina.innerHTML = json[0].nomeMaquina;
+                        usuario.innerHTML = json[0].username;
+                        tdJanela.innerHTML = json[0].totalJanelas;
+                        nomeJanela.innerHTML = json[0].nomeJanela;
+                        
+                        //ultData = json[0].data;
+                        //atencao(json[0].minAtencao, json[0].maxAtencao, utilizacao);
+                        //atencao(json[0].minAtencao, json[0].maxAtencao, json[].);
+                        setTimeout(() => buscarMedidaJanela(), 10000);
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+            });
+    }
+
+
+</script>
+
+</html>

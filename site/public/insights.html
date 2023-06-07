@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/insights.css">
+    <link rel="stylesheet" href="./css/componente.css">
+    <script src="./js/componente.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="shortcut icon" href="./img/logo 2.png" type="image/x-icon">
+    <title>Beaver</title>
+</head>
+
+<body onload="listarMaquinaByIdSuporte()">
+    <main-menu></main-menu>
+    <main-iconitsm></main-iconitsm>
+
+    <div class="cabecalho">
+        <p class="titulo">Insights</p>
+        <div class="container">
+            <div class="linha1">
+                <div class="maquina">
+                    <label>Máquina</label>
+                    <select onchange="mostrarCadastro()" name="" id="select_maquina">
+                        <option value=""></option>
+                        
+                    </select>
+                    <p id="selecionar_maquina">Selecione a máquina desejada para visualizar os problemas reportados</p>
+                </div>
+                <div id="exibir">
+                    <button onclick="mudarId()">Visualizar Histórico</button>
+                </div>
+            </div>
+            <div class="linha2" id="exibir1">
+                <canvas id="myChart"></canvas>
+            </div>
+        </div>
+
+
+
+
+</body>
+
+</html>
+
+<script>
+    var chart;
+    imgInsights.src = "./img/historicoLocal.png";
+
+    function listarMaquinaByIdSuporte() {
+    fetch(`/maquinas/listarMaquina/${sessionStorage.ID_USUARIO}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    for (var i = 0; i < json.length; i++) {
+                        select_maquina.innerHTML += `<option value="${json[i].idMaquina}">${json[i].nome}</option>`
+                    }
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+
+
+}
+
+    function mostrarCadastro() {
+
+        var tipo = select_maquina.value;
+
+        if (!tipo == "") {
+            exibir.style.display = "flex";
+            exibir1.style.display = "flex";
+            selecionar_maquina.style.display = "none";
+            buscarDados(tipo);
+        } else {
+
+            exibir.style.display = "none";
+            exibir1.style.display = "none";
+            selecionar_maquina.style.display = "block";
+
+        }
+
+    }
+
+    function buscarDados(idMaquina){
+
+        fetch(`/maquinas/contReportProb/${idMaquina}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json"
+        },
+
+    })
+        .then(resposta => {
+
+            if (resposta.ok) {
+                console.log(resposta);
+
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    var Travamento = json[0].Travamento;
+                    var Lentidao = json[0].Lentidao;
+                    var Desligamento = json[0].Desligamento;
+                    var Superaquecimento = json[0].Superaquecimento;
+                    var Outro = json[0].Total - (Travamento + Lentidao + Desligamento + Superaquecimento);
+                    
+                    plotarGraficoReport(Travamento, Lentidao, Desligamento, Superaquecimento, Outro)
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados da maquina: ${error.message}`);
+        });
+
+    }
+    
+    function plotarGraficoReport(Travamento, Lentidao, Desligamento, Superaquecimento, Outro){
+
+        if (chart != undefined) {
+            chart.destroy();
+        }
+
+        const ctx = document.getElementById('myChart');
+
+    chart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: ['Travamento', 'Lentidão', 'Desligamento', 'Superaquecimento', 'Outros'],
+            datasets: [{
+                backgroundColor: 'rgb(112, 94, 220)',
+                data: [Travamento, Lentidao, Desligamento, Superaquecimento, Outro],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            plugins: {
+                legend: {
+                    display: false
+                }
+            },
+            scales: {
+                y: {
+                    ticks: { color: 'black', beginAtZero: true }
+                },
+                x: {
+                    ticks: { color: 'black', beginAtZero: true }
+                }
+                
+            },
+            indexAxis: 'y',
+        }
+    });
+    }
+
+    function mudarId(){
+        sessionStorage.ID_MAQUINA = select_maquina.value;
+        window.location.href="./historicoReportes.html";
+    }
+
+</script>

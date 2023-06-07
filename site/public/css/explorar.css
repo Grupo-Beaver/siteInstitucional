@@ -14,7 +14,6 @@
 }
 
 .header_explorar{
-    background-color: #06095B;
     width: 89vw;
     height: 8vh;
     display: flex;
@@ -76,6 +75,10 @@
     padding: 0 0.5vw;
 }
 
+.container_titulo {
+    width: 1.2em;
+}
+
 .container_titulo_maquina h2{
     width: 12vw;
     font-family: 'Inter', sans-serif;
@@ -124,13 +127,49 @@
     display: flex;
     justify-content: space-between;
     background-color: #d9d9d9;
-    height: 6vh;
+    min-height: 6vh;
     align-items: center;
     border-radius: 10px;
     border-style: none;
     padding: 0 0.5vw;
     margin-bottom: 3vh;
 }
+  
+  .container_conteudo .tooltiptext {
+    visibility: hidden;
+    margin-bottom: 1vh;
+    width: 150px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    background-color: #0F1126;
+    font-size: 1.5vh;
+    color: #fff;
+    border-radius: 6px;
+    padding: 5px 2px;
+    text-align: center;
+  
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    margin-left: -60px;
+  }
+
+  .container_conteudo .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 40%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black transparent transparent transparent;
+  }
+  
+  .container_conteudo:hover .tooltiptext {
+    visibility: visible;
+  }
 
 .container_conteudo:nth-last-child(1){
     margin: 0;
@@ -173,14 +212,25 @@
 }
 
 .none{
-    width: 17vw;
+    width: 16vw;
 }
 
 .container_list_conteudo{
+    display: flex;
+    flex-direction: column;
     height: 58vh;
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
+.container_list_conteudo .aviso {
+    display: block;
+    position: relative;
+    width: 1.8em;
+}
+
+.container_list_conteudo .aviso img {
+    display: block;
+}
 
 .container_list_conteudo::-webkit-scrollbar-track {
     background-color: #F4F4F4;

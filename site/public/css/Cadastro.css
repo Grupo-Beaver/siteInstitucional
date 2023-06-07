@@ -18,7 +18,7 @@ main{
     
 }
 
-img{
+.img-volta{
     height: 100vh;
 }
 
@@ -59,11 +59,12 @@ img{
 .cadastroForm h2{
     font-size: 40px;
     font-family: 'Montserrat', sans-serif;
-    margin-bottom: 6vh;
+    margin-bottom: 4vh;
     font-weight: 800;
     display: flex;
     
 }
+
 .cadastroForm{
     display: flex;
     margin-top: 10vh;
@@ -118,6 +119,35 @@ input:focus{
     margin-right: 3vw;
 }
 
+.container-explicativo-cadastro-empresa{
+    margin-top: 1vh;
+    display: flex;
+}
+
+.img-atencao{
+    width: 10%;
+}
+
+.explicativo-cadastro-empresa{
+    width: 90%;
+}
+
+.frase-cadastro-empresa{
+    color: #0F1126;
+    font-size: 2.2vh;
+    text-align: justify;
+    font-weight: 400;
+}
+
+.frase-cadastro-empresa b{
+    color: #705EDC;
+}
+
+.frase-cadastro-empresa a{
+    text-decoration: none;
+}
+
+
 .containerButton{
     margin-top: 4vh;
     margin-bottom: 5vh;
@@ -162,9 +192,11 @@ input:focus{
 .voltarHome{
     font-family: 'Roboto', sans-serif;
     display: flex;
-    align-items: center;
-    width: 39vw;
-    margin-top: 7vh;
+    justify-content: end;
+    position: fixed;
+    width: 55px;
+    bottom: 20px;
+    right: 700px;
     margin-left: -12vw;
     gap: 1vh;
 }
